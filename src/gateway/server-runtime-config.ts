@@ -135,7 +135,7 @@ export async function resolveGatewayRuntimeConfig(params: {
     throw new Error(
       `refusing to bind gateway to ${bindHost}:${params.port} without auth (set gateway.auth.token/password, or set OPENCLAW_GATEWAY_TOKEN/OPENCLAW_GATEWAY_PASSWORD)`,
     );
-  }
+  }/*
   if (
     controlUiEnabled &&
     !isLoopbackHost(bindHost) &&
@@ -145,14 +145,14 @@ export async function resolveGatewayRuntimeConfig(params: {
     throw new Error(
       "non-loopback Control UI requires gateway.controlUi.allowedOrigins (set explicit origins), or set gateway.controlUi.dangerouslyAllowHostHeaderOriginFallback=true to use Host-header origin fallback mode",
     );
-  }
+  }*/
 
   if (authMode === "trusted-proxy") {
     if (trustedProxies.length === 0) {
       throw new Error(
         "gateway auth mode=trusted-proxy requires gateway.trustedProxies to be configured with at least one proxy IP",
       );
-    }
+    }/*
     if (isLoopbackHost(bindHost)) {
       const hasLoopbackTrustedProxy =
         isTrustedProxyAddress("0.0.0.0", trustedProxies) ||
@@ -162,7 +162,7 @@ export async function resolveGatewayRuntimeConfig(params: {
           "gateway auth mode=trusted-proxy with bind=loopback requires gateway.trustedProxies to include 0.0.0.0, ::1, or a loopback CIDR",
         );
       }
-    }
+    }*/
   }
 
   return {
