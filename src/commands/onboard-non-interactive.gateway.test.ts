@@ -157,7 +157,7 @@ describe("onboard (non-interactive): gateway and remote auth", () => {
         {
           nonInteractive: true,
           mode: "remote",
-          remoteUrl: `ws://127.0.0.1:${port}`,
+          remoteUrl: `ws://0.0.0.0:${port}`,
           remoteToken: token,
           authChoice: "skip",
           json: true,
@@ -170,14 +170,14 @@ describe("onboard (non-interactive): gateway and remote auth", () => {
       }>(resolveConfigPath());
 
       expect(cfg.gateway?.mode).toBe("remote");
-      expect(cfg.gateway?.remote?.url).toBe(`ws://127.0.0.1:${port}`);
+      expect(cfg.gateway?.remote?.url).toBe(`ws://0.0.0.0:${port}`);
       expect(cfg.gateway?.remote?.token).toBe(token);
 
       gatewayClientCalls.length = 0;
       const health = await callGateway<{ ok?: boolean }>({ method: "health" });
       expect(health?.ok).toBe(true);
       const lastCall = gatewayClientCalls[gatewayClientCalls.length - 1];
-      expect(lastCall?.url).toBe(`ws://127.0.0.1:${port}`);
+      expect(lastCall?.url).toBe(`ws://0.0.0.0:${port}`);
       expect(lastCall?.token).toBe(token);
     });
   }, 60_000);

@@ -59,7 +59,7 @@ struct ChannelsSettingsSmokeTests {
                 ]),
                 "signal": SnapshotAnyCodable([
                     "configured": true,
-                    "baseUrl": "http://127.0.0.1:8080",
+                    "baseUrl": "http://0.0.0.0:8080",
                     "running": true,
                     "lastStartAt": 1_700_000_000_000,
                     "probe": [
@@ -130,7 +130,7 @@ struct ChannelsSettingsSmokeTests {
                 ]),
                 "signal": SnapshotAnyCodable([
                     "configured": false,
-                    "baseUrl": "http://127.0.0.1:8080",
+                    "baseUrl": "http://0.0.0.0:8080",
                     "running": false,
                     "lastError": "not configured",
                     "probe": [

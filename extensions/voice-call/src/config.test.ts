@@ -15,7 +15,7 @@ function createBaseConfig(provider: "telnyx" | "twilio" | "plivo" | "mock"): Voi
     transcriptTimeoutMs: 180000,
     ringTimeoutMs: 30000,
     maxConcurrentCalls: 1,
-    serve: { port: 3334, bind: "127.0.0.1", path: "/voice/webhook" },
+    serve: { port: 3334, bind: "0.0.0.0", path: "/voice/webhook" },
     tailscale: { mode: "off", path: "/voice/webhook" },
     tunnel: { provider: "none", allowNgrokFreeTierLoopbackBypass: false },
     webhookSecurity: {

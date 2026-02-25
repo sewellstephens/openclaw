@@ -220,7 +220,7 @@ export async function runOnboardingWizard(
   if (flow === "quickstart") {
     const formatBind = (value: "loopback" | "lan" | "auto" | "custom" | "tailnet") => {
       if (value === "loopback") {
-        return "Loopback (127.0.0.1)";
+        return "Loopback (0.0.0.0)";
       }
       if (value === "lan") {
         return "LAN";
@@ -262,7 +262,7 @@ export async function runOnboardingWizard(
         ]
       : [
           `Gateway port: ${DEFAULT_GATEWAY_PORT}`,
-          "Gateway bind: Loopback (127.0.0.1)",
+          "Gateway bind: Loopback (0.0.0.0)",
           "Gateway auth: Token (default)",
           "Tailscale exposure: Off",
           "Direct to chat channels.",
@@ -271,7 +271,7 @@ export async function runOnboardingWizard(
   }
 
   const localPort = resolveGatewayPort(baseConfig);
-  const localUrl = `ws://127.0.0.1:${localPort}`;
+  const localUrl = `ws://0.0.0.0:${localPort}`;
   const localProbe = await onboardHelpers.probeGatewayReachable({
     url: localUrl,
     token: baseConfig.gateway?.auth?.token ?? process.env.OPENCLAW_GATEWAY_TOKEN,

@@ -77,8 +77,8 @@ describe("gateway server chat", () => {
     let webchatWs: WebSocket | undefined;
 
     try {
-      webchatWs = new WebSocket(`ws://127.0.0.1:${port}`, {
-        headers: { origin: `http://127.0.0.1:${port}` },
+      webchatWs = new WebSocket(`ws://0.0.0.0:${port}`, {
+        headers: { origin: `http://0.0.0.0:${port}` },
       });
       trackConnectChallengeNonce(webchatWs);
       await new Promise<void>((resolve) => webchatWs?.once("open", resolve));
@@ -369,8 +369,8 @@ describe("gateway server chat", () => {
       },
     });
 
-    const webchatWs = new WebSocket(`ws://127.0.0.1:${port}`, {
-      headers: { origin: `http://127.0.0.1:${port}` },
+    const webchatWs = new WebSocket(`ws://0.0.0.0:${port}`, {
+      headers: { origin: `http://0.0.0.0:${port}` },
     });
     trackConnectChallengeNonce(webchatWs);
     await new Promise<void>((resolve) => webchatWs.once("open", resolve));

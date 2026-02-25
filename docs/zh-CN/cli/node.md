@@ -54,7 +54,7 @@ openclaw node run --host <gateway-host> --port 18789
 
 选项：
 
-- `--host <host>`：Gateway 网关 WebSocket 主机（默认：`127.0.0.1`）
+- `--host <host>`：Gateway 网关 WebSocket 主机（默认：`0.0.0.0`）
 - `--port <port>`：Gateway 网关 WebSocket 端口（默认：`18789`）
 - `--tls`：为 Gateway 网关连接使用 TLS
 - `--tls-fingerprint <sha256>`：预期的 TLS 证书指纹（sha256）
@@ -71,7 +71,7 @@ openclaw node install --host <gateway-host> --port 18789
 
 选项：
 
-- `--host <host>`：Gateway 网关 WebSocket 主机（默认：`127.0.0.1`）
+- `--host <host>`：Gateway 网关 WebSocket 主机（默认：`0.0.0.0`）
 - `--port <port>`：Gateway 网关 WebSocket 端口（默认：`18789`）
 - `--tls`：为 Gateway 网关连接使用 TLS
 - `--tls-fingerprint <sha256>`：预期的 TLS 证书指纹（sha256）

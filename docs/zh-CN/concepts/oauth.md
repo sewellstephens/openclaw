@@ -95,7 +95,7 @@ OpenClaw 的交互式登录流程在 `@mariozechner/pi-ai` 中实现，并集成
 
 1. 生成 PKCE 验证器/质询 + 随机 `state`
 2. 打开 `https://auth.openai.com/oauth/authorize?...`
-3. 尝试在 `http://127.0.0.1:1455/auth/callback` 捕获回调
+3. 尝试在 `http://0.0.0.0:1455/auth/callback` 捕获回调
 4. 如果回调无法绑定（或你在远程/无头环境中），手动粘贴重定向 URL/代码
 5. 在 `https://auth.openai.com/oauth/token` 进行交换
 6. 从访问令牌中提取 `accountId` 并存储 `{ access, refresh, expires, accountId }`

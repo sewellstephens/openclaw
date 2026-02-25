@@ -543,7 +543,7 @@ extension MenuSessionsInjector {
             }
         case .local:
             platform = "local"
-            host = GatewayConnectivityCoordinator.shared.localEndpointHostLabel ?? "127.0.0.1:\(port)"
+            host = GatewayConnectivityCoordinator.shared.localEndpointHostLabel ?? "0.0.0.0:\(port)"
         case .unconfigured:
             platform = nil
             host = nil

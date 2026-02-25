@@ -36,7 +36,7 @@ describe("signalRpcRequest", () => {
     );
 
     const result = await signalRpcRequest<{ version: string }>("version", undefined, {
-      baseUrl: "http://127.0.0.1:8080",
+      baseUrl: "http://0.0.0.0:8080",
     });
 
     expect(result).toEqual({ version: "0.13.22" });
@@ -47,7 +47,7 @@ describe("signalRpcRequest", () => {
 
     await expect(
       signalRpcRequest("version", undefined, {
-        baseUrl: "http://127.0.0.1:8080",
+        baseUrl: "http://0.0.0.0:8080",
       }),
     ).rejects.toMatchObject({
       message: "Signal RPC returned malformed JSON (status 502)",
@@ -60,7 +60,7 @@ describe("signalRpcRequest", () => {
 
     await expect(
       signalRpcRequest("version", undefined, {
-        baseUrl: "http://127.0.0.1:8080",
+        baseUrl: "http://0.0.0.0:8080",
       }),
     ).rejects.toThrow("Signal RPC returned invalid response envelope (status 200)");
   });

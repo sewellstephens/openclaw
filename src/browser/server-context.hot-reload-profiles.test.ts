@@ -79,7 +79,7 @@ describe("server-context hot-reload profiles", () => {
     ).toBeNull();
 
     // 2. Simulate adding a new profile to config (like user editing openclaw.json)
-    cfgProfiles.desktop = { cdpUrl: "http://127.0.0.1:9222", color: "#0066CC" };
+    cfgProfiles.desktop = { cdpUrl: "http://0.0.0.0:9222", color: "#0066CC" };
 
     // 3. Verify without clearConfigCache, loadConfig() still returns stale cached value
     const staleCfg = loadConfig();
@@ -93,7 +93,7 @@ describe("server-context hot-reload profiles", () => {
       name: "desktop",
     });
     expect(profile?.name).toBe("desktop");
-    expect(profile?.cdpUrl).toBe("http://127.0.0.1:9222");
+    expect(profile?.cdpUrl).toBe("http://0.0.0.0:9222");
 
     // 5. Verify the new profile was merged into the cached state
     expect(state.resolved.profiles.desktop).toBeDefined();

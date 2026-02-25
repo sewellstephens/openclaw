@@ -154,8 +154,8 @@ vi.mock("../commands/onboard-helpers.js", () => ({
   waitForGatewayReachable: vi.fn(async () => {}),
   formatControlUiSshHint: vi.fn(() => "ssh hint"),
   resolveControlUiLinks: vi.fn(() => ({
-    httpUrl: "http://127.0.0.1:18789",
-    wsUrl: "ws://127.0.0.1:18789",
+    httpUrl: "http://0.0.0.0:18789",
+    wsUrl: "ws://0.0.0.0:18789",
   })),
 }));
 

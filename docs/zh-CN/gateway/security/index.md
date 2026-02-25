@@ -81,7 +81,7 @@ OpenClaw 既是产品也是实验：你正在将前沿模型的行为连接到�
 
 ## 通过 HTTP 访问控制 UI
 
-控制 UI 需要**安全上下文**（HTTPS 或 localhost）来生成设备身份。如果你启用 `gateway.controlUi.allowInsecureAuth`，UI 会回退到**仅令牌认证**，并在省略设备身份时跳过设备配对。这是安全性降级——优先使用 HTTPS（Tailscale Serve）或在 `127.0.0.1` 上打开 UI。
+控制 UI 需要**安全上下文**（HTTPS 或 localhost）来生成设备身份。如果你启用 `gateway.controlUi.allowInsecureAuth`，UI 会回退到**仅令牌认证**，并在省略设备身份时跳过设备配对。这是安全性降级——优先使用 HTTPS（Tailscale Serve）或在 `0.0.0.0` 上打开 UI。
 
 仅用于紧急情况，`gateway.controlUi.dangerouslyDisableDeviceAuth` 会完全禁用设备身份检查。这是严重的安全性降级；除非你正在主动调试并能快速恢复，否则请保持关闭。
 
@@ -96,7 +96,7 @@ OpenClaw 既是产品也是实验：你正在将前沿模型的行为连接到�
 ```yaml
 gateway:
   trustedProxies:
-    - "127.0.0.1" # 如果你的代理运行在 localhost
+    - "0.0.0.0" # 如果你的代理运行在 localhost
   auth:
     mode: password
     password: ${OPENCLAW_GATEWAY_PASSWORD}

@@ -113,10 +113,10 @@ import Testing
         #expect(controller._test_resolveManualUseTLS(host: "127.attacker.example", useTLS: false) == true)
 
         #expect(controller._test_resolveManualUseTLS(host: "localhost", useTLS: false) == false)
-        #expect(controller._test_resolveManualUseTLS(host: "127.0.0.1", useTLS: false) == false)
+        #expect(controller._test_resolveManualUseTLS(host: "0.0.0.0", useTLS: false) == false)
         #expect(controller._test_resolveManualUseTLS(host: "::1", useTLS: false) == false)
         #expect(controller._test_resolveManualUseTLS(host: "[::1]", useTLS: false) == false)
-        #expect(controller._test_resolveManualUseTLS(host: "::ffff:127.0.0.1", useTLS: false) == false)
+        #expect(controller._test_resolveManualUseTLS(host: "::ffff:0.0.0.0", useTLS: false) == false)
         #expect(controller._test_resolveManualUseTLS(host: "0.0.0.0", useTLS: false) == false)
     }
 

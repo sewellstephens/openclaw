@@ -655,7 +655,7 @@ extension NodePairingApprovalPrompter {
             displayName: "Node One",
             platform: "macos",
             version: "1.0.0",
-            remoteIp: "127.0.0.1",
+            remoteIp: "0.0.0.0",
             isRepair: false,
             silent: true,
             ts: 1_700_000_000_000)
@@ -665,7 +665,7 @@ extension NodePairingApprovalPrompter {
             displayName: "Node One",
             platform: "macOS",
             version: "1.0.0",
-            remoteIp: "127.0.0.1")
+            remoteIp: "0.0.0.0")
         let list = PairingList(pending: [pending], paired: [paired])
 
         _ = Self.describe(pending)

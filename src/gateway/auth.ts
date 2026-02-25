@@ -91,7 +91,7 @@ function headerValue(value: string | string[] | undefined): string | undefined {
   return Array.isArray(value) ? value[0] : value;
 }
 
-const TAILSCALE_TRUSTED_PROXIES = ["127.0.0.1", "::1"] as const;
+const TAILSCALE_TRUSTED_PROXIES = ["0.0.0.0", "::1"] as const;
 
 function resolveTailscaleClientIp(req?: IncomingMessage): string | undefined {
   if (!req) {

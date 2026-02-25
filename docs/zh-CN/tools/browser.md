@@ -61,7 +61,7 @@ openclaw browser --browser-profile openclaw snapshot
 {
   browser: {
     enabled: true, // default: true
-    // cdpUrl: "http://127.0.0.1:18792", // legacy single-profile override
+    // cdpUrl: "http://0.0.0.0:18792", // legacy single-profile override
     remoteCdpTimeoutMs: 1500, // remote CDP HTTP timeout (ms)
     remoteCdpHandshakeTimeoutMs: 3000, // remote CDP WebSocket handshake timeout (ms)
     defaultProfile: "chrome",
@@ -202,7 +202,7 @@ OpenClaw 支持多个命名配置文件（路由配置）。配置文件可以�
 默认值：
 
 - 如果缺少 `openclaw` 配置文件，会自动创建。
-- `chrome` 配置文件是内置的，用于 Chrome 扩展中继（默认指向 `http://127.0.0.1:18792`）。
+- `chrome` 配置文件是内置的，用于 Chrome 扩展中继（默认指向 `http://0.0.0.0:18792`）。
 - 本地 CDP 端口默认从 **18800–18899** 分配。
 - 删除配置文件会将其本地数据目录移至回收站。
 
@@ -217,7 +217,7 @@ OpenClaw 还可以通过本地 CDP 中继 + Chrome 扩展驱动**你现有的 Ch
 流程：
 
 - Gateway 网关在本地运行（同一台机器）或节点主机在浏览器所在机器上运行。
-- 本地**中继服务器**在 loopback 的 `cdpUrl` 上监听（默认：`http://127.0.0.1:18792`）。
+- 本地**中继服务器**在 loopback 的 `cdpUrl` 上监听（默认：`http://0.0.0.0:18792`）。
 - 你点击标签页上的 **OpenClaw Browser Relay** 扩展图标来附加（它不会自动附加）。
 - 智能体通过选择正确的配置文件，使用普通的 `browser` 工具控制该标签页。
 
@@ -254,7 +254,7 @@ openclaw browser extension install
 openclaw browser create-profile \
   --name my-chrome \
   --driver extension \
-  --cdp-url http://127.0.0.1:18792 \
+  --cdp-url http://0.0.0.0:18792 \
   --color "#00AA00"
 ```
 

@@ -170,7 +170,7 @@ If you want to manage `signal-cli` yourself (slow JVM cold starts, container ini
 {
   channels: {
     signal: {
-      httpUrl: "http://127.0.0.1:8080",
+      httpUrl: "http://0.0.0.0:8080",
       autoStart: false,
     },
   },
@@ -301,7 +301,7 @@ Provider options:
 - `channels.signal.account`: E.164 for the bot account.
 - `channels.signal.cliPath`: path to `signal-cli`.
 - `channels.signal.httpUrl`: full daemon URL (overrides host/port).
-- `channels.signal.httpHost`, `channels.signal.httpPort`: daemon bind (default 127.0.0.1:8080).
+- `channels.signal.httpHost`, `channels.signal.httpPort`: daemon bind (default 0.0.0.0:8080).
 - `channels.signal.autoStart`: auto-spawn daemon (default true if `httpUrl` unset).
 - `channels.signal.startupTimeoutMs`: startup wait timeout in ms (cap 120000).
 - `channels.signal.receiveMode`: `on-start | manual`.

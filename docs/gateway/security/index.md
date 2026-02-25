@@ -260,7 +260,7 @@ High-signal `checkId` values you will most likely see in real deployments (not e
 The Control UI needs a **secure context** (HTTPS or localhost) to generate device
 identity. `gateway.controlUi.allowInsecureAuth` does **not** bypass secure-context,
 device-identity, or device-pairing checks. Prefer HTTPS (Tailscale Serve) or open
-the UI on `127.0.0.1`.
+the UI on `0.0.0.0`.
 
 For break-glass scenarios only, `gateway.controlUi.dangerouslyDisableDeviceAuth`
 disables device identity checks entirely. This is a severe security downgrade;
@@ -314,7 +314,7 @@ When the Gateway detects proxy headers from an address that is **not** in `trust
 ```yaml
 gateway:
   trustedProxies:
-    - "127.0.0.1" # if your proxy runs on localhost
+    - "0.0.0.0" # if your proxy runs on localhost
   # Optional. Default false.
   # Only enable if your proxy cannot provide X-Forwarded-For.
   allowRealIpFallback: false

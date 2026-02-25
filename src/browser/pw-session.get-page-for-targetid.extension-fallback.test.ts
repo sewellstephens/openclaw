@@ -42,7 +42,7 @@ describe("pw-session getPageForTargetId", () => {
     getChromeWebSocketUrlSpy.mockResolvedValue(null);
 
     const resolved = await getPageForTargetId({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       targetId: "NOT_A_TAB",
     });
     expect(resolved).toBe(page);

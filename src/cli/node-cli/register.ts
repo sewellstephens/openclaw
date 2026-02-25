@@ -27,7 +27,7 @@ export function registerNodeCli(program: Command) {
       () =>
         `\n${theme.heading("Examples:")}\n${formatHelpExamples([
           [
-            "openclaw node run --host 127.0.0.1 --port 18789",
+            "openclaw node run --host 0.0.0.0 --port 18789",
             "Run the node host in the foreground.",
           ],
           ["openclaw node status", "Check node host service status."],
@@ -48,7 +48,7 @@ export function registerNodeCli(program: Command) {
     .action(async (opts) => {
       const existing = await loadNodeHostConfig();
       const host =
-        (opts.host as string | undefined)?.trim() || existing?.gateway?.host || "127.0.0.1";
+        (opts.host as string | undefined)?.trim() || existing?.gateway?.host || "0.0.0.0";
       const port = parsePortWithFallback(opts.port, existing?.gateway?.port ?? 18789);
       await runNodeHost({
         gatewayHost: host,

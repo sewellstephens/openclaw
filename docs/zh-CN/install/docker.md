@@ -61,7 +61,7 @@ Docker 是**可选的**。仅当你想要容器化的 Gateway 网关或验证 Do
 
 完成后：
 
-- 在浏览器中打开 `http://127.0.0.1:18789/`。
+- 在浏览器中打开 `http://0.0.0.0:18789/`。
 - 将令牌粘贴到控制 UI（设置 → token）。
 - 需要再次获取带令牌的 URL？运行 `docker compose run --rm openclaw-cli dashboard --no-open`。
 
@@ -263,7 +263,7 @@ docker compose run --rm openclaw-cli channels add --channel discord --token "<to
 
 ### OpenAI Codex OAuth（无头 Docker）
 
-如果你在向导中选择 OpenAI Codex OAuth，它会打开浏览器 URL 并尝试在 `http://127.0.0.1:1455/auth/callback` 捕获回调。在 Docker 或无头设置中，该回调可能显示浏览器错误。复制你到达的完整重定向 URL 并将其粘贴回向导以完成认证。
+如果你在向导中选择 OpenAI Codex OAuth，它会打开浏览器 URL 并尝试在 `http://0.0.0.0:1455/auth/callback` 捕获回调。在 Docker 或无头设置中，该回调可能显示浏览器错误。复制你到达的完整重定向 URL 并将其粘贴回向导以完成认证。
 
 ### 健康检查
 

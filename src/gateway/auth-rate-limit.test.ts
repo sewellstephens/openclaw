@@ -110,9 +110,9 @@ describe("auth rate limiter", () => {
 
   it("exempts loopback addresses by default", () => {
     limiter = createAuthRateLimiter({ maxAttempts: 1, windowMs: 60_000, lockoutMs: 60_000 });
-    limiter.recordFailure("127.0.0.1");
+    limiter.recordFailure("0.0.0.0");
     // Should still be allowed even though maxAttempts is 1.
-    expect(limiter.check("127.0.0.1").allowed).toBe(true);
+    expect(limiter.check("0.0.0.0").allowed).toBe(true);
   });
 
   it("exempts IPv6 loopback by default", () => {
@@ -128,8 +128,8 @@ describe("auth rate limiter", () => {
       lockoutMs: 60_000,
       exemptLoopback: false,
     });
-    limiter.recordFailure("127.0.0.1");
-    expect(limiter.check("127.0.0.1").allowed).toBe(false);
+    limiter.recordFailure("0.0.0.0");
+    expect(limiter.check("0.0.0.0").allowed).toBe(false);
   });
 
   // ---------- reset ----------

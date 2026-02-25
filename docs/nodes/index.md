@@ -71,12 +71,12 @@ node host at the local end of the tunnel.
 Example (node host -> gateway host):
 
 ```bash
-# Terminal A (keep running): forward local 18790 -> gateway 127.0.0.1:18789
-ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
+# Terminal A (keep running): forward local 18790 -> gateway 0.0.0.0:18789
+ssh -N -L 18790:0.0.0.0:18789 user@gateway-host
 
 # Terminal B: export the gateway token and connect through the tunnel
 export OPENCLAW_GATEWAY_TOKEN="<gateway-token>"
-openclaw node run --host 127.0.0.1 --port 18790 --display-name "Build Node"
+openclaw node run --host 0.0.0.0 --port 18790 --display-name "Build Node"
 ```
 
 Notes:

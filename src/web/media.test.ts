@@ -201,7 +201,7 @@ describe("web media loading", () => {
     const cases = [
       {
         name: "private network host",
-        url: "http://127.0.0.1:8080/internal-api",
+        url: "http://0.0.0.0:8080/internal-api",
         expectedMessage: /blocked|private|internal/i,
       },
       {
@@ -327,7 +327,7 @@ describe("Discord voice message input hardening", () => {
       },
       {
         name: "private-network URL",
-        candidate: "http://127.0.0.1/voice.ogg",
+        candidate: "http://0.0.0.0/voice.ogg",
         expectedMessage: /Failed to fetch media|Blocked|private|internal/i,
       },
       {

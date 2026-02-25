@@ -34,7 +34,7 @@ export function getBrowserControlServerTestState(): HarnessState {
 }
 
 export function getBrowserControlServerBaseUrl(): string {
-  return `http://127.0.0.1:${state.testPort}`;
+  return `http://0.0.0.0:${state.testPort}`;
 }
 
 export function restoreGatewayPortEnv(prevGatewayPort: string | undefined): void {
@@ -257,7 +257,7 @@ export async function resetBrowserControlServerTestContext(): Promise<void> {
   mockClearAll(cdpMocks);
 
   state.testPort = await getFreePort();
-  state.cdpBaseUrl = `http://127.0.0.1:${state.testPort + 1}`;
+  state.cdpBaseUrl = `http://0.0.0.0:${state.testPort + 1}`;
   state.prevGatewayPort = process.env.OPENCLAW_GATEWAY_PORT;
   process.env.OPENCLAW_GATEWAY_PORT = String(state.testPort - 2);
   // Avoid flaky auth coupling: some suites temporarily set gateway env auth
@@ -318,14 +318,14 @@ export function installBrowserControlServerHooks() {
               id: "abcd1234",
               title: "Tab",
               url: "https://example.com",
-              webSocketDebuggerUrl: "ws://127.0.0.1/devtools/page/abcd1234",
+              webSocketDebuggerUrl: "ws://0.0.0.0/devtools/page/abcd1234",
               type: "page",
             },
             {
               id: "abce9999",
               title: "Other",
               url: "https://other",
-              webSocketDebuggerUrl: "ws://127.0.0.1/devtools/page/abce9999",
+              webSocketDebuggerUrl: "ws://0.0.0.0/devtools/page/abce9999",
               type: "page",
             },
           ]);
@@ -341,7 +341,7 @@ export function installBrowserControlServerHooks() {
             id: "newtab1",
             title: "",
             url: "about:blank",
-            webSocketDebuggerUrl: "ws://127.0.0.1/devtools/page/newtab1",
+            webSocketDebuggerUrl: "ws://0.0.0.0/devtools/page/newtab1",
             type: "page",
           });
         }

@@ -76,7 +76,7 @@ Implications:
 ```
 
 If `gateway.bind` is `loopback`, include a loopback proxy address in
-`gateway.trustedProxies` (`127.0.0.1`, `::1`, or an equivalent loopback CIDR).
+`gateway.trustedProxies` (`0.0.0.0`, `::1`, or an equivalent loopback CIDR).
 
 ### Configuration Reference
 
@@ -178,7 +178,7 @@ Caddy with the `caddy-security` plugin can authenticate users and pass identity 
 {
   gateway: {
     bind: "lan",
-    trustedProxies: ["127.0.0.1"], // Caddy's IP (if on same host)
+    trustedProxies: ["0.0.0.0"], // Caddy's IP (if on same host)
     auth: {
       mode: "trusted-proxy",
       trustedProxy: {

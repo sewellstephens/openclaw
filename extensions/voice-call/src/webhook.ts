@@ -535,7 +535,7 @@ export async function setupTailscaleExposure(config: VoiceCallConfig): Promise<s
   const mode = config.tailscale.mode === "funnel" ? "funnel" : "serve";
   // Include the path suffix so tailscale forwards to the correct endpoint
   // (tailscale strips the mount path prefix when proxying)
-  const localUrl = `http://127.0.0.1:${config.serve.port}${config.serve.path}`;
+  const localUrl = `http://0.0.0.0:${config.serve.port}${config.serve.path}`;
   return setupTailscaleExposureRoute({
     mode,
     path: config.tailscale.path,

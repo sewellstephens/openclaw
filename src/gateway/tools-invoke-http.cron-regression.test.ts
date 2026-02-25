@@ -67,7 +67,7 @@ beforeAll(async () => {
   });
   await new Promise<void>((resolve, reject) => {
     server?.once("error", reject);
-    server?.listen(0, "127.0.0.1", () => {
+    server?.listen(0, "0.0.0.0", () => {
       const address = server?.address() as AddressInfo | null;
       port = address?.port ?? 0;
       resolve();
@@ -88,7 +88,7 @@ beforeEach(() => {
 });
 
 async function invoke(tool: string) {
-  return await fetch(`http://127.0.0.1:${port}/tools/invoke`, {
+  return await fetch(`http://0.0.0.0:${port}/tools/invoke`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

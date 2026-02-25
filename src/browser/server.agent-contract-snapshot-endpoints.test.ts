@@ -28,7 +28,7 @@ describe("browser control server", () => {
     expect(snapAria.ok).toBe(true);
     expect(snapAria.format).toBe("aria");
     expect(cdpMocks.snapshotAria).toHaveBeenCalledWith({
-      wsUrl: "ws://127.0.0.1/devtools/page/abcd1234",
+      wsUrl: "ws://0.0.0.0/devtools/page/abcd1234",
       limit: 1,
     });
 

@@ -43,7 +43,7 @@ const GATEWAY_NODE_STATUS_POLL_MS = 20;
 
 const getFreePort = async () => {
   const srv = net.createServer();
-  await new Promise<void>((resolve) => srv.listen(0, "127.0.0.1", resolve));
+  await new Promise<void>((resolve) => srv.listen(0, "0.0.0.0", resolve));
   const addr = srv.address();
   if (!addr || typeof addr === "string") {
     srv.close();
@@ -73,7 +73,7 @@ async function waitForPortOpen(
 
     try {
       await new Promise<void>((resolve, reject) => {
-        const socket = net.connect({ host: "127.0.0.1", port });
+        const socket = net.connect({ host: "0.0.0.0", port });
         socket.once("connect", () => {
           socket.destroy();
           resolve();
@@ -267,7 +267,7 @@ export async function connectNode(
   const deviceIdentity = loadOrCreateDeviceIdentity(identityPath);
   const nodeId = deviceIdentity.deviceId;
   const client = await connectGatewayClient({
-    url: `ws://127.0.0.1:${inst.port}`,
+    url: `ws://0.0.0.0:${inst.port}`,
     token: inst.gatewayToken,
     clientName: GATEWAY_CLIENT_NAMES.NODE_HOST,
     clientDisplayName: label,
@@ -308,7 +308,7 @@ async function connectStatusClient(
     };
 
     const client = new GatewayClient({
-      url: `ws://127.0.0.1:${inst.port}`,
+      url: `ws://0.0.0.0:${inst.port}`,
       connectDelayMs: 0,
       token: inst.gatewayToken,
       clientName: GATEWAY_CLIENT_NAMES.CLI,

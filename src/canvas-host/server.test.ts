@@ -88,12 +88,12 @@ describe("canvas host", () => {
       runtime: quietRuntime,
       rootDir: dir,
       port: 0,
-      listenHost: "127.0.0.1",
+      listenHost: "0.0.0.0",
       allowInTests: true,
     });
 
     try {
-      const res = await fetch(`http://127.0.0.1:${server.port}${CANVAS_HOST_PATH}/`);
+      const res = await fetch(`http://0.0.0.0:${server.port}${CANVAS_HOST_PATH}/`);
       const html = await res.text();
       expect(res.status).toBe(200);
       expect(html).toContain("Interactive test page");
@@ -112,19 +112,19 @@ describe("canvas host", () => {
       runtime: quietRuntime,
       rootDir: dir,
       port: 0,
-      listenHost: "127.0.0.1",
+      listenHost: "0.0.0.0",
       allowInTests: true,
       liveReload: false,
     });
 
     try {
-      const res = await fetch(`http://127.0.0.1:${server.port}${CANVAS_HOST_PATH}/`);
+      const res = await fetch(`http://0.0.0.0:${server.port}${CANVAS_HOST_PATH}/`);
       const html = await res.text();
       expect(res.status).toBe(200);
       expect(html).toContain("no-reload");
       expect(html).not.toContain(CANVAS_WS_PATH);
 
-      const wsRes = await fetch(`http://127.0.0.1:${server.port}${CANVAS_WS_PATH}`);
+      const wsRes = await fetch(`http://0.0.0.0:${server.port}${CANVAS_WS_PATH}`);
       expect(wsRes.status).toBe(404);
     } finally {
       await server.close();
@@ -159,17 +159,17 @@ describe("canvas host", () => {
       socket.destroy();
     });
 
-    await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+    await new Promise<void>((resolve) => server.listen(0, "0.0.0.0", resolve));
     const port = (server.address() as AddressInfo).port;
 
     try {
-      const res = await fetch(`http://127.0.0.1:${port}${CANVAS_HOST_PATH}/`);
+      const res = await fetch(`http://0.0.0.0:${port}${CANVAS_HOST_PATH}/`);
       const html = await res.text();
       expect(res.status).toBe(200);
       expect(html).toContain("v1");
       expect(html).toContain(CANVAS_WS_PATH);
 
-      const miss = await fetch(`http://127.0.0.1:${port}/`);
+      const miss = await fetch(`http://0.0.0.0:${port}/`);
       expect(miss.status).toBe(404);
     } finally {
       await new Promise<void>((resolve, reject) =>
@@ -185,7 +185,7 @@ describe("canvas host", () => {
       handler,
       ownsHandler: false,
       port: 0,
-      listenHost: "127.0.0.1",
+      listenHost: "0.0.0.0",
       allowInTests: true,
     });
 
@@ -210,7 +210,7 @@ describe("canvas host", () => {
         runtime: quietRuntime,
         rootDir: dir,
         port: 0,
-        listenHost: "127.0.0.1",
+        listenHost: "0.0.0.0",
         allowInTests: true,
       });
 
@@ -218,13 +218,13 @@ describe("canvas host", () => {
         const watcher = chokidarMockState.watchers[watcherStart];
         expect(watcher).toBeTruthy();
 
-        const res = await fetch(`http://127.0.0.1:${server.port}${CANVAS_HOST_PATH}/`);
+        const res = await fetch(`http://0.0.0.0:${server.port}${CANVAS_HOST_PATH}/`);
         const html = await res.text();
         expect(res.status).toBe(200);
         expect(html).toContain("v1");
         expect(html).toContain(CANVAS_WS_PATH);
 
-        const ws = new WebSocket(`ws://127.0.0.1:${server.port}${CANVAS_WS_PATH}`);
+        const ws = new WebSocket(`ws://0.0.0.0:${server.port}${CANVAS_WS_PATH}`);
         await new Promise<void>((resolve, reject) => {
           const timer = setTimeout(
             () => reject(new Error("ws open timeout")),
@@ -285,29 +285,29 @@ describe("canvas host", () => {
       runtime: quietRuntime,
       rootDir: dir,
       port: 0,
-      listenHost: "127.0.0.1",
+      listenHost: "0.0.0.0",
       allowInTests: true,
     });
 
     try {
-      const res = await fetch(`http://127.0.0.1:${server.port}/__openclaw__/a2ui/`);
+      const res = await fetch(`http://0.0.0.0:${server.port}/__openclaw__/a2ui/`);
       const html = await res.text();
       expect(res.status).toBe(200);
       expect(html).toContain("openclaw-a2ui-host");
       expect(html).toContain("openclawCanvasA2UIAction");
 
       const bundleRes = await fetch(
-        `http://127.0.0.1:${server.port}/__openclaw__/a2ui/a2ui.bundle.js`,
+        `http://0.0.0.0:${server.port}/__openclaw__/a2ui/a2ui.bundle.js`,
       );
       const js = await bundleRes.text();
       expect(bundleRes.status).toBe(200);
       expect(js).toContain("openclawA2UI");
       const traversalRes = await fetch(
-        `http://127.0.0.1:${server.port}${A2UI_PATH}/%2e%2e%2fpackage.json`,
+        `http://0.0.0.0:${server.port}${A2UI_PATH}/%2e%2e%2fpackage.json`,
       );
       expect(traversalRes.status).toBe(404);
       expect(await traversalRes.text()).toBe("not found");
-      const symlinkRes = await fetch(`http://127.0.0.1:${server.port}${A2UI_PATH}/${linkName}`);
+      const symlinkRes = await fetch(`http://0.0.0.0:${server.port}${A2UI_PATH}/${linkName}`);
       expect(symlinkRes.status).toBe(404);
       expect(await symlinkRes.text()).toBe("not found");
     } finally {

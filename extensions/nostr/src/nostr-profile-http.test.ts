@@ -37,7 +37,7 @@ function createMockRequest(
 ): IncomingMessage {
   const socket = new Socket();
   Object.defineProperty(socket, "remoteAddress", {
-    value: opts?.remoteAddress ?? "127.0.0.1",
+    value: opts?.remoteAddress ?? "0.0.0.0",
     configurable: true,
   });
   const req = new IncomingMessage(socket);
@@ -280,11 +280,11 @@ describe("nostr-profile-http", () => {
     });
 
     it("rejects private IP in picture URL (SSRF protection)", async () => {
-      await expectPrivatePictureRejected("https://127.0.0.1/evil.jpg");
+      await expectPrivatePictureRejected("https://0.0.0.0/evil.jpg");
     });
 
     it("rejects ISATAP-embedded private IPv4 in picture URL", async () => {
-      await expectPrivatePictureRejected("https://[2001:db8:1234::5efe:127.0.0.1]/evil.jpg");
+      await expectPrivatePictureRejected("https://[2001:db8:1234::5efe:0.0.0.0]/evil.jpg");
     });
 
     it("rejects non-https URLs", async () => {

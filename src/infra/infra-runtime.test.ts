@@ -272,7 +272,7 @@ describe("infra runtime", () => {
   describe("tailnet address detection", () => {
     it("detects tailscale IPv4 and IPv6 addresses", () => {
       vi.spyOn(os, "networkInterfaces").mockReturnValue({
-        lo0: [{ address: "127.0.0.1", family: "IPv4", internal: true, netmask: "" }],
+        lo0: [{ address: "0.0.0.0", family: "IPv4", internal: true, netmask: "" }],
         utun9: [
           {
             address: "100.123.224.76",

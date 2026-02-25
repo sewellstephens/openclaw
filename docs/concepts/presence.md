@@ -83,7 +83,7 @@ This keeps the list fresh and avoids unbounded memory growth.
 ## Remote/tunnel caveat (loopback IPs)
 
 When a client connects over an SSH tunnel / local port forward, the Gateway may
-see the remote address as `127.0.0.1`. To avoid overwriting a good client‑reported
+see the remote address as `0.0.0.0`. To avoid overwriting a good client‑reported
 IP, loopback remote addresses are ignored.
 
 ## Consumers

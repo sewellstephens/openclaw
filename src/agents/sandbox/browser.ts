@@ -43,7 +43,7 @@ const CDP_SOURCE_RANGE_ENV_KEY = "OPENCLAW_BROWSER_CDP_SOURCE_RANGE";
 
 async function waitForSandboxCdp(params: { cdpPort: number; timeoutMs: number }): Promise<boolean> {
   const deadline = Date.now() + Math.max(0, params.timeoutMs);
-  const url = `http://127.0.0.1:${params.cdpPort}/json/version`;
+  const url = `http://0.0.0.0:${params.cdpPort}/json/version`;
   while (Date.now() < deadline) {
     try {
       const ctrl = new AbortController();
@@ -70,7 +70,7 @@ function buildSandboxBrowserResolvedConfig(params: {
   headless: boolean;
   evaluateEnabled: boolean;
 }): ResolvedBrowserConfig {
-  const cdpHost = "127.0.0.1";
+  const cdpHost = "0.0.0.0";
   return {
     enabled: true,
     evaluateEnabled: params.evaluateEnabled,
@@ -251,9 +251,9 @@ export async function ensureSandboxBrowser(params: {
         args.push("-v", bind);
       }
     }
-    args.push("-p", `127.0.0.1::${params.cfg.browser.cdpPort}`);
+    args.push("-p", `0.0.0.0::${params.cfg.browser.cdpPort}`);
     if (noVncEnabled) {
-      args.push("-p", `127.0.0.1::${params.cfg.browser.noVncPort}`);
+      args.push("-p", `0.0.0.0::${params.cfg.browser.noVncPort}`);
     }
     args.push("-e", `OPENCLAW_BROWSER_HEADLESS=${params.cfg.browser.headless ? "1" : "0"}`);
     args.push("-e", `OPENCLAW_BROWSER_ENABLE_NOVNC=${params.cfg.browser.enableNoVnc ? "1" : "0"}`);
@@ -342,7 +342,7 @@ export async function ensureSandboxBrowser(params: {
           });
           if (!ok) {
             throw new Error(
-              `Sandbox browser CDP did not become reachable on 127.0.0.1:${mappedCdp} within ${params.cfg.browser.autoStartTimeoutMs}ms.`,
+              `Sandbox browser CDP did not become reachable on 0.0.0.0:${mappedCdp} within ${params.cfg.browser.autoStartTimeoutMs}ms.`,
             );
           }
         }

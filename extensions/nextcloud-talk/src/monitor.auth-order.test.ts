@@ -25,7 +25,7 @@ async function startWebhookServer(params: {
 }): Promise<WebhookHarness> {
   const { server, start } = createNextcloudTalkWebhookServer({
     port: 0,
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     path: params.path,
     secret: "nextcloud-secret",
     maxBodyBytes: params.maxBodyBytes,
@@ -38,7 +38,7 @@ async function startWebhookServer(params: {
     throw new Error("missing server address");
   }
   return {
-    webhookUrl: `http://127.0.0.1:${address.port}${params.path}`,
+    webhookUrl: `http://0.0.0.0:${address.port}${params.path}`,
     stop: () =>
       new Promise<void>((resolve) => {
         server.close(() => resolve());

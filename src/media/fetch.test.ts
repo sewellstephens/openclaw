@@ -58,7 +58,7 @@ describe("fetchRemoteMedia", () => {
     const fetchImpl = vi.fn();
     await expect(
       fetchRemoteMedia({
-        url: "http://127.0.0.1/secret.jpg",
+        url: "http://0.0.0.0/secret.jpg",
         fetchImpl,
         maxBytes: 1024,
       }),

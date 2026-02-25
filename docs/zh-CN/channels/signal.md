@@ -98,7 +98,7 @@ x-i18n:
 {
   channels: {
     signal: {
-      httpUrl: "http://127.0.0.1:8080",
+      httpUrl: "http://0.0.0.0:8080",
       autoStart: false,
     },
   },
@@ -185,7 +185,7 @@ message action=react channel=signal target=signal:group:<groupId> targetAuthor=u
 - `channels.signal.account`：bot 账户的 E.164。
 - `channels.signal.cliPath`：`signal-cli` 的路径。
 - `channels.signal.httpUrl`：完整守护进程 URL（覆盖 host/port）。
-- `channels.signal.httpHost`、`channels.signal.httpPort`：守护进程绑定（默认 127.0.0.1:8080）。
+- `channels.signal.httpHost`、`channels.signal.httpPort`：守护进程绑定（默认 0.0.0.0:8080）。
 - `channels.signal.autoStart`：自动启动守护进程（如果未设置 `httpUrl` 则默认 true）。
 - `channels.signal.startupTimeoutMs`：启动等待超时（毫秒）（上限 120000）。
 - `channels.signal.receiveMode`：`on-start | manual`。

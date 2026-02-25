@@ -26,7 +26,7 @@ x-i18n:
 
 远程模式支持两种传输方式：
 
-- **SSH 隧道**（默认）：使用 `ssh -N -L ...` 将 Gateway 网关端口转发到 localhost。Gateway 网关会将节点的 IP 视为 `127.0.0.1`，因为隧道是 loopback。
+- **SSH 隧道**（默认）：使用 `ssh -N -L ...` 将 Gateway 网关端口转发到 localhost。Gateway 网关会将节点的 IP 视为 `0.0.0.0`，因为隧道是 loopback。
 - **Direct (ws/wss)**：直接连接到 Gateway 网关 URL。Gateway 网关看到真实的客户端 IP。
 
 ## 远程主机上的先决条件
@@ -76,7 +76,7 @@ x-i18n:
 - **exit 127 / not found**：`openclaw` 不在非登录 shell 的 PATH 中。将其添加到 `/etc/paths`、你的 shell rc，或符号链接到 `/usr/local/bin`/`/opt/homebrew/bin`。
 - **Health probe failed**：检查 SSH 可达性、PATH，以及 Baileys 是否已登录（`openclaw status --json`）。
 - **Web Chat 卡住**：确认 Gateway 网关正在远程主机上运行，转发的端口与 Gateway 网关 WS 端口匹配；UI 需要健康的 WS 连接。
-- **节点 IP 显示 127.0.0.1**：使用 SSH 隧道时是预期的。如果你想让 Gateway 网关看到真实的客户端 IP，请将 **Transport** 切换到 **Direct (ws/wss)**。
+- **节点 IP 显示 0.0.0.0**：使用 SSH 隧道时是预期的。如果你想让 Gateway 网关看到真实的客户端 IP，请将 **Transport** 切换到 **Direct (ws/wss)**。
 - **Voice Wake**：触发短语在远程模式下自动转发；不需要单独的转发器。
 
 ## 通知声音

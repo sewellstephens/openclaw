@@ -18,7 +18,7 @@ OpenClaw can also **auto-discover** available models from vLLM when you opt in w
 
 Your base URL should expose `/v1` endpoints (e.g. `/v1/models`, `/v1/chat/completions`). vLLM commonly runs on:
 
-- `http://127.0.0.1:8000/v1`
+- `http://0.0.0.0:8000/v1`
 
 2. Opt in (any value works if no auth is configured):
 
@@ -42,7 +42,7 @@ export VLLM_API_KEY="vllm-local"
 
 When `VLLM_API_KEY` is set (or an auth profile exists) and you **do not** define `models.providers.vllm`, OpenClaw will query:
 
-- `GET http://127.0.0.1:8000/v1/models`
+- `GET http://0.0.0.0:8000/v1/models`
 
 …and convert the returned IDs into model entries.
 
@@ -61,7 +61,7 @@ Use explicit config when:
   models: {
     providers: {
       vllm: {
-        baseUrl: "http://127.0.0.1:8000/v1",
+        baseUrl: "http://0.0.0.0:8000/v1",
         apiKey: "${VLLM_API_KEY}",
         api: "openai-completions",
         models: [
@@ -86,7 +86,7 @@ Use explicit config when:
 - Check the server is reachable:
 
 ```bash
-curl http://127.0.0.1:8000/v1/models
+curl http://0.0.0.0:8000/v1/models
 ```
 
 - If requests fail with auth errors, set a real `VLLM_API_KEY` that matches your server configuration, or configure the provider explicitly under `models.providers.vllm`.

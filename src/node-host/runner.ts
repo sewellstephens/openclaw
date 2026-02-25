@@ -167,7 +167,7 @@ export async function runNodeHost(opts: NodeHostRunOptions): Promise<void> {
     process.env.OPENCLAW_GATEWAY_PASSWORD?.trim() ||
     (isRemoteMode ? cfg.gateway?.remote?.password : cfg.gateway?.auth?.password);
 
-  const host = gateway.host ?? "127.0.0.1";
+  const host = gateway.host ?? "0.0.0.0";
   const port = gateway.port ?? 18789;
   const scheme = gateway.tls ? "wss" : "ws";
   const url = `${scheme}://${host}:${port}`;

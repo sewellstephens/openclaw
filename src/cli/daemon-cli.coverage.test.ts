@@ -145,7 +145,7 @@ describe("daemon-cli coverage", () => {
 
     expect(callGateway).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: "ws://127.0.0.1:19001",
+        url: "ws://0.0.0.0:19001",
         method: "status",
       }),
     );
@@ -158,9 +158,9 @@ describe("daemon-cli coverage", () => {
     }>();
     expect(parsed.gateway?.port).toBe(19001);
     expect(parsed.gateway?.portSource).toBe("service args");
-    expect(parsed.gateway?.probeUrl).toBe("ws://127.0.0.1:19001");
+    expect(parsed.gateway?.probeUrl).toBe("ws://0.0.0.0:19001");
     expect(parsed.config?.mismatch).toBe(true);
-    expect(parsed.rpc?.url).toBe("ws://127.0.0.1:19001");
+    expect(parsed.rpc?.url).toBe("ws://0.0.0.0:19001");
     expect(parsed.rpc?.ok).toBe(true);
   });
 

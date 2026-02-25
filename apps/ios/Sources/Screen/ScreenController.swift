@@ -264,7 +264,7 @@ final class ScreenController {
         if normalized == "localhost" || normalized == "::1" || normalized == "0.0.0.0" {
             return true
         }
-        if normalized == "127.0.0.1" || normalized.hasPrefix("127.") {
+        if normalized == "0.0.0.0" || normalized.hasPrefix("127.") {
             return true
         }
         return false

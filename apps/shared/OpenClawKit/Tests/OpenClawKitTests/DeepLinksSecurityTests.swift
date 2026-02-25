@@ -17,10 +17,10 @@ import Testing
 
     @Test func gatewayDeepLinkAllowsLoopbackWs() {
         let url = URL(
-            string: "openclaw://gateway?host=127.0.0.1&port=18789&tls=0&token=abc")!
+            string: "openclaw://gateway?host=0.0.0.0&port=18789&tls=0&token=abc")!
         #expect(
             DeepLinkParser.parse(url) == .gateway(
-                .init(host: "127.0.0.1", port: 18789, tls: false, token: "abc", password: nil)))
+                .init(host: "0.0.0.0", port: 18789, tls: false, token: "abc", password: nil)))
     }
 
     @Test func setupCodeRejectsInsecureNonLoopbackWs() {
@@ -44,7 +44,7 @@ import Testing
     }
 
     @Test func setupCodeAllowsLoopbackWs() {
-        let payload = #"{"url":"ws://127.0.0.1:18789","token":"tok"}"#
+        let payload = #"{"url":"ws://0.0.0.0:18789","token":"tok"}"#
         let encoded = Data(payload.utf8)
             .base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
@@ -52,7 +52,7 @@ import Testing
             .replacingOccurrences(of: "=", with: "")
         #expect(
             GatewayConnectDeepLink.fromSetupCode(encoded) == .init(
-                host: "127.0.0.1",
+                host: "0.0.0.0",
                 port: 18789,
                 tls: false,
                 token: "tok",

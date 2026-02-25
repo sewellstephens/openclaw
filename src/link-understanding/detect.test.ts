@@ -19,8 +19,8 @@ describe("extractLinksFromMessage", () => {
     expect(links).toEqual(["https://bare.example"]);
   });
 
-  it("blocks 127.0.0.1", () => {
-    const links = extractLinksFromMessage("http://127.0.0.1/test https://ok.test");
+  it("blocks 0.0.0.0", () => {
+    const links = extractLinksFromMessage("http://0.0.0.0/test https://ok.test");
     expect(links).toEqual(["https://ok.test"]);
   });
 
@@ -53,8 +53,8 @@ describe("extractLinksFromMessage", () => {
   });
 
   it("blocks private and mapped IPv6 addresses", () => {
-    expect(extractLinksFromMessage("http://[::ffff:127.0.0.1]/secret")).toEqual([]);
-    expect(extractLinksFromMessage("http://[2001:db8:1234::5efe:127.0.0.1]/secret")).toEqual([]);
+    expect(extractLinksFromMessage("http://[::ffff:0.0.0.0]/secret")).toEqual([]);
+    expect(extractLinksFromMessage("http://[2001:db8:1234::5efe:0.0.0.0]/secret")).toEqual([]);
     expect(extractLinksFromMessage("http://[fe80::1]/secret")).toEqual([]);
     expect(extractLinksFromMessage("http://[fc00::1]/secret")).toEqual([]);
   });

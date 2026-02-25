@@ -132,7 +132,7 @@ describe("ensureSandboxBrowser create args", () => {
     bridgeMocks.startBrowserBridgeServer.mockResolvedValue({
       server: {} as never,
       port: 19000,
-      baseUrl: "http://127.0.0.1:19000",
+      baseUrl: "http://0.0.0.0:19000",
       state: {
         server: null,
         port: 19000,
@@ -156,7 +156,7 @@ describe("ensureSandboxBrowser create args", () => {
     )?.[0] as string[] | undefined;
 
     expect(createArgs).toBeDefined();
-    expect(createArgs).toContain("127.0.0.1::6080");
+    expect(createArgs).toContain("0.0.0.0::6080");
     const envEntries = envEntriesFromDockerArgs(createArgs ?? []);
     const passwordEntry = envEntries.find((entry) =>
       entry.startsWith("OPENCLAW_BROWSER_NOVNC_PASSWORD="),

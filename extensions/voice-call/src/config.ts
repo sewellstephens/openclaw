@@ -95,12 +95,12 @@ export const VoiceCallServeConfigSchema = z
     /** Port to listen on */
     port: z.number().int().positive().default(3334),
     /** Bind address */
-    bind: z.string().default("127.0.0.1"),
+    bind: z.string().default("0.0.0.0"),
     /** Webhook path */
     path: z.string().min(1).default("/voice/webhook"),
   })
   .strict()
-  .default({ port: 3334, bind: "127.0.0.1", path: "/voice/webhook" });
+  .default({ port: 3334, bind: "0.0.0.0", path: "/voice/webhook" });
 export type VoiceCallServeConfig = z.infer<typeof VoiceCallServeConfigSchema>;
 
 export const VoiceCallTailscaleConfigSchema = z

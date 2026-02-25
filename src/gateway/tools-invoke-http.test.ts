@@ -164,7 +164,7 @@ beforeAll(async () => {
 
   await new Promise<void>((resolve, reject) => {
     sharedServer?.once("error", reject);
-    sharedServer?.listen(0, "127.0.0.1", () => {
+    sharedServer?.listen(0, "0.0.0.0", () => {
       const address = sharedServer?.address() as AddressInfo | null;
       sharedPort = address?.port ?? 0;
       resolve();
@@ -214,7 +214,7 @@ const postToolsInvoke = async (params: {
   headers?: Record<string, string>;
   body: Record<string, unknown>;
 }) =>
-  await fetch(`http://127.0.0.1:${params.port}/tools/invoke`, {
+  await fetch(`http://0.0.0.0:${params.port}/tools/invoke`, {
     method: "POST",
     headers: { "content-type": "application/json", ...params.headers },
     body: JSON.stringify(params.body),

@@ -80,7 +80,7 @@ describe("browser CSRF loopback mutation guard", () => {
     expect(
       shouldRejectBrowserMutation({
         method: "POST",
-        origin: "http://127.0.0.1:18789",
+        origin: "http://0.0.0.0:18789",
       }),
     ).toBe(false);
 
@@ -168,13 +168,13 @@ describe("cdp.helpers", () => {
   });
 
   it("does not add relay header for unknown loopback ports", () => {
-    const headers = getHeadersWithAuth("http://127.0.0.1:19444/json/version");
+    const headers = getHeadersWithAuth("http://0.0.0.0:19444/json/version");
     expect(headers["x-openclaw-relay-token"]).toBeUndefined();
   });
 
   it("adds relay header for known relay ports", async () => {
     const port = await getFreePort();
-    const cdpUrl = `http://127.0.0.1:${port}`;
+    const cdpUrl = `http://0.0.0.0:${port}`;
     const prev = process.env.OPENCLAW_GATEWAY_TOKEN;
     process.env.OPENCLAW_GATEWAY_TOKEN = "test-gateway-token";
     try {
@@ -199,7 +199,7 @@ describe("fetchBrowserJson loopback auth (bridge auth registry)", () => {
     const getBridgeAuthForPort = vi.fn((candidate: number) =>
       candidate === port ? { token: "registry-token" } : undefined,
     );
-    const init = __test.withLoopbackBrowserAuth(`http://127.0.0.1:${port}/`, undefined, {
+    const init = __test.withLoopbackBrowserAuth(`http://0.0.0.0:${port}/`, undefined, {
       loadConfig: () => ({}),
       resolveBrowserControlAuth: () => ({}),
       getBridgeAuthForPort,

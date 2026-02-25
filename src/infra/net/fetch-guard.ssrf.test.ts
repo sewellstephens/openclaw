@@ -17,7 +17,7 @@ describe("fetchWithSsrFGuard hardening", () => {
 
   it("blocks private and legacy loopback literals before fetch", async () => {
     const blockedUrls = [
-      "http://127.0.0.1:8080/internal",
+      "http://0.0.0.0:8080/internal",
       "http://0177.0.0.1:8080/internal",
       "http://0x7f000001/internal",
     ];
@@ -58,7 +58,7 @@ describe("fetchWithSsrFGuard hardening", () => {
     const lookupFn = vi.fn(async () => [
       { address: "93.184.216.34", family: 4 },
     ]) as unknown as LookupFn;
-    const fetchImpl = vi.fn().mockResolvedValueOnce(redirectResponse("http://127.0.0.1:6379/"));
+    const fetchImpl = vi.fn().mockResolvedValueOnce(redirectResponse("http://0.0.0.0:6379/"));
 
     await expect(
       fetchWithSsrFGuard({

@@ -31,7 +31,7 @@ function makeAccount(
 function makeReq(method: string, body: string): IncomingMessage {
   const req = new EventEmitter() as IncomingMessage;
   req.method = method;
-  req.socket = { remoteAddress: "127.0.0.1" } as any;
+  req.socket = { remoteAddress: "0.0.0.0" } as any;
 
   // Simulate body delivery
   process.nextTick(() => {

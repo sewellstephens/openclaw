@@ -28,7 +28,7 @@ const {
   spawnSignalDaemonMock,
 } = getSignalToolResultTestMocks();
 
-const SIGNAL_BASE_URL = "http://127.0.0.1:8080";
+const SIGNAL_BASE_URL = "http://0.0.0.0:8080";
 type MonitorSignalProviderOptions = Parameters<typeof monitorSignalProvider>[0];
 
 function createMonitorRuntime() {

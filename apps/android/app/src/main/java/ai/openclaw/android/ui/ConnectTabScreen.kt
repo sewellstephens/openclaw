@@ -304,7 +304,7 @@ fun ConnectTabScreen(viewModel: MainViewModel) {
               QuickFillChip(
                 label = "Localhost",
                 onClick = {
-                  manualHostInput = "127.0.0.1"
+                  manualHostInput = "0.0.0.0"
                   manualPortInput = "18789"
                   manualTlsInput = false
                   validationText = null

@@ -21,7 +21,7 @@ describe("browser control HTTP auth", () => {
     });
     await new Promise<void>((resolve, reject) => {
       server?.once("error", reject);
-      server?.listen(0, "127.0.0.1", () => resolve());
+      server?.listen(0, "0.0.0.0", () => resolve());
     });
     const addr = server.address();
     if (!addr || typeof addr === "string") {
@@ -40,7 +40,7 @@ describe("browser control HTTP auth", () => {
   });
 
   it("requires bearer auth for standalone browser HTTP routes", async () => {
-    const base = `http://127.0.0.1:${port}`;
+    const base = `http://0.0.0.0:${port}`;
 
     const missingAuth = await realFetch(`${base}/`);
     expect(missingAuth.status).toBe(401);

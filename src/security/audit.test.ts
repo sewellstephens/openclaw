@@ -719,7 +719,7 @@ describe("security audit", () => {
       }
       if (args[0] === "port" && args.at(-1) === "openclaw-sbx-browser-exposed") {
         return {
-          stdout: Buffer.from("6080/tcp -> 0.0.0.0:49101\n9222/tcp -> 127.0.0.1:49100\n"),
+          stdout: Buffer.from("6080/tcp -> 0.0.0.0:49101\n9222/tcp -> 0.0.0.0:49100\n"),
           stderr: Buffer.alloc(0),
           code: 0,
         };
@@ -1269,7 +1269,7 @@ describe("security audit", () => {
           gateway: {
             bind: "loopback",
             allowRealIpFallback: true,
-            trustedProxies: ["127.0.0.1"],
+            trustedProxies: ["0.0.0.0"],
             auth: {
               mode: "token",
               token: "very-long-token-1234567890",
@@ -1295,12 +1295,12 @@ describe("security audit", () => {
       },
       {
         name: "loopback trusted-proxy with loopback-only proxies",
-        cfg: trustedProxyCfg(["127.0.0.1"]),
+        cfg: trustedProxyCfg(["0.0.0.0"]),
         expectedSeverity: "warn",
       },
       {
         name: "loopback trusted-proxy with non-loopback proxy range",
-        cfg: trustedProxyCfg(["127.0.0.1", "10.0.0.0/8"]),
+        cfg: trustedProxyCfg(["0.0.0.0", "10.0.0.0/8"]),
         expectedSeverity: "critical",
       },
       {
@@ -1969,7 +1969,7 @@ describe("security audit", () => {
         name: "probe returns failed result",
         probeGatewayFn: async () => ({
           ok: false,
-          url: "ws://127.0.0.1:18789",
+          url: "ws://0.0.0.0:18789",
           connectLatencyMs: null,
           error: "connect failed",
           close: null,

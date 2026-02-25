@@ -20,7 +20,7 @@ x-i18n:
 
 ## 推荐：LM Studio + MiniMax M2.1（Responses API，完整尺寸）
 
-当前最佳本地堆栈。在 LM Studio 中加载 MiniMax M2.1，启用本地服务器（默认 `http://127.0.0.1:1234`），并使用 Responses API 将推理与最终文本分开。
+当前最佳本地堆栈。在 LM Studio 中加载 MiniMax M2.1，启用本地服务器（默认 `http://0.0.0.0:1234`），并使用 Responses API 将推理与最终文本分开。
 
 ```json5
 {
@@ -37,7 +37,7 @@ x-i18n:
     mode: "merge",
     providers: {
       lmstudio: {
-        baseUrl: "http://127.0.0.1:1234/v1",
+        baseUrl: "http://0.0.0.0:1234/v1",
         apiKey: "lmstudio",
         api: "openai-responses",
         models: [
@@ -60,7 +60,7 @@ x-i18n:
 **设置清单**
 
 - 安装 LM Studio：https://lmstudio.ai
-- 在 LM Studio 中，下载**可用的最大 MiniMax M2.1 构建**（避免"小型"/重度量化变体），启动服务器，确认 `http://127.0.0.1:1234/v1/models` 列出了它。
+- 在 LM Studio 中，下载**可用的最大 MiniMax M2.1 构建**（避免"小型"/重度量化变体），启动服务器，确认 `http://0.0.0.0:1234/v1/models` 列出了它。
 - 保持模型加载；冷加载会增加启动延迟。
 - 如果你的 LM Studio 构建不同，调整 `contextWindow`/`maxTokens`。
 - 对于 WhatsApp，坚持使用 Responses API，这样只发送最终文本。
@@ -88,7 +88,7 @@ x-i18n:
     mode: "merge",
     providers: {
       lmstudio: {
-        baseUrl: "http://127.0.0.1:1234/v1",
+        baseUrl: "http://0.0.0.0:1234/v1",
         apiKey: "lmstudio",
         api: "openai-responses",
         models: [
@@ -127,7 +127,7 @@ vLLM、LiteLLM、OAI-proxy 或自定义网关都可以工作，只要它们暴�
     mode: "merge",
     providers: {
       local: {
-        baseUrl: "http://127.0.0.1:8000/v1",
+        baseUrl: "http://0.0.0.0:8000/v1",
         apiKey: "sk-local",
         api: "openai-responses",
         models: [
@@ -151,7 +151,7 @@ vLLM、LiteLLM、OAI-proxy 或自定义网关都可以工作，只要它们暴�
 
 ## 故障排除
 
-- Gateway 网关能访问代理吗？`curl http://127.0.0.1:1234/v1/models`。
+- Gateway 网关能访问代理吗？`curl http://0.0.0.0:1234/v1/models`。
 - LM Studio 模型卸载了？重新加载；冷启动是常见的"卡住"原因。
 - 上下文错误？降低 `contextWindow` 或提高服务器限制。
 - 安全：本地模型跳过提供商端过滤器；保持智能体范围窄并开启压缩以限制提示注入的影响范围。

@@ -304,7 +304,7 @@ struct GeneralSettings: View {
                     .trimmingCharacters(in: .whitespacesAndNewlines).isEmpty)
             }
             Text(
-                "Direct mode requires wss:// for remote hosts. ws:// is only allowed for localhost/127.0.0.1.")
+                "Direct mode requires wss:// for remote hosts. ws:// is only allowed for localhost/0.0.0.0.")
                 .font(.caption)
                 .foregroundStyle(.secondary)
                 .padding(.leading, self.remoteLabelWidth + 10)

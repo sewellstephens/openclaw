@@ -27,7 +27,7 @@ import { monitorFeishuProvider, stopFeishuMonitor } from "./monitor.js";
 
 async function getFreePort(): Promise<number> {
   const server = createServer();
-  await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", () => resolve()));
+  await new Promise<void>((resolve) => server.listen(0, "0.0.0.0", () => resolve()));
   const address = server.address() as AddressInfo | null;
   if (!address) {
     throw new Error("missing server address");
@@ -67,7 +67,7 @@ function buildConfig(params: {
             appId: "cli_test",
             appSecret: "secret_test",
             connectionMode: "webhook",
-            webhookHost: "127.0.0.1",
+            webhookHost: "0.0.0.0",
             webhookPort: params.port,
             webhookPath: params.path,
             verificationToken: params.verificationToken,
@@ -102,7 +102,7 @@ async function withRunningWebhookMonitor(
     abortSignal: abortController.signal,
   });
 
-  const url = `http://127.0.0.1:${port}${params.path}`;
+  const url = `http://0.0.0.0:${port}${params.path}`;
   await waitUntilServerReady(url);
 
   try {

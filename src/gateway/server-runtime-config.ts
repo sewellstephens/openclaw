@@ -128,7 +128,7 @@ export async function resolveGatewayRuntimeConfig(params: {
     );
   }
   if (tailscaleMode !== "off" && !isLoopbackHost(bindHost)) {
-    throw new Error("tailscale serve/funnel requires gateway bind=loopback (127.0.0.1)");
+    throw new Error("tailscale serve/funnel requires gateway bind=loopback (0.0.0.0)");
   }
   if (!isLoopbackHost(bindHost) && !hasSharedSecret && authMode !== "trusted-proxy") {
     throw new Error(
@@ -154,11 +154,11 @@ export async function resolveGatewayRuntimeConfig(params: {
     }
     if (isLoopbackHost(bindHost)) {
       const hasLoopbackTrustedProxy =
-        isTrustedProxyAddress("127.0.0.1", trustedProxies) ||
+        isTrustedProxyAddress("0.0.0.0", trustedProxies) ||
         isTrustedProxyAddress("::1", trustedProxies);
       if (!hasLoopbackTrustedProxy) {
         throw new Error(
-          "gateway auth mode=trusted-proxy with bind=loopback requires gateway.trustedProxies to include 127.0.0.1, ::1, or a loopback CIDR",
+          "gateway auth mode=trusted-proxy with bind=loopback requires gateway.trustedProxies to include 0.0.0.0, ::1, or a loopback CIDR",
         );
       }
     }

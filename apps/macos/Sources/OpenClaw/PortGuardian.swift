@@ -172,7 +172,7 @@ actor PortGuardian {
     }
 
     func probeGatewayHealth(port: Int, timeout: TimeInterval = 2.0) async -> Bool {
-        let url = URL(string: "http://127.0.0.1:\(port)/")!
+        let url = URL(string: "http://0.0.0.0:\(port)/")!
         let config = URLSessionConfiguration.ephemeral
         config.timeoutIntervalForRequest = timeout
         config.timeoutIntervalForResource = timeout

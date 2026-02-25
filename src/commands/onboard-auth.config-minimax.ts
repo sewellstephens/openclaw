@@ -33,7 +33,7 @@ export function applyMinimaxProviderConfig(cfg: OpenClawConfig): OpenClawConfig 
   const providers = { ...cfg.models?.providers };
   if (!providers.lmstudio) {
     providers.lmstudio = {
-      baseUrl: "http://127.0.0.1:1234/v1",
+      baseUrl: "http://0.0.0.0:1234/v1",
       apiKey: "lmstudio",
       api: "openai-responses",
       models: [

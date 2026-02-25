@@ -117,7 +117,7 @@ describe("node.invoke approval bypass", () => {
     resolveDevice?: (nonce: string) => NonNullable<Parameters<typeof connectReq>[1]>["device"],
   ) => {
     const connectOnce = async () => {
-      const ws = new WebSocket(`ws://127.0.0.1:${port}`);
+      const ws = new WebSocket(`ws://0.0.0.0:${port}`);
       trackConnectChallengeNonce(ws);
       const challengePromise = resolveDevice
         ? onceMessage<{
@@ -203,7 +203,7 @@ describe("node.invoke approval bypass", () => {
     });
 
     const client = new GatewayClient({
-      url: `ws://127.0.0.1:${port}`,
+      url: `ws://0.0.0.0:${port}`,
       // Keep challenge timeout realistic in tests; 0 maps to a 250ms timeout and can
       // trigger reconnect backoff loops under load.
       connectDelayMs: 2_000,

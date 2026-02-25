@@ -15,7 +15,7 @@ flowchart TB
     subgraph Client["Client Machine"]
         direction TB
         A["OpenClaw.app"]
-        B["ws://127.0.0.1:18789\n(local port)"]
+        B["ws://0.0.0.0:18789\n(local port)"]
         T["SSH Tunnel"]
 
         A --> B
@@ -24,7 +24,7 @@ flowchart TB
     subgraph Remote["Remote Machine"]
         direction TB
         C["Gateway WebSocket"]
-        D["ws://127.0.0.1:18789"]
+        D["ws://0.0.0.0:18789"]
 
         C --> D
     end
@@ -41,7 +41,7 @@ Edit `~/.ssh/config` and add:
 Host remote-gateway
     HostName <REMOTE_IP>          # e.g., 172.27.187.184
     User <REMOTE_USER>            # e.g., jefferson
-    LocalForward 18789 127.0.0.1:18789
+    LocalForward 18789 0.0.0.0:18789
     IdentityFile ~/.ssh/id_rsa
 ```
 
@@ -150,9 +150,9 @@ launchctl bootout gui/$UID/ai.openclaw.ssh-tunnel
 
 | Component                            | What It Does                                                 |
 | ------------------------------------ | ------------------------------------------------------------ |
-| `LocalForward 18789 127.0.0.1:18789` | Forwards local port 18789 to remote port 18789               |
+| `LocalForward 18789 0.0.0.0:18789` | Forwards local port 18789 to remote port 18789               |
 | `ssh -N`                             | SSH without executing remote commands (just port forwarding) |
 | `KeepAlive`                          | Automatically restarts tunnel if it crashes                  |
 | `RunAtLoad`                          | Starts tunnel when the agent loads                           |
 
-OpenClaw.app connects to `ws://127.0.0.1:18789` on your client machine. The SSH tunnel forwards that connection to port 18789 on the remote machine where the Gateway is running.
+OpenClaw.app connects to `ws://0.0.0.0:18789` on your client machine. The SSH tunnel forwards that connection to port 18789 on the remote machine where the Gateway is running.

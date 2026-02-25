@@ -315,7 +315,7 @@ function createMockRequest(
   req.method = method;
   req.url = `${parsedUrl.pathname}${parsedUrl.search}`;
   req.headers = headers;
-  (req as unknown as { socket: { remoteAddress: string } }).socket = { remoteAddress: "127.0.0.1" };
+  (req as unknown as { socket: { remoteAddress: string } }).socket = { remoteAddress: "0.0.0.0" };
 
   // Emit body data after a microtask
   // oxlint-disable-next-line no-floating-promises
@@ -520,7 +520,7 @@ describe("BlueBubbles webhook monitor", () => {
         req.url = "/bluebubbles-webhook";
         req.headers = {};
         (req as unknown as { socket: { remoteAddress: string } }).socket = {
-          remoteAddress: "127.0.0.1",
+          remoteAddress: "0.0.0.0",
         };
         req.destroy = vi.fn();
 
@@ -764,7 +764,7 @@ describe("BlueBubbles webhook monitor", () => {
       const config: OpenClawConfig = {};
       const core = createMockRuntime();
       setBlueBubblesRuntime(core);
-      for (const remoteAddress of ["127.0.0.1", "::1", "::ffff:127.0.0.1"]) {
+      for (const remoteAddress of ["0.0.0.0", "::1", "::ffff:0.0.0.0"]) {
         const req = createMockRequest("POST", "/bluebubbles-webhook", {
           type: "new-message",
           data: {
@@ -832,7 +832,7 @@ describe("BlueBubbles webhook monitor", () => {
           headers,
         );
         (req as unknown as { socket: { remoteAddress: string } }).socket = {
-          remoteAddress: "127.0.0.1",
+          remoteAddress: "0.0.0.0",
         };
         const res = createMockResponse();
         const handled = await handleBlueBubblesWebhookRequest(req, res);

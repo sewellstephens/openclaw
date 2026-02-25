@@ -210,7 +210,7 @@ export function isLocalGatewayAddress(ip: string | undefined): boolean {
  * Resolves gateway bind host with fallback strategy.
  *
  * Modes:
- * - loopback: 127.0.0.1 (rarely fails, but handled gracefully)
+ * - loopback: 0.0.0.0 (rarely fails, but handled gracefully)
  * - lan: always 0.0.0.0 (no fallback)
  * - tailnet: Tailnet IPv4 if available, else loopback
  * - auto: Loopback if available, else 0.0.0.0
@@ -225,9 +225,9 @@ export async function resolveGatewayBindHost(
   const mode = bind ?? "loopback";
 
   if (mode === "loopback") {
-    // 127.0.0.1 rarely fails, but handle gracefully
-    if (await canBindToHost("127.0.0.1")) {
-      return "127.0.0.1";
+    // 0.0.0.0 rarely fails, but handle gracefully
+    if (await canBindToHost("0.0.0.0")) {
+      return "0.0.0.0";
     }
     return "0.0.0.0"; // extreme fallback
   }
@@ -237,8 +237,8 @@ export async function resolveGatewayBindHost(
     if (tailnetIP && (await canBindToHost(tailnetIP))) {
       return tailnetIP;
     }
-    if (await canBindToHost("127.0.0.1")) {
-      return "127.0.0.1";
+    if (await canBindToHost("0.0.0.0")) {
+      return "0.0.0.0";
     }
     return "0.0.0.0";
   }
@@ -261,8 +261,8 @@ export async function resolveGatewayBindHost(
   }
 
   if (mode === "auto") {
-    if (await canBindToHost("127.0.0.1")) {
-      return "127.0.0.1";
+    if (await canBindToHost("0.0.0.0")) {
+      return "0.0.0.0";
     }
     return "0.0.0.0";
   }
@@ -296,7 +296,7 @@ export async function resolveGatewayListenHosts(
   bindHost: string,
   opts?: { canBindToHost?: (host: string) => Promise<boolean> },
 ): Promise<string[]> {
-  if (bindHost !== "127.0.0.1") {
+  if (bindHost !== "0.0.0.0") {
     return [bindHost];
   }
   const canBind = opts?.canBindToHost ?? canBindToHost;

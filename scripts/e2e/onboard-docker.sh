@@ -114,7 +114,7 @@ TRASH
     for _ in $(seq 1 20); do
       if node --input-type=module -e "
         import net from 'node:net';
-        const socket = net.createConnection({ host: '127.0.0.1', port: 18789 });
+        const socket = net.createConnection({ host: '0.0.0.0', port: 18789 });
         const timeout = setTimeout(() => {
           socket.destroy();
           process.exit(1);

@@ -9,7 +9,7 @@ import {
 export const DEFAULT_GMAIL_LABEL = "INBOX";
 export const DEFAULT_GMAIL_TOPIC = "gog-gmail-watch";
 export const DEFAULT_GMAIL_SUBSCRIPTION = "gog-gmail-watch-push";
-export const DEFAULT_GMAIL_SERVE_BIND = "127.0.0.1";
+export const DEFAULT_GMAIL_SERVE_BIND = "0.0.0.0";
 export const DEFAULT_GMAIL_SERVE_PORT = 8788;
 export const DEFAULT_GMAIL_SERVE_PATH = "/gmail-pubsub";
 export const DEFAULT_GMAIL_MAX_BYTES = 20_000;
@@ -93,7 +93,7 @@ export function buildDefaultHookUrl(
   port: number = DEFAULT_GATEWAY_PORT,
 ): string {
   const basePath = normalizeHooksPath(hooksPath);
-  const baseUrl = `http://127.0.0.1:${port}`;
+  const baseUrl = `http://0.0.0.0:${port}`;
   return joinUrl(baseUrl, `${basePath}/gmail`);
 }
 

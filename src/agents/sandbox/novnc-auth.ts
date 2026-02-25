@@ -35,7 +35,7 @@ export function buildNoVncDirectUrl(port: number, password?: string) {
   if (password?.trim()) {
     query.set("password", password);
   }
-  return `http://127.0.0.1:${port}/vnc.html?${query.toString()}`;
+  return `http://0.0.0.0:${port}/vnc.html?${query.toString()}`;
 }
 
 export function issueNoVncObserverToken(params: {

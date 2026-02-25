@@ -13,7 +13,7 @@ Local is doable, but OpenClaw expects large context + strong defenses against pr
 
 ## Recommended: LM Studio + MiniMax M2.1 (Responses API, full-size)
 
-Best current local stack. Load MiniMax M2.1 in LM Studio, enable the local server (default `http://127.0.0.1:1234`), and use Responses API to keep reasoning separate from final text.
+Best current local stack. Load MiniMax M2.1 in LM Studio, enable the local server (default `http://0.0.0.0:1234`), and use Responses API to keep reasoning separate from final text.
 
 ```json5
 {
@@ -30,7 +30,7 @@ Best current local stack. Load MiniMax M2.1 in LM Studio, enable the local serve
     mode: "merge",
     providers: {
       lmstudio: {
-        baseUrl: "http://127.0.0.1:1234/v1",
+        baseUrl: "http://0.0.0.0:1234/v1",
         apiKey: "lmstudio",
         api: "openai-responses",
         models: [
@@ -53,7 +53,7 @@ Best current local stack. Load MiniMax M2.1 in LM Studio, enable the local serve
 **Setup checklist**
 
 - Install LM Studio: [https://lmstudio.ai](https://lmstudio.ai)
-- In LM Studio, download the **largest MiniMax M2.1 build available** (avoid “small”/heavily quantized variants), start the server, confirm `http://127.0.0.1:1234/v1/models` lists it.
+- In LM Studio, download the **largest MiniMax M2.1 build available** (avoid “small”/heavily quantized variants), start the server, confirm `http://0.0.0.0:1234/v1/models` lists it.
 - Keep the model loaded; cold-load adds startup latency.
 - Adjust `contextWindow`/`maxTokens` if your LM Studio build differs.
 - For WhatsApp, stick to Responses API so only final text is sent.
@@ -81,7 +81,7 @@ Keep hosted models configured even when running local; use `models.mode: "merge"
     mode: "merge",
     providers: {
       lmstudio: {
-        baseUrl: "http://127.0.0.1:1234/v1",
+        baseUrl: "http://0.0.0.0:1234/v1",
         apiKey: "lmstudio",
         api: "openai-responses",
         models: [
@@ -120,7 +120,7 @@ vLLM, LiteLLM, OAI-proxy, or custom gateways work if they expose an OpenAI-style
     mode: "merge",
     providers: {
       local: {
-        baseUrl: "http://127.0.0.1:8000/v1",
+        baseUrl: "http://0.0.0.0:8000/v1",
         apiKey: "sk-local",
         api: "openai-responses",
         models: [
@@ -144,7 +144,7 @@ Keep `models.mode: "merge"` so hosted models stay available as fallbacks.
 
 ## Troubleshooting
 
-- Gateway can reach the proxy? `curl http://127.0.0.1:1234/v1/models`.
+- Gateway can reach the proxy? `curl http://0.0.0.0:1234/v1/models`.
 - LM Studio model unloaded? Reload; cold start is a common “hanging” cause.
 - Context errors? Lower `contextWindow` or raise your server limit.
 - Safety: local models skip provider-side filters; keep agents narrow and compaction on to limit prompt injection blast radius.

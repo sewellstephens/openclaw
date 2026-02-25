@@ -21,7 +21,7 @@ OpenClaw.app 使用 SSH 隧道连接到远程 Gateway 网关。本指南向你�
 ┌─────────────────────────────────────────────────────────────┐
 │                        Client Machine                          │
 │                                                              │
-│  OpenClaw.app ──► ws://127.0.0.1:18789 (local port)           │
+│  OpenClaw.app ──► ws://0.0.0.0:18789 (local port)           │
 │                     │                                        │
 │                     ▼                                        │
 │  SSH Tunnel ────────────────────────────────────────────────│
@@ -32,7 +32,7 @@ OpenClaw.app 使用 SSH 隧道连接到远程 Gateway 网关。本指南向你�
 ┌─────────────────────────────────────────────────────────────┐
 │                         Remote Machine                        │
 │                                                              │
-│  Gateway WebSocket ──► ws://127.0.0.1:18789 ──►              │
+│  Gateway WebSocket ──► ws://0.0.0.0:18789 ──►              │
 │                                                              │
 └─────────────────────────────────────────────────────────────┘
 ```
@@ -47,7 +47,7 @@ OpenClaw.app 使用 SSH 隧道连接到远程 Gateway 网关。本指南向你�
 Host remote-gateway
     HostName <REMOTE_IP>          # e.g., 172.27.187.184
     User <REMOTE_USER>            # e.g., jefferson
-    LocalForward 18789 127.0.0.1:18789
+    LocalForward 18789 0.0.0.0:18789
     IdentityFile ~/.ssh/id_rsa
 ```
 
@@ -156,9 +156,9 @@ launchctl bootout gui/$UID/bot.molt.ssh-tunnel
 
 | 组件                                 | 功能                                  |
 | ------------------------------------ | ------------------------------------- |
-| `LocalForward 18789 127.0.0.1:18789` | 将本地端口 18789 转发到远程端口 18789 |
+| `LocalForward 18789 0.0.0.0:18789` | 将本地端口 18789 转发到远程端口 18789 |
 | `ssh -N`                             | SSH 不执行远程命令（仅端口转发）      |
 | `KeepAlive`                          | 隧道崩溃时自动重启                    |
 | `RunAtLoad`                          | 代理加载时启动隧道                    |
 
-OpenClaw.app 连接到你的客户端机器上的 `ws://127.0.0.1:18789`。SSH 隧道将该连接转发到运行 Gateway 网关的远程机器的端口 18789。
+OpenClaw.app 连接到你的客户端机器上的 `ws://0.0.0.0:18789`。SSH 隧道将该连接转发到运行 Gateway 网关的远程机器的端口 18789。

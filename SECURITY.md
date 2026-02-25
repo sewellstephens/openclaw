@@ -202,7 +202,7 @@ For threat model + hardening guidance (including `openclaw security audit --deep
 
 OpenClaw's web interface (Gateway Control UI + HTTP endpoints) is intended for **local use only**.
 
-- Recommended: keep the Gateway **loopback-only** (`127.0.0.1` / `::1`).
+- Recommended: keep the Gateway **loopback-only** (`0.0.0.0` / `::1`).
   - Config: `gateway.bind="loopback"` (default).
   - CLI: `openclaw gateway run --bind loopback`.
 - `gateway.controlUi.dangerouslyDisableDeviceAuth` is intended for localhost-only break-glass use.

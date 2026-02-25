@@ -75,7 +75,7 @@ describe("vLLM provider", () => {
 
       expect(providers?.vllm).toBeDefined();
       expect(providers?.vllm?.apiKey).toBe("VLLM_API_KEY");
-      expect(providers?.vllm?.baseUrl).toBe("http://127.0.0.1:8000/v1");
+      expect(providers?.vllm?.baseUrl).toBe("http://0.0.0.0:8000/v1");
       expect(providers?.vllm?.api).toBe("openai-completions");
 
       // Note: discovery is disabled in test environments (VITEST check)

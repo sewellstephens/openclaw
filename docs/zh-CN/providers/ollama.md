@@ -55,7 +55,7 @@ openclaw config set models.providers.ollama.apiKey "ollama-local"
 
 ## 模型发现（隐式提供商）
 
-当你设置了 `OLLAMA_API_KEY`（或认证配置）且**未**定义 `models.providers.ollama` 时，OpenClaw 会从本地 Ollama 实例 `http://127.0.0.1:11434` 发现模型：
+当你设置了 `OLLAMA_API_KEY`（或认证配置）且**未**定义 `models.providers.ollama` 时，OpenClaw 会从本地 Ollama 实例 `http://0.0.0.0:11434` 发现模型：
 
 - 查询 `/api/tags` 和 `/api/show`
 - 仅保留报告了 `tools` 能力的模型

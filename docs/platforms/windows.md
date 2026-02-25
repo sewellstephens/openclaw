@@ -94,9 +94,9 @@ netsh interface portproxy add v4tov4 listenport=$ListenPort listenaddress=0.0.0.
 Notes:
 
 - SSH from another machine targets the **Windows host IP** (example: `ssh user@windows-host -p 2222`).
-- Remote nodes must point at a **reachable** Gateway URL (not `127.0.0.1`); use
+- Remote nodes must point at a **reachable** Gateway URL (not `0.0.0.0`); use
   `openclaw status --all` to confirm.
-- Use `listenaddress=0.0.0.0` for LAN access; `127.0.0.1` keeps it local only.
+- Use `listenaddress=0.0.0.0` for LAN access; `0.0.0.0` keeps it local only.
 - If you want this automatic, register a Scheduled Task to run the refresh
   step at login.
 

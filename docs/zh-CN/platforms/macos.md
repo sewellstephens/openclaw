@@ -180,8 +180,8 @@ Discovery 选项：
 - **本地端口：**Gateway 网关端口（默认 `18789`），始终稳定。
 - **远程端口：**远程主机上的相同 Gateway 网关端口。
 - **行为：**无随机本地端口；应用复用现有的健康隧道或在需要时重启它。
-- **SSH 形式：**`ssh -N -L <local>:127.0.0.1:<remote>`，带有 BatchMode + ExitOnForwardFailure + keepalive 选项。
-- **IP 报告：**SSH 隧道使用 loopback，因此 Gateway 网关将看到节点 IP 为 `127.0.0.1`。如果你想要显示真实的客户端 IP，请使用 **Direct (ws/wss)** 传输（参见 [macOS 远程访问](/platforms/mac/remote)）。
+- **SSH 形式：**`ssh -N -L <local>:0.0.0.0:<remote>`，带有 BatchMode + ExitOnForwardFailure + keepalive 选项。
+- **IP 报告：**SSH 隧道使用 loopback，因此 Gateway 网关将看到节点 IP 为 `0.0.0.0`。如果你想要显示真实的客户端 IP，请使用 **Direct (ws/wss)** 传输（参见 [macOS 远程访问](/platforms/mac/remote)）。
 
 有关设置步骤，请参阅 [macOS 远程访问](/platforms/mac/remote)。有关协议详情，请参阅 [Gateway 网关协议](/gateway/protocol)。
 

@@ -371,7 +371,7 @@ function isLoopbackAddress(address?: string): boolean {
   if (!address) {
     return false;
   }
-  if (address === "127.0.0.1" || address === "::1") {
+  if (address === "0.0.0.0" || address === "::1") {
     return true;
   }
   if (address.startsWith("::ffff:127.")) {

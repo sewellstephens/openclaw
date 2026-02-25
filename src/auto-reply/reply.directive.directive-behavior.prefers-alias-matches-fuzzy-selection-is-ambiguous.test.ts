@@ -138,7 +138,7 @@ describe("directive behavior", () => {
                   models: [makeModelDefinition("MiniMax-M2.1", "MiniMax M2.1")],
                 },
                 lmstudio: {
-                  baseUrl: "http://127.0.0.1:1234/v1",
+                  baseUrl: "http://0.0.0.0:1234/v1",
                   apiKey: "lmstudio",
                   api: "openai-responses",
                   models: [makeModelDefinition("minimax-m2.1-gs32", "MiniMax M2.1 GS32")],
@@ -220,7 +220,7 @@ describe("directive behavior", () => {
                 models: [makeModelDefinition("kimi-k2-0905-preview", "Kimi K2")],
               },
               lmstudio: {
-                baseUrl: "http://127.0.0.1:1234/v1",
+                baseUrl: "http://0.0.0.0:1234/v1",
                 apiKey: "lmstudio",
                 api: "openai-responses",
                 models: [makeModelDefinition("kimi-k2-0905-preview", "Kimi K2 (Local)")],

@@ -11,7 +11,7 @@ describe("cdp", () => {
   let wsServer: WebSocketServer | null = null;
 
   const startWsServer = async () => {
-    wsServer = new WebSocketServer({ port: 0, host: "127.0.0.1" });
+    wsServer = new WebSocketServer({ port: 0, host: "0.0.0.0" });
     await new Promise<void>((resolve) => wsServer?.once("listening", resolve));
     return (wsServer.address() as { port: number }).port;
   };
@@ -49,7 +49,7 @@ describe("cdp", () => {
       res.statusCode = 404;
       res.end("not found");
     });
-    await new Promise<void>((resolve) => httpServer?.listen(0, "127.0.0.1", resolve));
+    await new Promise<void>((resolve) => httpServer?.listen(0, "0.0.0.0", resolve));
     return (httpServer.address() as { port: number }).port;
   };
 
@@ -84,11 +84,11 @@ describe("cdp", () => {
     });
 
     const httpPort = await startVersionHttpServer({
-      webSocketDebuggerUrl: `ws://127.0.0.1:${wsPort}/devtools/browser/TEST`,
+      webSocketDebuggerUrl: `ws://0.0.0.0:${wsPort}/devtools/browser/TEST`,
     });
 
     const created = await createTargetViaCdp({
-      cdpUrl: `http://127.0.0.1:${httpPort}`,
+      cdpUrl: `http://0.0.0.0:${httpPort}`,
       url: "https://example.com",
     });
 
@@ -100,8 +100,8 @@ describe("cdp", () => {
     try {
       await expect(
         createTargetViaCdp({
-          cdpUrl: "http://127.0.0.1:9222",
-          url: "http://127.0.0.1:8080",
+          cdpUrl: "http://0.0.0.0:9222",
+          url: "http://0.0.0.0:8080",
         }),
       ).rejects.toBeInstanceOf(SsrFBlockedError);
       expect(fetchSpy).not.toHaveBeenCalled();
@@ -115,7 +115,7 @@ describe("cdp", () => {
     try {
       await expect(
         createTargetViaCdp({
-          cdpUrl: "http://127.0.0.1:9222",
+          cdpUrl: "http://0.0.0.0:9222",
           url: "file:///etc/passwd",
         }),
       ).rejects.toBeInstanceOf(InvalidBrowserNavigationUrlError);
@@ -130,7 +130,7 @@ describe("cdp", () => {
       if (msg.method !== "Target.createTarget") {
         return;
       }
-      expect(msg.params?.url).toBe("http://127.0.0.1:8080");
+      expect(msg.params?.url).toBe("http://0.0.0.0:8080");
       socket.send(
         JSON.stringify({
           id: msg.id,
@@ -140,12 +140,12 @@ describe("cdp", () => {
     });
 
     const httpPort = await startVersionHttpServer({
-      webSocketDebuggerUrl: `ws://127.0.0.1:${wsPort}/devtools/browser/TEST`,
+      webSocketDebuggerUrl: `ws://0.0.0.0:${wsPort}/devtools/browser/TEST`,
     });
 
     const created = await createTargetViaCdp({
-      cdpUrl: `http://127.0.0.1:${httpPort}`,
-      url: "http://127.0.0.1:8080",
+      cdpUrl: `http://0.0.0.0:${httpPort}`,
+      url: "http://0.0.0.0:8080",
       ssrfPolicy: { allowPrivateNetwork: true },
     });
 
@@ -170,7 +170,7 @@ describe("cdp", () => {
     });
 
     const res = await evaluateJavaScript({
-      wsUrl: `ws://127.0.0.1:${wsPort}`,
+      wsUrl: `ws://0.0.0.0:${wsPort}`,
       expression: "1+1",
     });
 
@@ -182,7 +182,7 @@ describe("cdp", () => {
     const httpPort = await startVersionHttpServer({});
     await expect(
       createTargetViaCdp({
-        cdpUrl: `http://127.0.0.1:${httpPort}`,
+        cdpUrl: `http://0.0.0.0:${httpPort}`,
         url: "https://example.com",
       }),
     ).rejects.toThrow("CDP /json/version missing webSocketDebuggerUrl");
@@ -220,7 +220,7 @@ describe("cdp", () => {
       }
     });
 
-    const snap = await snapshotAria({ wsUrl: `ws://127.0.0.1:${wsPort}` });
+    const snap = await snapshotAria({ wsUrl: `ws://0.0.0.0:${wsPort}` });
     expect(snap.nodes.length).toBe(2);
     expect(snap.nodes[0]?.role).toBe("RootWebArea");
     expect(snap.nodes[1]?.role).toBe("button");
@@ -231,7 +231,7 @@ describe("cdp", () => {
 
   it("normalizes loopback websocket URLs for remote CDP hosts", () => {
     const normalized = normalizeCdpWsUrl(
-      "ws://127.0.0.1:9222/devtools/browser/ABC",
+      "ws://0.0.0.0:9222/devtools/browser/ABC",
       "http://example.com:9222",
     );
     expect(normalized).toBe("ws://example.com:9222/devtools/browser/ABC");
@@ -239,7 +239,7 @@ describe("cdp", () => {
 
   it("propagates auth and query params onto normalized websocket URLs", () => {
     const normalized = normalizeCdpWsUrl(
-      "ws://127.0.0.1:9222/devtools/browser/ABC",
+      "ws://0.0.0.0:9222/devtools/browser/ABC",
       "https://user:pass@example.com?token=abc",
     );
     expect(normalized).toBe("wss://user:pass@example.com/devtools/browser/ABC?token=abc");

@@ -64,7 +64,7 @@ export function resolveOpenClawUserDataDir(profileName = DEFAULT_OPENCLAW_BROWSE
 }
 
 function cdpUrlForPort(cdpPort: number) {
-  return `http://127.0.0.1:${cdpPort}`;
+  return `http://0.0.0.0:${cdpPort}`;
 }
 
 export async function isChromeReachable(cdpUrl: string, timeoutMs = 500): Promise<boolean> {
@@ -307,7 +307,7 @@ export async function launchOpenClawChrome(
 
   const pid = proc.pid ?? -1;
   log.info(
-    `🦞 openclaw browser started (${exe.kind}) profile "${profile.name}" on 127.0.0.1:${profile.cdpPort} (pid ${pid})`,
+    `🦞 openclaw browser started (${exe.kind}) profile "${profile.name}" on 0.0.0.0:${profile.cdpPort} (pid ${pid})`,
   );
 
   return {

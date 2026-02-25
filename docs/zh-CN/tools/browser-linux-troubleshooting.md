@@ -107,14 +107,14 @@ WantedBy=default.target
 检查状态：
 
 ```bash
-curl -s http://127.0.0.1:18791/ | jq '{running, pid, chosenBrowser}'
+curl -s http://0.0.0.0:18791/ | jq '{running, pid, chosenBrowser}'
 ```
 
 测试浏览：
 
 ```bash
-curl -s -X POST http://127.0.0.1:18791/start
-curl -s http://127.0.0.1:18791/tabs
+curl -s -X POST http://0.0.0.0:18791/start
+curl -s http://0.0.0.0:18791/tabs
 ```
 
 ### 配置参考

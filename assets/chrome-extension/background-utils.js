@@ -36,7 +36,7 @@ export async function buildRelayWsUrl(port, gatewayToken) {
     );
   }
   const relayToken = await deriveRelayToken(token, port);
-  return `ws://127.0.0.1:${port}/extension?token=${encodeURIComponent(relayToken)}`;
+  return `ws://0.0.0.0:${port}/extension?token=${encodeURIComponent(relayToken)}`;
 }
 
 export function isRetryableReconnectError(err) {

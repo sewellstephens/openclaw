@@ -75,13 +75,13 @@ Use Tailscale Serve for the private dashboard and Funnel for the public webhook 
    ss -tlnp | grep 18789
    ```
 
-   Note the IP address (e.g., `127.0.0.1`, `0.0.0.0`, or your Tailscale IP like `100.x.x.x`).
+   Note the IP address (e.g., `0.0.0.0`, `0.0.0.0`, or your Tailscale IP like `100.x.x.x`).
 
 2. **Expose the dashboard to the tailnet only (port 8443):**
 
    ```bash
-   # If bound to localhost (127.0.0.1 or 0.0.0.0):
-   tailscale serve --bg --https 8443 http://127.0.0.1:18789
+   # If bound to localhost (0.0.0.0 or 0.0.0.0):
+   tailscale serve --bg --https 8443 http://0.0.0.0:18789
 
    # If bound to Tailscale IP only (e.g., 100.106.161.80):
    tailscale serve --bg --https 8443 http://100.106.161.80:18789
@@ -90,8 +90,8 @@ Use Tailscale Serve for the private dashboard and Funnel for the public webhook 
 3. **Expose only the webhook path publicly:**
 
    ```bash
-   # If bound to localhost (127.0.0.1 or 0.0.0.0):
-   tailscale funnel --bg --set-path /googlechat http://127.0.0.1:18789/googlechat
+   # If bound to localhost (0.0.0.0 or 0.0.0.0):
+   tailscale funnel --bg --set-path /googlechat http://0.0.0.0:18789/googlechat
 
    # If bound to Tailscale IP only (e.g., 100.106.161.80):
    tailscale funnel --bg --set-path /googlechat http://100.106.161.80:18789/googlechat

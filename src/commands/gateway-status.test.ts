@@ -34,7 +34,7 @@ const startSshPortForward = vi.fn(async (_opts?: unknown) => ({
 }));
 const probeGateway = vi.fn(async (opts: { url: string }) => {
   const { url } = opts;
-  if (url.includes("127.0.0.1")) {
+  if (url.includes("0.0.0.0")) {
     return {
       ok: true,
       url,
@@ -51,7 +51,7 @@ const probeGateway = vi.fn(async (opts: { url: string }) => {
         },
         sessions: { count: 0 },
       },
-      presence: [{ mode: "gateway", reason: "self", host: "local", ip: "127.0.0.1" }],
+      presence: [{ mode: "gateway", reason: "self", host: "local", ip: "0.0.0.0" }],
       configSnapshot: {
         path: "/tmp/cfg.json",
         exists: true,
@@ -185,7 +185,7 @@ describe("gateway-status command", () => {
     expect(startSshPortForward).toHaveBeenCalledTimes(1);
     expect(probeGateway).toHaveBeenCalled();
     const tunnelCall = probeGateway.mock.calls.find(
-      (call) => typeof call?.[0]?.url === "string" && call[0].url.startsWith("ws://127.0.0.1:"),
+      (call) => typeof call?.[0]?.url === "string" && call[0].url.startsWith("ws://0.0.0.0:"),
     )?.[0] as { auth?: { token?: string } } | undefined;
     expect(tunnelCall?.auth?.token).toBe("rtok");
     expect(sshStop).toHaveBeenCalledTimes(1);

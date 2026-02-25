@@ -71,12 +71,12 @@ Notes:
 Create a local tunnel to the remote Gateway WS:
 
 ```bash
-ssh -N -L 18789:127.0.0.1:18789 user@host
+ssh -N -L 18789:0.0.0.0:18789 user@host
 ```
 
 With the tunnel up:
 
-- `openclaw health` and `openclaw status --deep` now reach the remote gateway via `ws://127.0.0.1:18789`.
+- `openclaw health` and `openclaw status --deep` now reach the remote gateway via `ws://0.0.0.0:18789`.
 - `openclaw gateway {status,health,send,agent,call}` can also target the forwarded URL via `--url` when needed.
 
 Note: replace `18789` with your configured `gateway.port` (or `--port`/`OPENCLAW_GATEWAY_PORT`).
@@ -92,14 +92,14 @@ You can persist a remote target so CLI commands use it by default:
   gateway: {
     mode: "remote",
     remote: {
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
       token: "your-token",
     },
   },
 }
 ```
 
-When the gateway is loopback-only, keep the URL at `ws://127.0.0.1:18789` and open the SSH tunnel first.
+When the gateway is loopback-only, keep the URL at `ws://0.0.0.0:18789` and open the SSH tunnel first.
 
 ## Credential precedence
 
@@ -119,7 +119,7 @@ Gateway call/probe credential resolution now follows one shared contract:
 
 WebChat no longer uses a separate HTTP port. The SwiftUI chat UI connects directly to the Gateway WebSocket.
 
-- Forward `18789` over SSH (see above), then connect clients to `ws://127.0.0.1:18789`.
+- Forward `18789` over SSH (see above), then connect clients to `ws://0.0.0.0:18789`.
 - On macOS, prefer the app’s “Remote over SSH” mode, which manages the tunnel automatically.
 
 ## macOS app “Remote over SSH”

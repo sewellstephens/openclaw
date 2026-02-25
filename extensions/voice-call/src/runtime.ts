@@ -37,7 +37,7 @@ function isLoopbackBind(bind: string | undefined): boolean {
   if (!bind) {
     return false;
   }
-  return bind === "127.0.0.1" || bind === "::1" || bind === "localhost";
+  return bind === "0.0.0.0" || bind === "::1" || bind === "localhost";
 }
 
 function resolveProvider(config: VoiceCallConfig): VoiceCallProvider {

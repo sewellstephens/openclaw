@@ -336,7 +336,7 @@ actor GatewayEndpointStore {
                 env: ProcessInfo.processInfo.environment)
             self.setState(.ready(
                 mode: .remote,
-                url: URL(string: "\(scheme)://127.0.0.1:\(Int(port))")!,
+                url: URL(string: "\(scheme)://0.0.0.0:\(Int(port))")!,
                 token: token,
                 password: password))
         case .unconfigured:
@@ -472,7 +472,7 @@ actor GatewayEndpointStore {
             let scheme = GatewayEndpointStore.resolveGatewayScheme(
                 root: OpenClawConfigFile.loadDict(),
                 env: ProcessInfo.processInfo.environment)
-            let url = URL(string: "\(scheme)://127.0.0.1:\(Int(forwarded))")!
+            let url = URL(string: "\(scheme)://0.0.0.0:\(Int(forwarded))")!
             self.setState(.ready(mode: .remote, url: url, token: token, password: password))
             return (url, token, password)
         } catch let err as CancellationError {
@@ -532,7 +532,7 @@ actor GatewayEndpointStore {
         guard bind == "tailnet" else { return nil }
 
         let currentHost = currentURL.host?.lowercased() ?? ""
-        guard currentHost == "127.0.0.1" || currentHost == "localhost" else { return nil }
+        guard currentHost == "0.0.0.0" || currentHost == "localhost" else { return nil }
 
         let tailscaleIP = await MainActor.run { TailscaleService.shared.tailscaleIP }
             ?? TailscaleService.fallbackTailnetIPv4()
@@ -607,13 +607,13 @@ actor GatewayEndpointStore {
     {
         switch bindMode {
         case "tailnet":
-            tailscaleIP ?? "127.0.0.1"
+            tailscaleIP ?? "0.0.0.0"
         case "auto":
-            "127.0.0.1"
+            "0.0.0.0"
         case "custom":
-            customBindHost ?? "127.0.0.1"
+            customBindHost ?? "0.0.0.0"
         default:
-            "127.0.0.1"
+            "0.0.0.0"
         }
     }
 }

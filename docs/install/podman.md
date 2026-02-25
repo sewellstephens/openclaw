@@ -44,7 +44,7 @@ By default the container is **not** installed as a systemd service, you start it
 ./scripts/run-openclaw-podman.sh launch setup
 ```
 
-Then open `http://127.0.0.1:18789/` and use the token from `~openclaw/.openclaw/.env` (or the value printed by setup).
+Then open `http://0.0.0.0:18789/` and use the token from `~openclaw/.openclaw/.env` (or the value printed by setup).
 
 ## Systemd (Quadlet, optional)
 

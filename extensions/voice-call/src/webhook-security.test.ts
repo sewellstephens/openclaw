@@ -315,13 +315,13 @@ describe("verifyTwilioWebhook", () => {
     const result = verifyTwilioWebhook(
       {
         headers: {
-          host: "127.0.0.1:3334",
+          host: "0.0.0.0:3334",
           "x-forwarded-proto": "https",
           "x-forwarded-host": "attacker.ngrok-free.app",
           "x-twilio-signature": "invalid",
         },
         rawBody: postBody,
-        url: "http://127.0.0.1:3334/voice/webhook",
+        url: "http://0.0.0.0:3334/voice/webhook",
         method: "POST",
       },
       authToken,
@@ -347,15 +347,15 @@ describe("verifyTwilioWebhook", () => {
     const result = verifyTwilioWebhook(
       {
         headers: {
-          host: "127.0.0.1:3334",
+          host: "0.0.0.0:3334",
           "x-forwarded-proto": "https",
           "x-forwarded-host": "local.ngrok-free.app",
           "x-twilio-signature": signature,
         },
         rawBody: postBody,
-        url: "http://127.0.0.1:3334/voice/webhook",
+        url: "http://0.0.0.0:3334/voice/webhook",
         method: "POST",
-        remoteAddress: "127.0.0.1",
+        remoteAddress: "0.0.0.0",
       },
       authToken,
       { allowNgrokFreeTierLoopbackBypass: true },
@@ -372,15 +372,15 @@ describe("verifyTwilioWebhook", () => {
     const result = verifyTwilioWebhook(
       {
         headers: {
-          host: "127.0.0.1:3334",
+          host: "0.0.0.0:3334",
           "x-forwarded-proto": "https",
           "x-forwarded-host": "local.ngrok-free.app",
           "x-twilio-signature": "invalid",
         },
         rawBody: postBody,
-        url: "http://127.0.0.1:3334/voice/webhook",
+        url: "http://0.0.0.0:3334/voice/webhook",
         method: "POST",
-        remoteAddress: "127.0.0.1",
+        remoteAddress: "0.0.0.0",
       },
       authToken,
       { allowNgrokFreeTierLoopbackBypass: true },

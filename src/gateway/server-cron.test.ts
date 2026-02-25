@@ -117,7 +117,7 @@ describe("buildGatewayCronService", () => {
         payload: { kind: "systemEvent", text: "hello" },
         delivery: {
           mode: "webhook",
-          to: "http://127.0.0.1:8080/cron-finished",
+          to: "http://0.0.0.0:8080/cron-finished",
         },
       });
 
@@ -125,7 +125,7 @@ describe("buildGatewayCronService", () => {
 
       expect(fetchWithSsrFGuardMock).toHaveBeenCalledOnce();
       expect(fetchWithSsrFGuardMock).toHaveBeenCalledWith({
-        url: "http://127.0.0.1:8080/cron-finished",
+        url: "http://0.0.0.0:8080/cron-finished",
         init: {
           method: "POST",
           headers: {

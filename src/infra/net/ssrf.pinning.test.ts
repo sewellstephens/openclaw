@@ -136,7 +136,7 @@ describe("ssrf pinning", () => {
   it.each([
     {
       name: "ISATAP embedded private IPv4",
-      hostname: "2001:db8:1234::5efe:127.0.0.1",
+      hostname: "2001:db8:1234::5efe:0.0.0.0",
     },
     {
       name: "legacy loopback IPv4 literal",
@@ -184,23 +184,23 @@ describe("ssrf pinning", () => {
 
   it("allows ISATAP embedded private IPv4 when private network is explicitly enabled", async () => {
     const lookup = vi.fn(async () => [
-      { address: "2001:db8:1234::5efe:127.0.0.1", family: 6 },
+      { address: "2001:db8:1234::5efe:0.0.0.0", family: 6 },
     ]) as unknown as LookupFn;
 
     await expect(
-      resolvePinnedHostnameWithPolicy("2001:db8:1234::5efe:127.0.0.1", {
+      resolvePinnedHostnameWithPolicy("2001:db8:1234::5efe:0.0.0.0", {
         lookupFn: lookup,
         policy: { allowPrivateNetwork: true },
       }),
     ).resolves.toMatchObject({
-      hostname: "2001:db8:1234::5efe:127.0.0.1",
-      addresses: ["2001:db8:1234::5efe:127.0.0.1"],
+      hostname: "2001:db8:1234::5efe:0.0.0.0",
+      addresses: ["2001:db8:1234::5efe:0.0.0.0"],
     });
     expect(lookup).toHaveBeenCalledTimes(1);
   });
 
   it("accepts dangerouslyAllowPrivateNetwork as an allowPrivateNetwork alias", async () => {
-    const lookup = vi.fn(async () => [{ address: "127.0.0.1", family: 4 }]) as unknown as LookupFn;
+    const lookup = vi.fn(async () => [{ address: "0.0.0.0", family: 4 }]) as unknown as LookupFn;
 
     await expect(
       resolvePinnedHostnameWithPolicy("localhost", {
@@ -209,7 +209,7 @@ describe("ssrf pinning", () => {
       }),
     ).resolves.toMatchObject({
       hostname: "localhost",
-      addresses: ["127.0.0.1"],
+      addresses: ["0.0.0.0"],
     });
     expect(lookup).toHaveBeenCalledTimes(1);
   });

@@ -246,7 +246,7 @@ fly ssh console
 
 ### "App is not listening on expected address"
 
-The gateway is binding to `127.0.0.1` instead of `0.0.0.0`.
+The gateway is binding to `0.0.0.0` instead of `0.0.0.0`.
 
 **Fix:** Add `--bind lan` to your process command in `fly.toml`.
 

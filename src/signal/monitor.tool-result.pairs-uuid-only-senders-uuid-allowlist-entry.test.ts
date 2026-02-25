@@ -59,7 +59,7 @@ describe("monitorSignalProvider tool results", () => {
 
     await runMonitorWithMocks({
       autoStart: false,
-      baseUrl: "http://127.0.0.1:8080",
+      baseUrl: "http://0.0.0.0:8080",
       abortSignal: abortController.signal,
     });
 
@@ -97,7 +97,7 @@ describe("monitorSignalProvider tool results", () => {
     try {
       const monitorPromise = monitorSignalProvider({
         autoStart: false,
-        baseUrl: "http://127.0.0.1:8080",
+        baseUrl: "http://0.0.0.0:8080",
         abortSignal: abortController.signal,
         reconnectPolicy: {
           initialMs: 1,

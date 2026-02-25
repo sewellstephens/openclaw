@@ -43,7 +43,7 @@ describe("media understanding attachments SSRF", () => {
     const fetchSpy = vi.fn();
     globalThis.fetch = withFetchPreconnect(fetchSpy);
 
-    const cache = new MediaAttachmentCache([{ index: 0, url: "http://127.0.0.1/secret.jpg" }]);
+    const cache = new MediaAttachmentCache([{ index: 0, url: "http://0.0.0.0/secret.jpg" }]);
 
     await expect(
       cache.getBuffer({ attachmentIndex: 0, maxBytes: 1024, timeoutMs: 1000 }),

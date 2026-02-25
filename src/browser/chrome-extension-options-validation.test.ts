@@ -89,7 +89,7 @@ describe("chrome extension options validation", () => {
     expect(result).toEqual({
       action: "status",
       kind: "ok",
-      message: "Relay reachable and authenticated at http://127.0.0.1:19004/",
+      message: "Relay reachable and authenticated at http://0.0.0.0:19004/",
     });
   });
 
@@ -107,7 +107,7 @@ describe("chrome extension options validation", () => {
     expect(result).toEqual({
       kind: "error",
       message:
-        "Relay not reachable/authenticated at http://127.0.0.1:18792/. Start OpenClaw browser relay and verify token.",
+        "Relay not reachable/authenticated at http://0.0.0.0:18792/. Start OpenClaw browser relay and verify token.",
     });
   });
 });

@@ -233,7 +233,7 @@ describe("gateway server models + voicewake", () => {
 
   test("pushes voicewake.changed to nodes on connect and on updates", async () => {
     await withTempHome(async () => {
-      const nodeWs = new WebSocket(`ws://127.0.0.1:${port}`);
+      const nodeWs = new WebSocket(`ws://0.0.0.0:${port}`);
       trackConnectChallengeNonce(nodeWs);
       await new Promise<void>((resolve) => nodeWs.once("open", resolve));
       const firstEventP = onceMessage(
@@ -378,7 +378,7 @@ describe("gateway server misc", () => {
         const canvasHostUrl = resolveCanvasHostUrl({
           canvasPort,
           requestHost: `100.64.0.1:${testPort}`,
-          localAddress: "127.0.0.1",
+          localAddress: "0.0.0.0",
         });
         expect(canvasHostUrl).toBe(`http://100.64.0.1:${canvasPort}`);
       });
@@ -472,7 +472,7 @@ describe("gateway server misc", () => {
     const probe = createServer();
     await new Promise<void>((resolve, reject) => {
       probe.once("error", reject);
-      probe.listen(releasePort, "127.0.0.1", () => resolve());
+      probe.listen(releasePort, "0.0.0.0", () => resolve());
     });
     await new Promise<void>((resolve, reject) =>
       probe.close((err) => (err ? reject(err) : resolve())),

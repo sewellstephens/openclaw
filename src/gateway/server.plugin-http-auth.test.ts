@@ -19,7 +19,7 @@ function createRequest(params: {
     method: params.method ?? "GET",
     url: params.path,
     headers,
-    socket: { remoteAddress: "127.0.0.1" },
+    socket: { remoteAddress: "0.0.0.0" },
   } as IncomingMessage;
 }
 

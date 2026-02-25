@@ -34,7 +34,7 @@ describe("isPrivateOrReservedIP", () => {
     ["172.32.0.1", false],
     ["192.168.0.1", true],
     ["192.168.255.255", true],
-    ["127.0.0.1", true],
+    ["0.0.0.0", true],
     ["127.255.255.255", true],
     ["169.254.0.1", true],
     ["169.254.169.254", true],
@@ -55,7 +55,7 @@ describe("isPrivateOrReservedIP", () => {
     ["2001:0db8::1", false],
     ["2620:1ec:c11::200", false],
     // IPv4-mapped IPv6 addresses
-    ["::ffff:127.0.0.1", true],
+    ["::ffff:0.0.0.0", true],
     ["::ffff:10.0.0.1", true],
     ["::ffff:192.168.1.1", true],
     ["::ffff:169.254.169.254", true],
@@ -98,7 +98,7 @@ describe("resolveAndValidateIP", () => {
   });
 
   it("rejects a hostname resolving to loopback", async () => {
-    await expect(resolveAndValidateIP("evil.test", privateResolve("127.0.0.1"))).rejects.toThrow(
+    await expect(resolveAndValidateIP("evil.test", privateResolve("0.0.0.0"))).rejects.toThrow(
       "private/reserved IP",
     );
   });

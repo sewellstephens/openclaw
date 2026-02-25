@@ -225,10 +225,10 @@ describe("browser chrome helpers", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ webSocketDebuggerUrl: "ws://127.0.0.1/devtools" }),
+        json: async () => ({ webSocketDebuggerUrl: "ws://0.0.0.0/devtools" }),
       } as unknown as Response),
     );
-    await expect(isChromeReachable("http://127.0.0.1:12345", 50)).resolves.toBe(true);
+    await expect(isChromeReachable("http://0.0.0.0:12345", 50)).resolves.toBe(true);
 
     vi.stubGlobal(
       "fetch",
@@ -237,10 +237,10 @@ describe("browser chrome helpers", () => {
         json: async () => ({}),
       } as unknown as Response),
     );
-    await expect(isChromeReachable("http://127.0.0.1:12345", 50)).resolves.toBe(false);
+    await expect(isChromeReachable("http://0.0.0.0:12345", 50)).resolves.toBe(false);
 
     vi.stubGlobal("fetch", vi.fn().mockRejectedValue(new Error("boom")));
-    await expect(isChromeReachable("http://127.0.0.1:12345", 50)).resolves.toBe(false);
+    await expect(isChromeReachable("http://0.0.0.0:12345", 50)).resolves.toBe(false);
   });
 
   it("stopOpenClawChrome no-ops when process is already killed", async () => {
@@ -273,7 +273,7 @@ describe("browser chrome helpers", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ webSocketDebuggerUrl: "ws://127.0.0.1/devtools" }),
+        json: async () => ({ webSocketDebuggerUrl: "ws://0.0.0.0/devtools" }),
       } as unknown as Response),
     );
     const proc = makeProc();

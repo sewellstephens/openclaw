@@ -36,7 +36,7 @@ describe("media server", () => {
   let port = 0;
 
   function mediaUrl(id: string) {
-    return `http://127.0.0.1:${port}/media/${id}`;
+    return `http://0.0.0.0:${port}/media/${id}`;
   }
 
   async function writeMediaFile(id: string, contents: string) {

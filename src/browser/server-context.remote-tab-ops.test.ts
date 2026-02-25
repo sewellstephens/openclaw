@@ -25,7 +25,7 @@ function makeState(
       enabled: true,
       controlPort: 18791,
       cdpProtocol: profile === "remote" ? "https" : "http",
-      cdpHost: profile === "remote" ? "browserless.example" : "127.0.0.1",
+      cdpHost: profile === "remote" ? "browserless.example" : "0.0.0.0",
       cdpIsLoopback: profile !== "remote",
       remoteCdpTimeoutMs: 1500,
       remoteCdpHandshakeTimeoutMs: 3000,
@@ -103,7 +103,7 @@ describe("browser server-context remote profile tab operations", () => {
     const createPageViaPlaywright = vi.fn(async () => ({
       targetId: "T2",
       title: "Tab 2",
-      url: "http://127.0.0.1:3000",
+      url: "http://0.0.0.0:3000",
       type: "page",
     }));
     const closePageByTargetIdViaPlaywright = vi.fn(async () => {});
@@ -119,12 +119,12 @@ describe("browser server-context remote profile tab operations", () => {
     const tabs = await remote.listTabs();
     expect(tabs.map((t) => t.targetId)).toEqual(["T1"]);
 
-    const opened = await remote.openTab("http://127.0.0.1:3000");
+    const opened = await remote.openTab("http://0.0.0.0:3000");
     expect(opened.targetId).toBe("T2");
     expect(state.profiles.get("remote")?.lastTargetId).toBe("T2");
     expect(createPageViaPlaywright).toHaveBeenCalledWith({
       cdpUrl: "https://browserless.example/chrome?token=abc",
-      url: "http://127.0.0.1:3000",
+      url: "http://0.0.0.0:3000",
       ssrfPolicy: { allowPrivateNetwork: true },
     });
 
@@ -287,8 +287,8 @@ describe("browser server-context tab selection state", () => {
       {
         id: "CREATED",
         title: "New Tab",
-        url: "http://127.0.0.1:8080",
-        webSocketDebuggerUrl: "ws://127.0.0.1/devtools/page/CREATED",
+        url: "http://0.0.0.0:8080",
+        webSocketDebuggerUrl: "ws://0.0.0.0/devtools/page/CREATED",
         type: "page",
       },
     ]);
@@ -299,12 +299,12 @@ describe("browser server-context tab selection state", () => {
     const ctx = createBrowserRouteContext({ getState: () => state });
     const openclaw = ctx.forProfile("openclaw");
 
-    const opened = await openclaw.openTab("http://127.0.0.1:8080");
+    const opened = await openclaw.openTab("http://0.0.0.0:8080");
     expect(opened.targetId).toBe("CREATED");
     expect(state.profiles.get("openclaw")?.lastTargetId).toBe("CREATED");
     expect(createTargetViaCdp).toHaveBeenCalledWith({
-      cdpUrl: "http://127.0.0.1:18800",
-      url: "http://127.0.0.1:8080",
+      cdpUrl: "http://0.0.0.0:18800",
+      url: "http://0.0.0.0:8080",
       ssrfPolicy: { allowPrivateNetwork: true },
     });
   });

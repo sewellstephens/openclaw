@@ -93,7 +93,7 @@ describe("web_fetch SSRF protection", () => {
     const fetchSpy = setMockFetch();
     const tool = await createWebFetchToolForTest();
 
-    const cases = ["http://127.0.0.1/test", "http://[::ffff:127.0.0.1]/"] as const;
+    const cases = ["http://0.0.0.0/test", "http://[::ffff:0.0.0.0]/"] as const;
     for (const url of cases) {
       await expectBlockedUrl(tool, url, /private|internal|blocked/i);
     }
@@ -120,7 +120,7 @@ describe("web_fetch SSRF protection", () => {
     lookupMock.mockResolvedValue([{ address: "93.184.216.34", family: 4 }]);
 
     const fetchSpy = setMockFetch().mockResolvedValueOnce(
-      redirectResponse("http://127.0.0.1/secret"),
+      redirectResponse("http://0.0.0.0/secret"),
     );
     const tool = await createWebFetchToolForTest({
       firecrawl: { apiKey: "firecrawl-test" },

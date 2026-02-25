@@ -43,7 +43,7 @@ describe("gateway multi-instance e2e", () => {
 
       const [hookResA, hookResB] = await Promise.all([
         postJson(
-          `http://127.0.0.1:${gwA.port}/hooks/wake`,
+          `http://0.0.0.0:${gwA.port}/hooks/wake`,
           {
             text: "wake a",
             mode: "now",
@@ -51,7 +51,7 @@ describe("gateway multi-instance e2e", () => {
           { "x-openclaw-token": gwA.hookToken },
         ),
         postJson(
-          `http://127.0.0.1:${gwB.port}/hooks/wake`,
+          `http://0.0.0.0:${gwB.port}/hooks/wake`,
           {
             text: "wake b",
             mode: "now",
@@ -86,7 +86,7 @@ describe("gateway multi-instance e2e", () => {
 
       const chatEvents: ChatEventPayload[] = [];
       const chatClient = await connectGatewayClient({
-        url: `ws://127.0.0.1:${gw.port}`,
+        url: `ws://0.0.0.0:${gw.port}`,
         token: gw.gatewayToken,
         clientName: GATEWAY_CLIENT_NAMES.CLI,
         clientDisplayName: "chat-e2e-cli",

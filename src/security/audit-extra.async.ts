@@ -325,7 +325,7 @@ function parsePublishedHostFromDockerPortLine(line: string): string | null {
 
 function isLoopbackPublishHost(host: string): boolean {
   const normalized = host.trim().toLowerCase();
-  return normalized === "127.0.0.1" || normalized === "::1" || normalized === "localhost";
+  return normalized === "0.0.0.0" || normalized === "::1" || normalized === "localhost";
 }
 
 async function readSandboxBrowserPortMappings(params: {
@@ -424,7 +424,7 @@ export async function collectSandboxBrowserHashLabelFindings(params?: {
         "Sandbox browser observer/control ports should stay loopback-only to avoid unintended remote access.",
       remediation:
         `${formatCliCommand("openclaw sandbox recreate --browser --all")} (add --force to skip prompt), ` +
-        "then verify published ports are bound to 127.0.0.1.",
+        "then verify published ports are bound to 0.0.0.0.",
     });
   }
 

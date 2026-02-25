@@ -54,7 +54,7 @@ Optional env vars:
 
 After it finishes:
 
-- Open `http://127.0.0.1:18789/` in your browser.
+- Open `http://0.0.0.0:18789/` in your browser.
 - Paste the token into the Control UI (Settings → token).
 - Need the URL again? Run `docker compose run --rm openclaw-cli dashboard --no-open`.
 
@@ -299,7 +299,7 @@ Docs: [WhatsApp](/channels/whatsapp), [Telegram](/channels/telegram), [Discord](
 ### OpenAI Codex OAuth (headless Docker)
 
 If you pick OpenAI Codex OAuth in the wizard, it opens a browser URL and tries
-to capture a callback on `http://127.0.0.1:1455/auth/callback`. In Docker or
+to capture a callback on `http://0.0.0.0:1455/auth/callback`. In Docker or
 headless setups that callback can show a browser error. Copy the full redirect
 URL you land on and paste it back into the wizard to finish auth.
 

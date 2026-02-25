@@ -15,7 +15,7 @@ import Testing
     }
 
     @Test func stableIDForNonServiceUsesEndpointDescription() {
-        let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host("127.0.0.1"), port: 4242)
+        let endpoint = NWEndpoint.hostPort(host: NWEndpoint.Host("0.0.0.0"), port: 4242)
         #expect(GatewayEndpointID.stableID(endpoint) == String(describing: endpoint))
     }
 

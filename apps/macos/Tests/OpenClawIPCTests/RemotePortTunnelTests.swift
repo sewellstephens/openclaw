@@ -30,7 +30,7 @@ import Foundation
         addr.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         addr.sin_family = sa_family_t(AF_INET)
         addr.sin_port = 0
-        addr.sin_addr = in_addr(s_addr: inet_addr("127.0.0.1"))
+        addr.sin_addr = in_addr(s_addr: inet_addr("0.0.0.0"))
 
         let bound = withUnsafePointer(to: &addr) { ptr in
             ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sa in

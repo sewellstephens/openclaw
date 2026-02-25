@@ -216,7 +216,7 @@ export function formatControlUiSshHint(params: {
   const sshTarget = resolveSshTargetHint();
   return [
     "No GUI detected. Open from your computer:",
-    `ssh -N -L ${params.port}:127.0.0.1:${params.port} ${sshTarget}`,
+    `ssh -N -L ${params.port}:0.0.0.0:${params.port} ${sshTarget}`,
     "Then open:",
     localUrl,
     authedUrl,
@@ -471,12 +471,12 @@ export function resolveControlUiLinks(params: {
       return customBindHost;
     }
     if (bind === "tailnet" && tailnetIPv4) {
-      return tailnetIPv4 ?? "127.0.0.1";
+      return tailnetIPv4 ?? "0.0.0.0";
     }
     if (bind === "lan") {
-      return pickPrimaryLanIPv4() ?? "127.0.0.1";
+      return pickPrimaryLanIPv4() ?? "0.0.0.0";
     }
-    return "127.0.0.1";
+    return "0.0.0.0";
   })();
   const basePath = normalizeControlUiBasePath(params.basePath);
   const uiPath = basePath ? `${basePath}/` : "/";

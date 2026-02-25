@@ -1062,8 +1062,8 @@ describe("gateway server sessions", () => {
       },
     });
 
-    const ws = new WebSocket(`ws://127.0.0.1:${harness.port}`, {
-      headers: { origin: `http://127.0.0.1:${harness.port}` },
+    const ws = new WebSocket(`ws://0.0.0.0:${harness.port}`, {
+      headers: { origin: `http://0.0.0.0:${harness.port}` },
     });
     trackConnectChallengeNonce(ws);
     await new Promise<void>((resolve) => ws.once("open", resolve));

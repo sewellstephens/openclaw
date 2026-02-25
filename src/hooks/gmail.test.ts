@@ -55,7 +55,7 @@ describe("gmail hook config", () => {
 
   it("builds default hook url", () => {
     expect(buildDefaultHookUrl("/hooks", DEFAULT_GATEWAY_PORT)).toBe(
-      `http://127.0.0.1:${DEFAULT_GATEWAY_PORT}/hooks/gmail`,
+      `http://0.0.0.0:${DEFAULT_GATEWAY_PORT}/hooks/gmail`,
     );
   });
 
@@ -75,7 +75,7 @@ describe("gmail hook config", () => {
       expect(result.value.label).toBe("INBOX");
       expect(result.value.includeBody).toBe(true);
       expect(result.value.serve.port).toBe(8788);
-      expect(result.value.hookUrl).toBe(`http://127.0.0.1:${DEFAULT_GATEWAY_PORT}/hooks/gmail`);
+      expect(result.value.hookUrl).toBe(`http://0.0.0.0:${DEFAULT_GATEWAY_PORT}/hooks/gmail`);
     }
   });
 
@@ -117,7 +117,7 @@ describe("gmail hook config", () => {
   });
 
   it("keeps serve path when tailscale target is set", () => {
-    const target = "http://127.0.0.1:8788/custom";
+    const target = "http://0.0.0.0:8788/custom";
     const result = resolveWithGmailOverrides({
       serve: { path: "/custom" },
       tailscale: { mode: "funnel", target },

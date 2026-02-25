@@ -13,7 +13,7 @@ import { createSubsystemLogger } from "../logging/subsystem.js";
 
 const log = createSubsystemLogger("ollama-stream");
 
-export const OLLAMA_NATIVE_BASE_URL = "http://127.0.0.1:11434";
+export const OLLAMA_NATIVE_BASE_URL = "http://0.0.0.0:11434";
 
 // ── Ollama /api/chat request types ──────────────────────────────────────────
 

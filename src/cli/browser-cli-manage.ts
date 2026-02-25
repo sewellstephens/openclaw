@@ -98,7 +98,7 @@ export function registerBrowserManageCommands(
             `enabled: ${status.enabled}`,
             `running: ${status.running}`,
             `cdpPort: ${status.cdpPort}`,
-            `cdpUrl: ${status.cdpUrl ?? `http://127.0.0.1:${status.cdpPort}`}`,
+            `cdpUrl: ${status.cdpUrl ?? `http://0.0.0.0:${status.cdpPort}`}`,
             `browser: ${status.chosenBrowser ?? "unknown"}`,
             `detectedBrowser: ${status.detectedBrowser ?? "unknown"}`,
             `detectedPath: ${detectedDisplay}`,

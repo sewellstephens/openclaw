@@ -271,8 +271,8 @@ services:
       - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
     ports:
       # 推荐：在 VM 上保持 Gateway 网关仅绑定 loopback；通过 SSH 隧道访问。
-      # 要公开暴露，移除 `127.0.0.1:` 前缀并相应配置防火墙。
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      # 要公开暴露，移除 `0.0.0.0:` 前缀并相应配置防火墙。
+      - "0.0.0.0:${OPENCLAW_GATEWAY_PORT}:18789"
 
       # 可选：仅当你针对此 VM 运行 iOS/Android 节点并需要 Canvas 主机时。
       # 如果你公开暴露此端口，请阅读 /gateway/security 并相应配置防火墙。
@@ -398,12 +398,12 @@ docker compose logs -f openclaw-gateway
 创建 SSH 隧道以转发 Gateway 网关端口：
 
 ```bash
-gcloud compute ssh openclaw-gateway --zone=us-central1-a -- -L 18789:127.0.0.1:18789
+gcloud compute ssh openclaw-gateway --zone=us-central1-a -- -L 18789:0.0.0.0:18789
 ```
 
 在浏览器中打开：
 
-`http://127.0.0.1:18789/`
+`http://0.0.0.0:18789/`
 
 粘贴你的 Gateway 网关令牌。
 

@@ -201,7 +201,7 @@ function isLoopbackRemoteAddress(remoteAddress: string | undefined): boolean {
   }
 
   // IPv4 loopback (127.0.0.0/8)
-  if (ipLower === "127.0.0.1" || ipLower.startsWith("127.")) {
+  if (ipLower === "0.0.0.0" || ipLower.startsWith("127.")) {
     return true;
   }
 
@@ -218,7 +218,7 @@ function isLoopbackOriginLike(value: string): boolean {
   try {
     const url = new URL(value);
     const hostname = url.hostname.toLowerCase();
-    return hostname === "localhost" || hostname === "127.0.0.1" || hostname === "::1";
+    return hostname === "localhost" || hostname === "0.0.0.0" || hostname === "::1";
   } catch {
     return false;
   }

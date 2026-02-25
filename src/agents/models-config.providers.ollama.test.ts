@@ -6,7 +6,7 @@ import { resolveImplicitProviders, resolveOllamaApiBase } from "./models-config.
 
 describe("resolveOllamaApiBase", () => {
   it("returns default localhost base when no configured URL is provided", () => {
-    expect(resolveOllamaApiBase()).toBe("http://127.0.0.1:11434");
+    expect(resolveOllamaApiBase()).toBe("http://0.0.0.0:11434");
   });
 
   it("strips /v1 suffix from OpenAI-compatible URLs", () => {
@@ -42,7 +42,7 @@ describe("Ollama provider", () => {
       expect(providers?.ollama).toBeDefined();
       expect(providers?.ollama?.apiKey).toBe("OLLAMA_API_KEY");
       expect(providers?.ollama?.api).toBe("ollama");
-      expect(providers?.ollama?.baseUrl).toBe("http://127.0.0.1:11434");
+      expect(providers?.ollama?.baseUrl).toBe("http://0.0.0.0:11434");
     } finally {
       delete process.env.OLLAMA_API_KEY;
     }

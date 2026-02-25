@@ -29,7 +29,7 @@ function createLimiterSpy(): AuthRateLimiter & {
 
 function createTailscaleForwardedReq(): never {
   return {
-    socket: { remoteAddress: "127.0.0.1" },
+    socket: { remoteAddress: "0.0.0.0" },
     headers: {
       host: "gateway.local",
       "x-forwarded-for": "100.64.0.1",
@@ -55,10 +55,10 @@ describe("gateway auth", () => {
       auth: { mode: "token", token: "secret", allowTailscale: false },
       connectAuth: { token: "wrong" },
       req: {
-        socket: { remoteAddress: "127.0.0.1" },
+        socket: { remoteAddress: "0.0.0.0" },
         headers: params.reqHeaders,
       } as never,
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       ...(params.allowRealIpFallback ? { allowRealIpFallback: true } : {}),
       rateLimiter: limiter,
     });
@@ -260,7 +260,7 @@ describe("gateway auth", () => {
       auth: { mode: "token", token: "secret", allowTailscale: true },
       connectAuth: { token: "secret" },
       req: {
-        socket: { remoteAddress: "127.0.0.1" },
+        socket: { remoteAddress: "0.0.0.0" },
         headers: { host: "gateway.tailnet-1234.ts.net:443" },
       } as never,
     });
@@ -321,8 +321,8 @@ describe("gateway auth", () => {
     const limiter = await expectTokenMismatchWithLimiter({
       reqHeaders: { "x-real-ip": "203.0.113.77" },
     });
-    expect(limiter.check).toHaveBeenCalledWith("127.0.0.1", "shared-secret");
-    expect(limiter.recordFailure).toHaveBeenCalledWith("127.0.0.1", "shared-secret");
+    expect(limiter.check).toHaveBeenCalledWith("0.0.0.0", "shared-secret");
+    expect(limiter.recordFailure).toHaveBeenCalledWith("0.0.0.0", "shared-secret");
   });
 
   it("uses X-Real-IP when fallback is explicitly enabled", async () => {

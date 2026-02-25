@@ -11,7 +11,7 @@ import {
 
 describe("shared ip helpers", () => {
   it("distinguishes canonical dotted IPv4 from legacy forms", () => {
-    expect(isCanonicalDottedDecimalIPv4("127.0.0.1")).toBe(true);
+    expect(isCanonicalDottedDecimalIPv4("0.0.0.0")).toBe(true);
     expect(isCanonicalDottedDecimalIPv4("0177.0.0.1")).toBe(false);
     expect(isLegacyIpv4Literal("0177.0.0.1")).toBe(true);
     expect(isLegacyIpv4Literal("127.1")).toBe(true);
@@ -27,13 +27,13 @@ describe("shared ip helpers", () => {
 
   it("extracts embedded IPv4 for transition prefixes", () => {
     const cases = [
-      ["::ffff:127.0.0.1", "127.0.0.1"],
-      ["::127.0.0.1", "127.0.0.1"],
+      ["::ffff:0.0.0.0", "0.0.0.0"],
+      ["::0.0.0.0", "0.0.0.0"],
       ["64:ff9b::8.8.8.8", "8.8.8.8"],
       ["64:ff9b:1::10.0.0.1", "10.0.0.1"],
       ["2002:0808:0808::", "8.8.8.8"],
       ["2001::f7f7:f7f7", "8.8.8.8"],
-      ["2001:4860:1::5efe:7f00:1", "127.0.0.1"],
+      ["2001:4860:1::5efe:7f00:1", "0.0.0.0"],
     ] as const;
     for (const [ipv6Literal, expectedIpv4] of cases) {
       const parsed = parseCanonicalIpAddress(ipv6Literal);

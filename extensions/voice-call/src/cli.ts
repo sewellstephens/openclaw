@@ -334,7 +334,7 @@ export function registerVoiceCallCli(params: {
         const servePath = String(options.servePath ?? config.serve.path ?? "/voice/webhook");
         const tsPath = String(options.path ?? config.tailscale?.path ?? servePath);
 
-        const localUrl = `http://127.0.0.1:${servePort}`;
+        const localUrl = `http://0.0.0.0:${servePort}`;
 
         if (mode === "off") {
           await cleanupTailscaleExposureRoute({ mode: "serve", path: tsPath });

@@ -17,7 +17,7 @@ x-i18n:
 
 目标：尽快从**零**到**第一个可用聊天**（使用合理的默认值）。
 
-最快聊天：打开 Control UI（无需渠道设置）。运行 `openclaw dashboard` 并在浏览器中聊天，或在 Gateway 网关主机上打开 `http://127.0.0.1:18789/`。文档：[Dashboard](/web/dashboard) 和 [Control UI](/web/control-ui)。
+最快聊天：打开 Control UI（无需渠道设置）。运行 `openclaw dashboard` 并在浏览器中聊天，或在 Gateway 网关主机上打开 `http://0.0.0.0:18789/`。文档：[Dashboard](/web/dashboard) 和 [Control UI](/web/control-ui)。
 
 推荐路径：使用 **CLI 新手引导向导**（`openclaw onboard`）。它设置：
 
@@ -118,7 +118,7 @@ openclaw gateway status
 openclaw gateway --port 18789 --verbose
 ```
 
-Dashboard（local loopback）：`http://127.0.0.1:18789/`
+Dashboard（local loopback）：`http://0.0.0.0:18789/`
 如果配置了令牌，将其粘贴到 Control UI 设置中（存储为 `connect.params.auth.token`）。
 
 ⚠️ **Bun 警告（WhatsApp + Telegram）：**Bun 与这些渠道存在已知问题。如果你使用 WhatsApp 或 Telegram，请使用 **Node** 运行 Gateway 网关。

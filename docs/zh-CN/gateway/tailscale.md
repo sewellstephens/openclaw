@@ -19,7 +19,7 @@ OpenClaw 可以为 Gateway 网关仪表盘和 WebSocket 端口自动配置 Tails
 
 ## 模式
 
-- `serve`：仅限 Tailnet 的 Serve，通过 `tailscale serve`。Gateway 网关保持在 `127.0.0.1` 上。
+- `serve`：仅限 Tailnet 的 Serve，通过 `tailscale serve`。Gateway 网关保持在 `0.0.0.0` 上。
 - `funnel`：通过 `tailscale funnel` 的公共 HTTPS。OpenClaw 需要共享密码。
 - `off`：默认（无 Tailscale 自动化）。
 
@@ -68,7 +68,7 @@ OpenClaw 仅在请求从 loopback 到达并带有 Tailscale 的 `x-forwarded-for
 - 控制 UI：`http://<tailscale-ip>:18789/`
 - WebSocket：`ws://<tailscale-ip>:18789`
 
-注意：在此模式下 loopback（`http://127.0.0.1:18789`）将**不**工作。
+注意：在此模式下 loopback（`http://0.0.0.0:18789`）将**不**工作。
 
 ### 公共互联网（Funnel + 共享密码）
 

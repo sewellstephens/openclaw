@@ -15,7 +15,7 @@ describe("pw-tools-core", () => {
     setPwToolsCoreCurrentPage({});
 
     await mod.scrollIntoViewViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       targetId: "T1",
       ref: "1",
       timeoutMs: 50,
@@ -43,7 +43,7 @@ describe("pw-tools-core", () => {
 
     await expect(
       mod.scrollIntoViewViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         targetId: "T1",
         ref: "1",
       }),
@@ -69,7 +69,7 @@ describe("pw-tools-core", () => {
 
     await expect(
       mod.clickViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         targetId: "T1",
         ref: "1",
       }),
@@ -86,7 +86,7 @@ describe("pw-tools-core", () => {
 
     await expect(
       mod.clickViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         targetId: "T1",
         ref: "1",
       }),

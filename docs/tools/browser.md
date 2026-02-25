@@ -65,7 +65,7 @@ Browser settings live in `~/.openclaw/openclaw.json`.
       // hostnameAllowlist: ["*.example.com", "example.com"],
       // allowedHostnames: ["localhost"],
     },
-    // cdpUrl: "http://127.0.0.1:18792", // legacy single-profile override
+    // cdpUrl: "http://0.0.0.0:18792", // legacy single-profile override
     remoteCdpTimeoutMs: 1500, // remote CDP HTTP timeout (ms)
     remoteCdpHandshakeTimeoutMs: 3000, // remote CDP WebSocket handshake timeout (ms)
     defaultProfile: "chrome",
@@ -221,7 +221,7 @@ OpenClaw supports multiple named profiles (routing configs). Profiles can be:
 Defaults:
 
 - The `openclaw` profile is auto-created if missing.
-- The `chrome` profile is built-in for the Chrome extension relay (points at `http://127.0.0.1:18792` by default).
+- The `chrome` profile is built-in for the Chrome extension relay (points at `http://0.0.0.0:18792` by default).
 - Local CDP ports allocate from **18800–18899** by default.
 - Deleting a profile moves its local data directory to Trash.
 
@@ -236,7 +236,7 @@ Full guide: [Chrome extension](/tools/chrome-extension)
 Flow:
 
 - The Gateway runs locally (same machine) or a node host runs on the browser machine.
-- A local **relay server** listens at a loopback `cdpUrl` (default: `http://127.0.0.1:18792`).
+- A local **relay server** listens at a loopback `cdpUrl` (default: `http://0.0.0.0:18792`).
 - You click the **OpenClaw Browser Relay** extension icon on a tab to attach (it does not auto-attach).
 - The agent controls that tab via the normal `browser` tool, by selecting the right profile.
 
@@ -273,7 +273,7 @@ Optional: if you want a different name or relay port, create your own profile:
 openclaw browser create-profile \
   --name my-chrome \
   --driver extension \
-  --cdp-url http://127.0.0.1:18792 \
+  --cdp-url http://0.0.0.0:18792 \
   --color "#00AA00"
 ```
 

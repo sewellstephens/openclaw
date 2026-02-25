@@ -8,7 +8,7 @@ export type SignalAccountConfig = CommonChannelMessagingConfig & {
   account?: string;
   /** Optional full base URL for signal-cli HTTP daemon. */
   httpUrl?: string;
-  /** HTTP host for signal-cli daemon (default 127.0.0.1). */
+  /** HTTP host for signal-cli daemon (default 0.0.0.0). */
   httpHost?: string;
   /** HTTP port for signal-cli daemon (default 8080). */
   httpPort?: number;

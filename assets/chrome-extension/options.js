@@ -13,7 +13,7 @@ function clampPort(value) {
 function updateRelayUrl(port) {
   const el = document.getElementById('relay-url')
   if (!el) return
-  el.textContent = `http://127.0.0.1:${port}/`
+  el.textContent = `http://0.0.0.0:${port}/`
 }
 
 function setStatus(kind, message) {
@@ -24,7 +24,7 @@ function setStatus(kind, message) {
 }
 
 async function checkRelayReachable(port, token) {
-  const url = `http://127.0.0.1:${port}/json/version`
+  const url = `http://0.0.0.0:${port}/json/version`
   const trimmedToken = String(token || '').trim()
   if (!trimmedToken) {
     setStatus('error', 'Gateway token required. Save your gateway token to connect.')

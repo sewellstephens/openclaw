@@ -65,7 +65,7 @@ describe("pw-session createPageViaPlaywright navigation guard", () => {
 
     await expect(
       createPageViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         url: "file:///etc/passwd",
       }),
     ).rejects.toBeInstanceOf(InvalidBrowserNavigationUrlError);
@@ -77,7 +77,7 @@ describe("pw-session createPageViaPlaywright navigation guard", () => {
     const { pageGoto } = installBrowserMocks();
 
     const created = await createPageViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       url: "about:blank",
     });
 

@@ -384,11 +384,11 @@ x-i18n:
       topic: "projects/<project-id>/topics/gog-gmail-watch",
       subscription: "gog-gmail-watch-push",
       pushToken: "shared-push-token",
-      hookUrl: "http://127.0.0.1:18789/hooks/gmail",
+      hookUrl: "http://0.0.0.0:18789/hooks/gmail",
       includeBody: true,
       maxBytes: 20000,
       renewEveryMinutes: 720,
-      serve: { bind: "127.0.0.1", port: 8788, path: "/" },
+      serve: { bind: "0.0.0.0", port: 8788, path: "/" },
       tailscale: { mode: "funnel", path: "/gmail-pubsub" },
     },
   },
@@ -559,7 +559,7 @@ x-i18n:
     mode: "merge",
     providers: {
       lmstudio: {
-        baseUrl: "http://127.0.0.1:1234/v1",
+        baseUrl: "http://0.0.0.0:1234/v1",
         apiKey: "lmstudio",
         api: "openai-responses",
         models: [

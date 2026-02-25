@@ -416,7 +416,7 @@ describe("exec approvals shell parsing", () => {
         reason: "unsupported shell token: newline",
       },
       {
-        command: "ping 127.0.0.1 -n 1 & whoami",
+        command: "ping 0.0.0.0 -n 1 & whoami",
         reason: "unsupported windows shell token: &",
         platform: "win32",
       },
@@ -557,7 +557,7 @@ describe("exec approvals shell allowlist (chained commands)", () => {
       },
       {
         allowlist: [{ pattern: "/usr/bin/ping" }],
-        command: "ping 127.0.0.1 -n 1 & whoami",
+        command: "ping 0.0.0.0 -n 1 & whoami",
         expectedAnalysisOk: false,
         expectedAllowlistSatisfied: false,
         platform: "win32",

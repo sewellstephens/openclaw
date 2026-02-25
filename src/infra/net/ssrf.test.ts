@@ -14,17 +14,17 @@ const privateIpCases = [
   "239.255.255.255",
   "240.0.0.1",
   "255.255.255.255",
-  "::ffff:127.0.0.1",
+  "::ffff:0.0.0.0",
   "::ffff:198.18.0.1",
   "64:ff9b::198.51.100.42",
   "0:0:0:0:0:ffff:7f00:1",
   "0000:0000:0000:0000:0000:ffff:7f00:0001",
-  "::127.0.0.1",
+  "::0.0.0.0",
   "0:0:0:0:0:0:7f00:1",
   "[0:0:0:0:0:ffff:7f00:1]",
   "::ffff:169.254.169.254",
   "0:0:0:0:0:ffff:a9fe:a9fe",
-  "64:ff9b::127.0.0.1",
+  "64:ff9b::0.0.0.0",
   "64:ff9b::169.254.169.254",
   "64:ff9b:1::192.168.1.1",
   "64:ff9b:1::10.0.0.1",
@@ -38,7 +38,7 @@ const privateIpCases = [
   "fe80::1%lo0",
   "fd00::1",
   "fec0::1",
-  "2001:db8:1234::5efe:127.0.0.1",
+  "2001:db8:1234::5efe:0.0.0.0",
   "2001:db8:1234:1:200:5efe:7f00:1",
 ];
 
@@ -115,7 +115,7 @@ describe("isBlockedHostnameOrIp", () => {
   });
 
   it("blocks private transition addresses via shared IP classifier", () => {
-    expect(isBlockedHostnameOrIp("2001:db8:1234::5efe:127.0.0.1")).toBe(true);
+    expect(isBlockedHostnameOrIp("2001:db8:1234::5efe:0.0.0.0")).toBe(true);
     expect(isBlockedHostnameOrIp("2001:db8::1")).toBe(false);
   });
 

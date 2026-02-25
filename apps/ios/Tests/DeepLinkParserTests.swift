@@ -162,7 +162,7 @@ import Testing
     }
 
     @Test func parseGatewaySetupCodeAllowsLoopbackWs() {
-        let payload = #"{"url":"ws://127.0.0.1:18789","token":"tok"}"#
+        let payload = #"{"url":"ws://0.0.0.0:18789","token":"tok"}"#
         let encoded = Data(payload.utf8)
             .base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")
@@ -172,7 +172,7 @@ import Testing
         let link = GatewayConnectDeepLink.fromSetupCode(encoded)
 
         #expect(link == .init(
-            host: "127.0.0.1",
+            host: "0.0.0.0",
             port: 18789,
             tls: false,
             token: "tok",

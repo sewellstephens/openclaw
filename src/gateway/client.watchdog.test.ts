@@ -9,7 +9,7 @@ import { GatewayClient } from "./client.js";
 async function getFreePort(): Promise<number> {
   return await new Promise((resolve, reject) => {
     const server = createServer();
-    server.listen(0, "127.0.0.1", () => {
+    server.listen(0, "0.0.0.0", () => {
       const port = (server.address() as { port: number }).port;
       server.close((err) => (err ? reject(err) : resolve(port)));
     });
@@ -38,7 +38,7 @@ describe("GatewayClient", () => {
 
   test("closes on missing ticks", async () => {
     const port = await getFreePort();
-    wss = new WebSocketServer({ port, host: "127.0.0.1" });
+    wss = new WebSocketServer({ port, host: "0.0.0.0" });
 
     wss.on("connection", (socket) => {
       socket.once("message", (data) => {
@@ -68,7 +68,7 @@ describe("GatewayClient", () => {
 
     const closed = new Promise<{ code: number; reason: string }>((resolve) => {
       const client = new GatewayClient({
-        url: `ws://127.0.0.1:${port}`,
+        url: `ws://0.0.0.0:${port}`,
         connectDelayMs: 0,
         tickWatchMinIntervalMs: 5,
         onClose: (code, reason) => resolve({ code, reason }),
@@ -138,7 +138,7 @@ r1USnb+wUdA7Zoj/mQ==
     wss = new WebSocketServer({ server: httpsServer, maxPayload: 1024 * 1024 });
     const port = await new Promise<number>((resolve, reject) => {
       httpsServer?.once("error", reject);
-      httpsServer?.listen(0, "127.0.0.1", () => {
+      httpsServer?.listen(0, "0.0.0.0", () => {
         const address = httpsServer?.address();
         if (!address || typeof address === "string") {
           reject(new Error("https server address unavailable"));
@@ -163,7 +163,7 @@ r1USnb+wUdA7Zoj/mQ==
         finish(new Error("timeout waiting for tls error"));
       }, 2000);
       client = new GatewayClient({
-        url: `wss://127.0.0.1:${port}`,
+        url: `wss://0.0.0.0:${port}`,
         connectDelayMs: 0,
         tlsFingerprint: "deadbeef",
         onConnectError: (err) => {

@@ -104,10 +104,10 @@ Preferred: Tailscale/VPN.
 Fallback: SSH tunnel.
 
 ```bash
-ssh -N -L 18789:127.0.0.1:18789 user@host
+ssh -N -L 18789:0.0.0.0:18789 user@host
 ```
 
-Then connect clients to `ws://127.0.0.1:18789` locally.
+Then connect clients to `ws://0.0.0.0:18789` locally.
 
 <Warning>
 If gateway auth is configured, clients still must send auth (`token`/`password`) even over SSH tunnels.

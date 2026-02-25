@@ -141,7 +141,7 @@ describe("VoiceCallWebhookServer replay handling", () => {
       }),
     };
     const { manager, processEvent } = createManager([]);
-    const config = createConfig({ serve: { port: 0, bind: "127.0.0.1", path: "/voice/webhook" } });
+    const config = createConfig({ serve: { port: 0, bind: "0.0.0.0", path: "/voice/webhook" } });
     const server = new VoiceCallWebhookServer(config, manager, replayProvider);
 
     try {

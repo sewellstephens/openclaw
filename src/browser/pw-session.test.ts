@@ -75,7 +75,7 @@ describe("pw-session refLocator", () => {
 
 describe("pw-session role refs cache", () => {
   it("restores refs for a different Page instance (same CDP targetId)", () => {
-    const cdpUrl = "http://127.0.0.1:9222";
+    const cdpUrl = "http://0.0.0.0:9222";
     const targetId = "t1";
 
     rememberRoleRefsForTarget({

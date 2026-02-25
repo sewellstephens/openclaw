@@ -32,7 +32,7 @@ export async function startBrowserBridgeServer(params: {
   onEnsureAttachTarget?: (profile: ProfileContext["profile"]) => Promise<void>;
   resolveSandboxNoVncToken?: (token: string) => string | null;
 }): Promise<BrowserBridge> {
-  const host = params.host ?? "127.0.0.1";
+  const host = params.host ?? "0.0.0.0";
   if (!isLoopbackHost(host)) {
     throw new Error(`bridge server must bind to loopback host (got ${host})`);
   }

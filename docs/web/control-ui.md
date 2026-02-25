@@ -19,7 +19,7 @@ It speaks **directly to the Gateway WebSocket** on the same port.
 
 If the Gateway is running on the same computer, open:
 
-- [http://127.0.0.1:18789/](http://127.0.0.1:18789/) (or [http://localhost:18789/](http://localhost:18789/))
+- [http://0.0.0.0:18789/](http://0.0.0.0:18789/) (or [http://localhost:18789/](http://localhost:18789/))
 
 If the page fails to load, start the Gateway first: `openclaw gateway`.
 
@@ -55,7 +55,7 @@ you revoke it with `openclaw devices revoke --device <id> --role <role>`. See
 
 **Notes:**
 
-- Local connections (`127.0.0.1`) are auto-approved.
+- Local connections (`0.0.0.0`) are auto-approved.
 - Remote connections (LAN, Tailnet, etc.) require explicit approval.
 - Each browser profile generates a unique device ID, so switching browsers or
   clearing browser data will require re-pairing.
@@ -151,7 +151,7 @@ OpenClaw **blocks** Control UI connections without device identity.
 **Recommended fix:** use HTTPS (Tailscale Serve) or open the UI locally:
 
 - `https://<magicdns>/` (Serve)
-- `http://127.0.0.1:18789/` (on the gateway host)
+- `http://0.0.0.0:18789/` (on the gateway host)
 
 **Insecure-auth toggle behavior:**
 
@@ -204,7 +204,7 @@ For local development (separate dev server):
 pnpm ui:dev # auto-installs UI deps on first run
 ```
 
-Then point the UI at your Gateway WS URL (e.g. `ws://127.0.0.1:18789`).
+Then point the UI at your Gateway WS URL (e.g. `ws://0.0.0.0:18789`).
 
 ## Debugging/testing: dev server + remote Gateway
 

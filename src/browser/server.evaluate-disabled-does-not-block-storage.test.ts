@@ -17,7 +17,7 @@ const pwMocks = vi.hoisted(() => ({
 
 const routeCtxMocks = vi.hoisted(() => {
   const profileCtx = {
-    profile: { cdpUrl: "http://127.0.0.1:9222" },
+    profile: { cdpUrl: "http://0.0.0.0:9222" },
     ensureTabAvailable: vi.fn(async () => ({
       targetId: "tab-1",
       url: "https://example.com",
@@ -72,7 +72,7 @@ async function getFreePort(): Promise<number> {
   const probe = createServer();
   await new Promise<void>((resolve, reject) => {
     probe.once("error", reject);
-    probe.listen(0, "127.0.0.1", () => resolve());
+    probe.listen(0, "0.0.0.0", () => resolve());
   });
   const addr = probe.address() as AddressInfo;
   await new Promise<void>((resolve) => probe.close(() => resolve()));
@@ -120,7 +120,7 @@ describe("browser control evaluate gating", () => {
   it("blocks act:evaluate but still allows cookies/storage reads", async () => {
     await startBrowserControlServerFromConfig();
 
-    const base = `http://127.0.0.1:${testPort}`;
+    const base = `http://0.0.0.0:${testPort}`;
 
     const evalRes = (await realFetch(`${base}/act`, {
       method: "POST",
@@ -138,7 +138,7 @@ describe("browser control evaluate gating", () => {
     expect(cookiesRes.ok).toBe(true);
     expect(cookiesRes.cookies?.[0]?.name).toBe("session");
     expect(pwMocks.cookiesGetViaPlaywright).toHaveBeenCalledWith({
-      cdpUrl: "http://127.0.0.1:9222",
+      cdpUrl: "http://0.0.0.0:9222",
       targetId: "tab-1",
     });
 
@@ -151,7 +151,7 @@ describe("browser control evaluate gating", () => {
     expect(storageRes.ok).toBe(true);
     expect(storageRes.values).toEqual({ token: "value" });
     expect(pwMocks.storageGetViaPlaywright).toHaveBeenCalledWith({
-      cdpUrl: "http://127.0.0.1:9222",
+      cdpUrl: "http://0.0.0.0:9222",
       targetId: "tab-1",
       kind: "local",
       key: "token",

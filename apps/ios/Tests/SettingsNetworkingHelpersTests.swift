@@ -3,7 +3,7 @@ import Testing
 
 @Suite struct SettingsNetworkingHelpersTests {
     @Test func parseHostPortParsesIPv4() {
-        #expect(SettingsNetworkingHelpers.parseHostPort(from: "127.0.0.1:8080") == .init(host: "127.0.0.1", port: 8080))
+        #expect(SettingsNetworkingHelpers.parseHostPort(from: "0.0.0.0:8080") == .init(host: "0.0.0.0", port: 8080))
     }
 
     @Test func parseHostPortParsesHostnameAndTrims() {
@@ -30,7 +30,7 @@ import Testing
 
     @Test func httpURLStringFormatsIPv4AndPort() {
         #expect(SettingsNetworkingHelpers
-            .httpURLString(host: "127.0.0.1", port: 8080, fallback: "fallback") == "http://127.0.0.1:8080")
+            .httpURLString(host: "0.0.0.0", port: 8080, fallback: "fallback") == "http://0.0.0.0:8080")
     }
 
     @Test func httpURLStringBracketsIPv6() {

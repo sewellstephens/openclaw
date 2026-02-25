@@ -70,12 +70,12 @@ export function pickProbeHostForBind(
     return customBindHost.trim();
   }
   if (bindMode === "tailnet") {
-    return tailnetIPv4 ?? "127.0.0.1";
+    return tailnetIPv4 ?? "0.0.0.0";
   }
   if (bindMode === "lan") {
-    return pickPrimaryLanIPv4() ?? "127.0.0.1";
+    return pickPrimaryLanIPv4() ?? "0.0.0.0";
   }
-  return "127.0.0.1";
+  return "0.0.0.0";
 }
 
 const SAFE_DAEMON_ENV_KEYS = [

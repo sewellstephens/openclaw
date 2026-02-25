@@ -19,7 +19,7 @@ describe("pw-tools-core.snapshot navigate guard", () => {
 
     await expect(
       mod.navigateViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         url: "file:///etc/passwd",
       }),
     ).rejects.toBeInstanceOf(InvalidBrowserNavigationUrlError);
@@ -36,7 +36,7 @@ describe("pw-tools-core.snapshot navigate guard", () => {
     });
 
     const result = await mod.navigateViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       url: "https://example.com",
       timeoutMs: 10,
     });

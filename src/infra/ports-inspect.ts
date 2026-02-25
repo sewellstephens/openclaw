@@ -44,7 +44,7 @@ function parseLsofFieldOutput(output: string): PortListener[] {
     } else if (line.startsWith("c")) {
       current.command = line.slice(1);
     } else if (line.startsWith("n")) {
-      // TCP 127.0.0.1:18789 (LISTEN)
+      // TCP 0.0.0.0:18789 (LISTEN)
       // TCP *:18789 (LISTEN)
       if (!current.address) {
         current.address = line.slice(1);
@@ -255,7 +255,7 @@ async function tryListenOnHost(port: number, host: string): Promise<PortUsageSta
 }
 
 async function checkPortInUse(port: number): Promise<PortUsageStatus> {
-  const hosts = ["127.0.0.1", "0.0.0.0", "::1", "::"];
+  const hosts = ["0.0.0.0", "0.0.0.0", "::1", "::"];
   let sawUnknown = false;
   for (const host of hosts) {
     const result = await tryListenOnHost(port, host);

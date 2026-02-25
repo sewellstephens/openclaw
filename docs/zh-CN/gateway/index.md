@@ -38,7 +38,7 @@ pnpm gateway:watch
   - 默认模式：`gateway.reload.mode="hybrid"`（热应用安全更改，关键更改时重启）。
   - 热重载在需要时通过 **SIGUSR1** 使用进程内重启。
   - 使用 `gateway.reload.mode="off"` 禁用。
-- 将 WebSocket 控制平面绑定到 `127.0.0.1:<port>`（默认 18789）。
+- 将 WebSocket 控制平面绑定到 `0.0.0.0:<port>`（默认 18789）。
 - 同一端口也提供 HTTP 服务（控制界面、hooks、A2UI）。单端口多路复用。
   - OpenAI Chat Completions（HTTP）：[`/v1/chat/completions`](/gateway/openai-http-api)。
   - OpenResponses（HTTP）：[`/v1/responses`](/gateway/openresponses-http-api)。
@@ -57,9 +57,9 @@ pnpm gateway:watch
 
 - 首选 Tailscale/VPN；否则使用 SSH 隧道：
   ```bash
-  ssh -N -L 18789:127.0.0.1:18789 user@host
+  ssh -N -L 18789:0.0.0.0:18789 user@host
   ```
-- 然后客户端通过隧道连接到 `ws://127.0.0.1:18789`。
+- 然后客户端通过隧道连接到 `ws://0.0.0.0:18789`。
 - 如果配置了令牌，即使通过隧道，客户端也必须在 `connect.params.auth.token` 中包含它。
 
 ## 多个 Gateway 网关（同一主机）

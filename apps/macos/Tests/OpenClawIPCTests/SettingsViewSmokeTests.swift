@@ -115,7 +115,7 @@ struct SettingsViewSmokeTests {
             InstanceInfo(
                 id: "local",
                 host: "this-mac",
-                ip: "127.0.0.1",
+                ip: "0.0.0.0",
                 version: "1.0",
                 platform: "macos 15.0",
                 deviceFamily: "Mac",

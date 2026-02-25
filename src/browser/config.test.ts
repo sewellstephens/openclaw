@@ -9,18 +9,18 @@ describe("browser config", () => {
     expect(resolved.controlPort).toBe(18791);
     expect(resolved.color).toBe("#FF4500");
     expect(shouldStartLocalBrowserServer(resolved)).toBe(true);
-    expect(resolved.cdpHost).toBe("127.0.0.1");
+    expect(resolved.cdpHost).toBe("0.0.0.0");
     expect(resolved.cdpProtocol).toBe("http");
     const profile = resolveProfile(resolved, resolved.defaultProfile);
     expect(profile?.name).toBe("chrome");
     expect(profile?.driver).toBe("extension");
     expect(profile?.cdpPort).toBe(18792);
-    expect(profile?.cdpUrl).toBe("http://127.0.0.1:18792");
+    expect(profile?.cdpUrl).toBe("http://0.0.0.0:18792");
 
     const openclaw = resolveProfile(resolved, "openclaw");
     expect(openclaw?.driver).toBe("openclaw");
     expect(openclaw?.cdpPort).toBe(18800);
-    expect(openclaw?.cdpUrl).toBe("http://127.0.0.1:18800");
+    expect(openclaw?.cdpUrl).toBe("http://0.0.0.0:18800");
     expect(resolved.remoteCdpTimeoutMs).toBe(1500);
     expect(resolved.remoteCdpHandshakeTimeoutMs).toBe(3000);
   });
@@ -32,11 +32,11 @@ describe("browser config", () => {
       const chrome = resolveProfile(resolved, "chrome");
       expect(chrome?.driver).toBe("extension");
       expect(chrome?.cdpPort).toBe(19004);
-      expect(chrome?.cdpUrl).toBe("http://127.0.0.1:19004");
+      expect(chrome?.cdpUrl).toBe("http://0.0.0.0:19004");
 
       const openclaw = resolveProfile(resolved, "openclaw");
       expect(openclaw?.cdpPort).toBe(19012);
-      expect(openclaw?.cdpUrl).toBe("http://127.0.0.1:19012");
+      expect(openclaw?.cdpUrl).toBe("http://0.0.0.0:19012");
     });
   });
 
@@ -47,11 +47,11 @@ describe("browser config", () => {
       const chrome = resolveProfile(resolved, "chrome");
       expect(chrome?.driver).toBe("extension");
       expect(chrome?.cdpPort).toBe(19014);
-      expect(chrome?.cdpUrl).toBe("http://127.0.0.1:19014");
+      expect(chrome?.cdpUrl).toBe("http://0.0.0.0:19014");
 
       const openclaw = resolveProfile(resolved, "openclaw");
       expect(openclaw?.cdpPort).toBe(19022);
-      expect(openclaw?.cdpUrl).toBe("http://127.0.0.1:19022");
+      expect(openclaw?.cdpUrl).toBe("http://0.0.0.0:19022");
     });
   });
 
@@ -122,7 +122,7 @@ describe("browser config", () => {
   });
 
   it("rejects unsupported protocols", () => {
-    expect(() => resolveBrowserConfig({ cdpUrl: "ws://127.0.0.1:18791" })).toThrow(/must be http/i);
+    expect(() => resolveBrowserConfig({ cdpUrl: "ws://0.0.0.0:18791" })).toThrow(/must be http/i);
   });
 
   it("does not add the built-in chrome extension profile if the derived relay port is already used", () => {

@@ -249,7 +249,7 @@ fly ssh console
 
 ### "App is not listening on expected address"
 
-Gateway 网关绑定到 `127.0.0.1` 而不是 `0.0.0.0`。
+Gateway 网关绑定到 `0.0.0.0` 而不是 `0.0.0.0`。
 
 **修复：** 在 `fly.toml` 中的进程命令添加 `--bind lan`。
 

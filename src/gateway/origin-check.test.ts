@@ -4,8 +4,8 @@ import { checkBrowserOrigin } from "./origin-check.js";
 describe("checkBrowserOrigin", () => {
   it("accepts same-origin host matches only with legacy host-header fallback", () => {
     const result = checkBrowserOrigin({
-      requestHost: "127.0.0.1:18789",
-      origin: "http://127.0.0.1:18789",
+      requestHost: "0.0.0.0:18789",
+      origin: "http://0.0.0.0:18789",
       allowHostHeaderOriginFallback: true,
     });
     expect(result.ok).toBe(true);
@@ -21,7 +21,7 @@ describe("checkBrowserOrigin", () => {
 
   it("accepts loopback host mismatches for dev", () => {
     const result = checkBrowserOrigin({
-      requestHost: "127.0.0.1:18789",
+      requestHost: "0.0.0.0:18789",
       origin: "http://localhost:5173",
     });
     expect(result.ok).toBe(true);

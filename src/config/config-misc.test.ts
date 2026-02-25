@@ -230,7 +230,7 @@ describe("model compat config schema", () => {
       models: {
         providers: {
           local: {
-            baseUrl: "http://127.0.0.1:1234/v1",
+            baseUrl: "http://0.0.0.0:1234/v1",
             api: "openai-completions",
             models: [
               {

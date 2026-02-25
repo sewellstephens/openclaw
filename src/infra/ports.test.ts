@@ -64,7 +64,7 @@ describe("ports helpers", () => {
 
   it("classifies ssh and gateway listeners", () => {
     expect(
-      classifyPortListener({ commandLine: "ssh -N -L 18789:127.0.0.1:18789 user@host" }, 18789),
+      classifyPortListener({ commandLine: "ssh -N -L 18789:0.0.0.0:18789 user@host" }, 18789),
     ).toBe("ssh");
     expect(
       classifyPortListener(
@@ -80,8 +80,8 @@ describe("ports helpers", () => {
     const diagnostics = {
       port: 18789,
       status: "busy" as const,
-      listeners: [{ pid: 123, commandLine: "ssh -N -L 18789:127.0.0.1:18789" }],
-      hints: buildPortHints([{ pid: 123, commandLine: "ssh -N -L 18789:127.0.0.1:18789" }], 18789),
+      listeners: [{ pid: 123, commandLine: "ssh -N -L 18789:0.0.0.0:18789" }],
+      hints: buildPortHints([{ pid: 123, commandLine: "ssh -N -L 18789:0.0.0.0:18789" }], 18789),
     };
     const lines = formatPortDiagnostics(diagnostics);
     expect(lines[0]).toContain("Port 18789 is already in use");
@@ -96,7 +96,7 @@ describeUnix("inspectPortUsage", () => {
 
   it("reports busy when lsof is missing but loopback listener exists", async () => {
     const server = net.createServer();
-    await new Promise<void>((resolve) => server.listen(0, "127.0.0.1", resolve));
+    await new Promise<void>((resolve) => server.listen(0, "0.0.0.0", resolve));
     const port = (server.address() as net.AddressInfo).port;
 
     runCommandWithTimeoutMock.mockRejectedValueOnce(

@@ -6,7 +6,7 @@ export async function getFreePort(): Promise<number> {
     const port = await new Promise<number>((resolve, reject) => {
       const s = createServer();
       s.once("error", reject);
-      s.listen(0, "127.0.0.1", () => {
+      s.listen(0, "0.0.0.0", () => {
         const assigned = (s.address() as AddressInfo).port;
         s.close((err) => (err ? reject(err) : resolve(assigned)));
       });

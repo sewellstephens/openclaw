@@ -32,7 +32,7 @@ The canvas host server binds based on `gateway.bind` setting:
 
 | Bind Mode  | Server Binds To     | Canvas URL Uses            |
 | ---------- | ------------------- | -------------------------- |
-| `loopback` | 127.0.0.1           | localhost (local only)     |
+| `loopback` | 0.0.0.0           | localhost (local only)     |
 | `lan`      | LAN interface       | LAN IP address             |
 | `tailnet`  | Tailscale interface | Tailscale hostname         |
 | `auto`     | Best available      | Tailscale > LAN > loopback |
@@ -111,7 +111,7 @@ cat ~/.openclaw/openclaw.json | jq '.gateway.bind'
 
 Then construct the URL:
 
-- **loopback**: `http://127.0.0.1:18793/__openclaw__/canvas/<file>.html`
+- **loopback**: `http://0.0.0.0:18793/__openclaw__/canvas/<file>.html`
 - **lan/tailnet/auto**: `http://<hostname>:18793/__openclaw__/canvas/<file>.html`
 
 Find your Tailscale hostname:

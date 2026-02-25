@@ -8,7 +8,7 @@ async function getFreePort(): Promise<number> {
   return await new Promise((resolve, reject) => {
     const server = net.createServer();
     server.once("error", reject);
-    server.listen(0, "127.0.0.1", () => {
+    server.listen(0, "0.0.0.0", () => {
       const address = server.address();
       if (!address || typeof address === "string") {
         server.close(() => reject(new Error("No TCP address")));
@@ -61,7 +61,7 @@ function createOAuthFetchFn(params: {
 describe("loginChutes", () => {
   it("captures local redirect and exchanges code for tokens", async () => {
     const port = await getFreePort();
-    const redirectUri = `http://127.0.0.1:${port}/oauth-callback`;
+    const redirectUri = `http://0.0.0.0:${port}/oauth-callback`;
 
     const fetchFn = createOAuthFetchFn({
       accessToken: "at_local",
@@ -102,7 +102,7 @@ describe("loginChutes", () => {
     const creds = await loginChutes({
       app: {
         clientId: "cid_test",
-        redirectUri: "http://127.0.0.1:1456/oauth-callback",
+        redirectUri: "http://0.0.0.0:1456/oauth-callback",
         scopes: ["openid"],
       },
       manual: true,
@@ -139,7 +139,7 @@ describe("loginChutes", () => {
     const creds = await loginChutes({
       app: {
         clientId: "cid_test",
-        redirectUri: "http://127.0.0.1:1456/oauth-callback",
+        redirectUri: "http://0.0.0.0:1456/oauth-callback",
         scopes: ["openid"],
       },
       manual: true,
@@ -164,14 +164,14 @@ describe("loginChutes", () => {
       loginChutes({
         app: {
           clientId: "cid_test",
-          redirectUri: "http://127.0.0.1:1456/oauth-callback",
+          redirectUri: "http://0.0.0.0:1456/oauth-callback",
           scopes: ["openid"],
         },
         manual: true,
         createPkce: () => ({ verifier: "verifier_123", challenge: "chal_123" }),
         createState: () => "state_456",
         onAuth: async () => {},
-        onPrompt: async () => "http://127.0.0.1:1456/oauth-callback?code=code_only",
+        onPrompt: async () => "http://0.0.0.0:1456/oauth-callback?code=code_only",
         fetchFn,
       }),
     ).rejects.toThrow("Missing 'state' parameter");

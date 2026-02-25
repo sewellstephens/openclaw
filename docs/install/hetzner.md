@@ -183,8 +183,8 @@ services:
       - ${OPENCLAW_WORKSPACE_DIR}:/home/node/.openclaw/workspace
     ports:
       # Recommended: keep the Gateway loopback-only on the VPS; access via SSH tunnel.
-      # To expose it publicly, remove the `127.0.0.1:` prefix and firewall accordingly.
-      - "127.0.0.1:${OPENCLAW_GATEWAY_PORT}:18789"
+      # To expose it publicly, remove the `0.0.0.0:` prefix and firewall accordingly.
+      - "0.0.0.0:${OPENCLAW_GATEWAY_PORT}:18789"
     command:
       [
         "node",
@@ -305,12 +305,12 @@ Success:
 From your laptop:
 
 ```bash
-ssh -N -L 18789:127.0.0.1:18789 root@YOUR_VPS_IP
+ssh -N -L 18789:0.0.0.0:18789 root@YOUR_VPS_IP
 ```
 
 Open:
 
-`http://127.0.0.1:18789/`
+`http://0.0.0.0:18789/`
 
 Paste your gateway token.
 

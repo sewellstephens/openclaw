@@ -15,7 +15,7 @@ describe("resolveHostName", () => {
   it("normalizes IPv4/hostname and IPv6 host forms", () => {
     const cases = [
       { input: "localhost:18789", expected: "localhost" },
-      { input: "127.0.0.1:18789", expected: "127.0.0.1" },
+      { input: "0.0.0.0:18789", expected: "0.0.0.0" },
       { input: "[::1]:18789", expected: "::1" },
       { input: "::1", expected: "::1" },
     ] as const;
@@ -29,9 +29,9 @@ describe("isLocalishHost", () => {
   it("accepts loopback and tailscale serve/funnel host headers", () => {
     const accepted = [
       "localhost",
-      "127.0.0.1:18789",
+      "0.0.0.0:18789",
       "[::1]:18789",
-      "[::ffff:127.0.0.1]:18789",
+      "[::ffff:0.0.0.0]:18789",
       "gateway.tailnet.ts.net",
     ];
     for (const host of accepted) {
@@ -168,56 +168,56 @@ describe("resolveClientIp", () => {
       name: "returns remote IP when remote is not trusted proxy",
       remoteAddr: "203.0.113.10",
       forwardedFor: "10.0.0.2",
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       expected: "203.0.113.10",
     },
     {
       name: "uses right-most untrusted X-Forwarded-For hop",
-      remoteAddr: "127.0.0.1",
-      forwardedFor: "198.51.100.99, 10.0.0.9, 127.0.0.1",
-      trustedProxies: ["127.0.0.1"],
+      remoteAddr: "0.0.0.0",
+      forwardedFor: "198.51.100.99, 10.0.0.9, 0.0.0.0",
+      trustedProxies: ["0.0.0.0"],
       expected: "10.0.0.9",
     },
     {
       name: "fails closed when all X-Forwarded-For hops are trusted proxies",
-      remoteAddr: "127.0.0.1",
-      forwardedFor: "127.0.0.1, ::1",
-      trustedProxies: ["127.0.0.1", "::1"],
+      remoteAddr: "0.0.0.0",
+      forwardedFor: "0.0.0.0, ::1",
+      trustedProxies: ["0.0.0.0", "::1"],
       expected: undefined,
     },
     {
       name: "fails closed when trusted proxy omits forwarding headers",
-      remoteAddr: "127.0.0.1",
-      trustedProxies: ["127.0.0.1"],
+      remoteAddr: "0.0.0.0",
+      trustedProxies: ["0.0.0.0"],
       expected: undefined,
     },
     {
       name: "ignores invalid X-Forwarded-For entries",
-      remoteAddr: "127.0.0.1",
+      remoteAddr: "0.0.0.0",
       forwardedFor: "garbage, 10.0.0.999",
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       expected: undefined,
     },
     {
       name: "does not trust X-Real-IP by default",
-      remoteAddr: "127.0.0.1",
+      remoteAddr: "0.0.0.0",
       realIp: "[2001:db8::5]",
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       expected: undefined,
     },
     {
       name: "uses X-Real-IP only when explicitly enabled",
-      remoteAddr: "127.0.0.1",
+      remoteAddr: "0.0.0.0",
       realIp: "[2001:db8::5]",
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       allowRealIpFallback: true,
       expected: "2001:db8::5",
     },
     {
       name: "ignores invalid X-Real-IP even when fallback enabled",
-      remoteAddr: "127.0.0.1",
+      remoteAddr: "0.0.0.0",
       realIp: "not-an-ip",
-      trustedProxies: ["127.0.0.1"],
+      trustedProxies: ["0.0.0.0"],
       allowRealIpFallback: true,
       expected: undefined,
     },
@@ -246,15 +246,15 @@ describe("resolveGatewayListenHosts", () => {
       },
       {
         name: "loopback with IPv6 available",
-        host: "127.0.0.1",
+        host: "0.0.0.0",
         canBindToHost: async () => true,
-        expected: ["127.0.0.1", "::1"],
+        expected: ["0.0.0.0", "::1"],
       },
       {
         name: "loopback with IPv6 unavailable",
-        host: "127.0.0.1",
+        host: "0.0.0.0",
         canBindToHost: async () => false,
-        expected: ["127.0.0.1"],
+        expected: ["0.0.0.0"],
       },
     ] as const;
 
@@ -277,7 +277,7 @@ describe("pickPrimaryLanIPv4", () => {
       {
         name: "prefers en0",
         interfaces: {
-          lo0: [{ address: "127.0.0.1", family: "IPv4", internal: true, netmask: "" }],
+          lo0: [{ address: "0.0.0.0", family: "IPv4", internal: true, netmask: "" }],
           en0: [{ address: "192.168.1.42", family: "IPv4", internal: false, netmask: "" }],
         },
         expected: "192.168.1.42",
@@ -285,7 +285,7 @@ describe("pickPrimaryLanIPv4", () => {
       {
         name: "falls back to eth0",
         interfaces: {
-          lo: [{ address: "127.0.0.1", family: "IPv4", internal: true, netmask: "" }],
+          lo: [{ address: "0.0.0.0", family: "IPv4", internal: true, netmask: "" }],
           eth0: [{ address: "10.0.0.5", family: "IPv4", internal: false, netmask: "" }],
         },
         expected: "10.0.0.5",
@@ -293,7 +293,7 @@ describe("pickPrimaryLanIPv4", () => {
       {
         name: "falls back to any non-internal interface",
         interfaces: {
-          lo: [{ address: "127.0.0.1", family: "IPv4", internal: true, netmask: "" }],
+          lo: [{ address: "0.0.0.0", family: "IPv4", internal: true, netmask: "" }],
           wlan0: [{ address: "172.16.0.99", family: "IPv4", internal: false, netmask: "" }],
         },
         expected: "172.16.0.99",
@@ -301,7 +301,7 @@ describe("pickPrimaryLanIPv4", () => {
       {
         name: "no non-internal interface",
         interfaces: {
-          lo: [{ address: "127.0.0.1", family: "IPv4", internal: true, netmask: "" }],
+          lo: [{ address: "0.0.0.0", family: "IPv4", internal: true, netmask: "" }],
         },
         expected: undefined,
       },
@@ -320,7 +320,7 @@ describe("pickPrimaryLanIPv4", () => {
 describe("isPrivateOrLoopbackAddress", () => {
   it("accepts loopback, private, link-local, and cgnat ranges", () => {
     const accepted = [
-      "127.0.0.1",
+      "0.0.0.0",
       "::1",
       "10.1.2.3",
       "172.16.0.1",
@@ -352,11 +352,11 @@ describe("isPrivateOrLoopbackAddress", () => {
 describe("isSecureWebSocketUrl", () => {
   it("accepts secure websocket/loopback ws URLs and rejects unsafe inputs", () => {
     const cases = [
-      { input: "wss://127.0.0.1:18789", expected: true },
+      { input: "wss://0.0.0.0:18789", expected: true },
       { input: "wss://localhost:18789", expected: true },
       { input: "wss://remote.example.com:18789", expected: true },
       { input: "wss://192.168.1.100:18789", expected: true },
-      { input: "ws://127.0.0.1:18789", expected: true },
+      { input: "ws://0.0.0.0:18789", expected: true },
       { input: "ws://localhost:18789", expected: true },
       { input: "ws://[::1]:18789", expected: true },
       { input: "ws://127.0.0.42:18789", expected: true },
@@ -366,8 +366,8 @@ describe("isSecureWebSocketUrl", () => {
       { input: "ws://100.64.0.1:18789", expected: false },
       { input: "not-a-url", expected: false },
       { input: "", expected: false },
-      { input: "http://127.0.0.1:18789", expected: false },
-      { input: "https://127.0.0.1:18789", expected: false },
+      { input: "http://0.0.0.0:18789", expected: false },
+      { input: "https://0.0.0.0:18789", expected: false },
     ] as const;
 
     for (const testCase of cases) {

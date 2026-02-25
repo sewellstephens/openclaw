@@ -172,7 +172,7 @@ function ensureDefaultChromeExtensionProfile(
   }
   result.chrome = {
     driver: "extension",
-    cdpUrl: `http://127.0.0.1:${relayPort}`,
+    cdpUrl: `http://0.0.0.0:${relayPort}`,
     color: "#00AA00",
   };
   return result;
@@ -211,7 +211,7 @@ export function resolveBrowserConfig(
         `Derived CDP port (${derivedPort}) is too high; check gateway port configuration.`,
       );
     }
-    const derived = new URL(`http://127.0.0.1:${derivedPort}`);
+    const derived = new URL(`http://0.0.0.0:${derivedPort}`);
     cdpInfo = {
       parsed: derived,
       port: derivedPort,

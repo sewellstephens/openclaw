@@ -24,7 +24,7 @@ afterAll(async () => {
 async function startServer(port: number, opts?: { openResponsesEnabled?: boolean }) {
   const { startGatewayServer } = await import("./server.js");
   const serverOpts = {
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     auth: { mode: "token", token: "secret" },
     controlUiEnabled: false,
   } as const;
@@ -46,7 +46,7 @@ async function writeGatewayConfig(config: Record<string, unknown>) {
 }
 
 async function postResponses(port: number, body: unknown, headers?: Record<string, string>) {
-  const res = await fetch(`http://127.0.0.1:${port}/v1/responses`, {
+  const res = await fetch(`http://0.0.0.0:${port}/v1/responses`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -129,14 +129,14 @@ describe("OpenResponses HTTP API (e2e)", () => {
     };
 
     try {
-      const resNonPost = await fetch(`http://127.0.0.1:${port}/v1/responses`, {
+      const resNonPost = await fetch(`http://0.0.0.0:${port}/v1/responses`, {
         method: "GET",
         headers: { authorization: "Bearer secret" },
       });
       expect(resNonPost.status).toBe(405);
       await ensureResponseConsumed(resNonPost);
 
-      const resMissingAuth = await fetch(`http://127.0.0.1:${port}/v1/responses`, {
+      const resMissingAuth = await fetch(`http://0.0.0.0:${port}/v1/responses`, {
         method: "POST",
         headers: { "content-type": "application/json" },
         body: JSON.stringify({ model: "openclaw", input: "hi" }),
@@ -528,7 +528,7 @@ describe("OpenResponses HTTP API (e2e)", () => {
             { type: "input_text", text: "read this" },
             {
               type: "input_file",
-              source: { type: "url", url: "http://127.0.0.1:6379/info" },
+              source: { type: "url", url: "http://0.0.0.0:6379/info" },
             },
           ],
         },

@@ -8,7 +8,7 @@ async function isPortFree(port: number): Promise<boolean> {
   return await new Promise((resolve) => {
     const server = createServer();
     server.once("error", () => resolve(false));
-    server.listen(port, "127.0.0.1", () => {
+    server.listen(port, "0.0.0.0", () => {
       server.close(() => resolve(true));
     });
   });
@@ -18,7 +18,7 @@ async function getOsFreePort(): Promise<number> {
   return await new Promise((resolve, reject) => {
     const server = createServer();
     server.once("error", reject);
-    server.listen(0, "127.0.0.1", () => {
+    server.listen(0, "0.0.0.0", () => {
       const addr = server.address();
       if (!addr || typeof addr === "string") {
         server.close();

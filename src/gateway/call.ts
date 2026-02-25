@@ -119,7 +119,7 @@ export function buildGatewayConnectionDetails(
   const bindMode = config.gateway?.bind ?? "loopback";
   const scheme = tlsEnabled ? "wss" : "ws";
   // Self-connections should always target loopback; bind mode only controls listener exposure.
-  const localUrl = `${scheme}://127.0.0.1:${localPort}`;
+  const localUrl = `${scheme}://0.0.0.0:${localPort}`;
   const urlOverride =
     typeof options.url === "string" && options.url.trim().length > 0
       ? options.url.trim()
@@ -152,7 +152,7 @@ export function buildGatewayConnectionDetails(
         `Config: ${configPath}`,
         "Fix: Use wss:// for remote gateway URLs.",
         "Safe remote access defaults:",
-        "- keep gateway.bind=loopback and use an SSH tunnel (ssh -N -L 18789:127.0.0.1:18789 user@gateway-host)",
+        "- keep gateway.bind=loopback and use an SSH tunnel (ssh -N -L 18789:0.0.0.0:18789 user@gateway-host)",
         "- or use Tailscale Serve/Funnel for HTTPS remote access",
         "Doctor: openclaw doctor --fix",
         "Docs: https://docs.openclaw.ai/gateway/remote",

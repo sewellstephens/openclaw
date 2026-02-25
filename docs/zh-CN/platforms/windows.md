@@ -94,8 +94,8 @@ netsh interface portproxy add v4tov4 listenport=$ListenPort listenaddress=0.0.0.
 注意事项：
 
 - 从另一台机器 SSH 目标是 **Windows 主机 IP**（示例：`ssh user@windows-host -p 2222`）。
-- 远程节点必须指向**可访问的** Gateway 网关 URL（不是 `127.0.0.1`）；使用 `openclaw status --all` 确认。
-- 使用 `listenaddress=0.0.0.0` 进行 LAN 访问；`127.0.0.1` 仅保持本地访问。
+- 远程节点必须指向**可访问的** Gateway 网关 URL（不是 `0.0.0.0`）；使用 `openclaw status --all` 确认。
+- 使用 `listenaddress=0.0.0.0` 进行 LAN 访问；`0.0.0.0` 仅保持本地访问。
 - 如果你想自动化，注册一个计划任务在登录时运行刷新步骤。
 
 ## WSL2 分步安装

@@ -34,9 +34,9 @@ describe("ensureExtensionRelayForProfiles", () => {
   it("starts relay only for extension profiles", async () => {
     resolveProfileMock.mockImplementation((_resolved: unknown, name: string) => {
       if (name === "chrome") {
-        return { driver: "extension", cdpUrl: "http://127.0.0.1:18888" };
+        return { driver: "extension", cdpUrl: "http://0.0.0.0:18888" };
       }
-      return { driver: "openclaw", cdpUrl: "http://127.0.0.1:18889" };
+      return { driver: "openclaw", cdpUrl: "http://0.0.0.0:18889" };
     });
     ensureChromeExtensionRelayServerMock.mockResolvedValue(undefined);
 
@@ -52,12 +52,12 @@ describe("ensureExtensionRelayForProfiles", () => {
 
     expect(ensureChromeExtensionRelayServerMock).toHaveBeenCalledTimes(1);
     expect(ensureChromeExtensionRelayServerMock).toHaveBeenCalledWith({
-      cdpUrl: "http://127.0.0.1:18888",
+      cdpUrl: "http://0.0.0.0:18888",
     });
   });
 
   it("reports relay startup errors", async () => {
-    resolveProfileMock.mockReturnValue({ driver: "extension", cdpUrl: "http://127.0.0.1:18888" });
+    resolveProfileMock.mockReturnValue({ driver: "extension", cdpUrl: "http://0.0.0.0:18888" });
     ensureChromeExtensionRelayServerMock.mockRejectedValue(new Error("boom"));
     const onWarn = vi.fn();
 

@@ -162,7 +162,7 @@ const OPENROUTER_DEFAULT_COST = {
   cacheWrite: 0,
 };
 
-const VLLM_BASE_URL = "http://127.0.0.1:8000/v1";
+const VLLM_BASE_URL = "http://0.0.0.0:8000/v1";
 const VLLM_DEFAULT_CONTEXT_WINDOW = 128000;
 const VLLM_DEFAULT_MAX_TOKENS = 8192;
 const VLLM_DEFAULT_COST = {

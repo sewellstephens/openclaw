@@ -356,7 +356,7 @@ async function getFreePort(): Promise<number> {
   return await new Promise((resolve, reject) => {
     const srv = createServer();
     srv.on("error", reject);
-    srv.listen(0, "127.0.0.1", () => {
+    srv.listen(0, "0.0.0.0", () => {
       const addr = srv.address();
       if (!addr || typeof addr === "string") {
         srv.close();
@@ -382,7 +382,7 @@ async function isPortFree(port: number): Promise<boolean> {
   return await new Promise((resolve) => {
     const srv = createServer();
     srv.once("error", () => resolve(false));
-    srv.listen(port, "127.0.0.1", () => {
+    srv.listen(port, "0.0.0.0", () => {
       srv.close(() => resolve(true));
     });
   });
@@ -644,7 +644,7 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
   });
 
   const client = await connectClient({
-    url: `ws://127.0.0.1:${port}`,
+    url: `ws://0.0.0.0:${port}`,
     token,
   });
 
@@ -1283,7 +1283,7 @@ describeLive("gateway live (dev agent, profile keys)", () => {
     });
 
     const client = await connectClient({
-      url: `ws://127.0.0.1:${port}`,
+      url: `ws://0.0.0.0:${port}`,
       token,
     });
 

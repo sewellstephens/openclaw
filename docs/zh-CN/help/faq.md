@@ -340,7 +340,7 @@ openclaw onboard
 
 **本地（同一台机器）：**
 
-- 打开 `http://127.0.0.1:18789/`。
+- 打开 `http://0.0.0.0:18789/`。
 - 如果要求认证，运行 `openclaw dashboard` 并使用带令牌的链接（`?token=...`）。
 - 令牌与 `gateway.auth.token`（或 `OPENCLAW_GATEWAY_TOKEN`）的值相同，UI 在首次加载后会存储它。
 
@@ -348,7 +348,7 @@ openclaw onboard
 
 - **Tailscale Serve**（推荐）：保持绑定 loopback，运行 `openclaw gateway --tailscale serve`，打开 `https://<magicdns>/`。如果 `gateway.auth.allowTailscale` 为 `true`，身份标头满足认证要求（无需令牌）。
 - **Tailnet 绑定**：运行 `openclaw gateway --bind tailnet --token "<token>"`，打开 `http://<tailscale-ip>:18789/`，在仪表板设置中粘贴令牌。
-- **SSH 隧道**：`ssh -N -L 18789:127.0.0.1:18789 user@host`，然后从 `openclaw dashboard` 打开 `http://127.0.0.1:18789/?token=...`。
+- **SSH 隧道**：`ssh -N -L 18789:0.0.0.0:18789 user@host`，然后从 `openclaw dashboard` 打开 `http://0.0.0.0:18789/?token=...`。
 
 参阅[仪表板](/web/dashboard)和 [Web 界面](/web)了解绑定模式和认证详情。
 
@@ -2173,7 +2173,7 @@ openclaw gateway install --force
 
 ### "another gateway instance is already listening"是什么意思
 
-OpenClaw 通过在启动时立即绑定 WebSocket 监听器来强制运行时锁（默认 `ws://127.0.0.1:18789`）。如果绑定因 `EADDRINUSE` 失败，它会抛出 `GatewayLockError` 表示另一个实例已在监听。
+OpenClaw 通过在启动时立即绑定 WebSocket 监听器来强制运行时锁（默认 `ws://0.0.0.0:18789`）。如果绑定因 `EADDRINUSE` 失败，它会抛出 `GatewayLockError` 表示另一个实例已在监听。
 
 修复：停止另一个实例，释放端口，或使用 `openclaw gateway --port <port>` 运行。
 
@@ -2212,7 +2212,7 @@ OpenClaw 通过在启动时立即绑定 WebSocket 监听器来强制运行时锁
 
 - 最快：`openclaw dashboard`（打印 + 复制带令牌的链接，尝试打开；如果无头则显示 SSH 提示）。
 - 如果你还没有令牌：`openclaw doctor --generate-gateway-token`。
-- 如果是远程，先建隧道：`ssh -N -L 18789:127.0.0.1:18789 user@host` 然后打开 `http://127.0.0.1:18789/?token=...`。
+- 如果是远程，先建隧道：`ssh -N -L 18789:0.0.0.0:18789 user@host` 然后打开 `http://0.0.0.0:18789/?token=...`。
 - 在 Gateway 网关主机上设置 `gateway.auth.token`（或 `OPENCLAW_GATEWAY_TOKEN`）。
 - 在控制 UI 设置中粘贴相同的令牌（或使用一次性 `?token=...` 链接刷新）。
 - 仍然卡住？运行 `openclaw status --all` 并按[故障排除](/gateway/troubleshooting)操作。参阅[仪表板](/web/dashboard)了解认证详情。

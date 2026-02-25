@@ -41,7 +41,7 @@ for _ in $(seq 1 40); do
   fi
   if docker exec "$GW_NAME" bash -lc "node --input-type=module -e '
     import net from \"node:net\";
-    const socket = net.createConnection({ host: \"127.0.0.1\", port: $PORT });
+    const socket = net.createConnection({ host: \"0.0.0.0\", port: $PORT });
     const timeout = setTimeout(() => {
       socket.destroy();
       process.exit(1);

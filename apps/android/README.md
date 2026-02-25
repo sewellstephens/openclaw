@@ -71,7 +71,7 @@ adb reverse tcp:18789 tcp:18789
 
 Then in app **Connect → Manual**:
 
-- Host: `127.0.0.1`
+- Host: `0.0.0.0`
 - Port: `18789`
 - TLS: off
 

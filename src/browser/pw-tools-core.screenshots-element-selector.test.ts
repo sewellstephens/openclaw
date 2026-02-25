@@ -22,7 +22,7 @@ describe("pw-tools-core", () => {
     setPwToolsCoreCurrentPage(page);
 
     const res = await mod.takeScreenshotViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       targetId: "T1",
       element: "#main",
       type: "png",
@@ -43,7 +43,7 @@ describe("pw-tools-core", () => {
     setPwToolsCoreCurrentPage(page);
 
     const res = await mod.takeScreenshotViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       targetId: "T1",
       ref: "76",
       type: "jpeg",
@@ -64,7 +64,7 @@ describe("pw-tools-core", () => {
 
     await expect(
       mod.takeScreenshotViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         targetId: "T1",
         element: "#x",
         fullPage: true,
@@ -73,7 +73,7 @@ describe("pw-tools-core", () => {
 
     await expect(
       mod.takeScreenshotViaPlaywright({
-        cdpUrl: "http://127.0.0.1:18792",
+        cdpUrl: "http://0.0.0.0:18792",
         targetId: "T1",
         ref: "1",
         fullPage: true,
@@ -89,7 +89,7 @@ describe("pw-tools-core", () => {
     });
 
     await mod.armFileUploadViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       targetId: "T1",
       paths: ["/tmp/a.txt"],
     });
@@ -112,7 +112,7 @@ describe("pw-tools-core", () => {
     });
 
     await mod.armFileUploadViaPlaywright({
-      cdpUrl: "http://127.0.0.1:18792",
+      cdpUrl: "http://0.0.0.0:18792",
       paths: [],
     });
     await Promise.resolve();

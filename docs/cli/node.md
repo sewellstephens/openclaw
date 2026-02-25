@@ -51,7 +51,7 @@ openclaw node run --host <gateway-host> --port 18789
 
 Options:
 
-- `--host <host>`: Gateway WebSocket host (default: `127.0.0.1`)
+- `--host <host>`: Gateway WebSocket host (default: `0.0.0.0`)
 - `--port <port>`: Gateway WebSocket port (default: `18789`)
 - `--tls`: Use TLS for the gateway connection
 - `--tls-fingerprint <sha256>`: Expected TLS certificate fingerprint (sha256)
@@ -68,7 +68,7 @@ openclaw node install --host <gateway-host> --port 18789
 
 Options:
 
-- `--host <host>`: Gateway WebSocket host (default: `127.0.0.1`)
+- `--host <host>`: Gateway WebSocket host (default: `0.0.0.0`)
 - `--port <port>`: Gateway WebSocket port (default: `18789`)
 - `--tls`: Use TLS for the gateway connection
 - `--tls-fingerprint <sha256>`: Expected TLS certificate fingerprint (sha256)

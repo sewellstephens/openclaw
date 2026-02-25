@@ -35,7 +35,7 @@ else
 fi
 
 CHROME_ARGS+=(
-  "--remote-debugging-address=127.0.0.1"
+  "--remote-debugging-address=0.0.0.0"
   "--remote-debugging-port=${CHROME_CDP_PORT}"
   "--user-data-dir=${HOME}/.chrome"
   "--no-first-run"
@@ -58,7 +58,7 @@ fi
 chromium "${CHROME_ARGS[@]}" about:blank &
 
 for _ in $(seq 1 50); do
-  if curl -sS --max-time 1 "http://127.0.0.1:${CHROME_CDP_PORT}/json/version" >/dev/null; then
+  if curl -sS --max-time 1 "http://0.0.0.0:${CHROME_CDP_PORT}/json/version" >/dev/null; then
     break
   fi
   sleep 0.1
@@ -68,7 +68,7 @@ SOCAT_LISTEN_ADDR="TCP-LISTEN:${CDP_PORT},fork,reuseaddr,bind=0.0.0.0"
 if [[ -n "${CDP_SOURCE_RANGE}" ]]; then
   SOCAT_LISTEN_ADDR="${SOCAT_LISTEN_ADDR},range=${CDP_SOURCE_RANGE}"
 fi
-socat "${SOCAT_LISTEN_ADDR}" "TCP:127.0.0.1:${CHROME_CDP_PORT}" &
+socat "${SOCAT_LISTEN_ADDR}" "TCP:0.0.0.0:${CHROME_CDP_PORT}" &
 
 if [[ "${ENABLE_NOVNC}" == "1" && "${HEADLESS}" != "1" ]]; then
   # VNC auth passwords are max 8 chars; use a random default when not provided.

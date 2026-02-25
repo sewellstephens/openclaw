@@ -121,7 +121,7 @@ openclaw doctor --generate-gateway-token
 
 # Expose over Tailscale Serve (HTTPS + tailnet access)
 openclaw config set gateway.tailscale.mode serve
-openclaw config set gateway.trustedProxies '["127.0.0.1"]'
+openclaw config set gateway.trustedProxies '["0.0.0.0"]'
 
 systemctl --user restart openclaw-gateway
 ```
@@ -202,7 +202,7 @@ This setup often removes the _need_ for extra host-based firewall rules purely t
 
 ```bash
 # Confirm no public ports listening
-sudo ss -tlnp | grep -v '127.0.0.1\|::1'
+sudo ss -tlnp | grep -v '0.0.0.0\|::1'
 
 # Verify Tailscale SSH is active
 tailscale status | grep -q 'offers: ssh' && echo "Tailscale SSH active"
@@ -219,7 +219,7 @@ If Tailscale Serve isn't working, use an SSH tunnel:
 
 ```bash
 # From your local machine (via Tailscale)
-ssh -L 18789:127.0.0.1:18789 ubuntu@openclaw
+ssh -L 18789:0.0.0.0:18789 ubuntu@openclaw
 ```
 
 Then open `http://localhost:18789`.

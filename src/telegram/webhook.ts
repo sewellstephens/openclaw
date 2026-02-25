@@ -38,7 +38,7 @@ export async function startTelegramWebhook(opts: {
   const path = opts.path ?? "/telegram-webhook";
   const healthPath = opts.healthPath ?? "/healthz";
   const port = opts.port ?? 8787;
-  const host = opts.host ?? "127.0.0.1";
+  const host = opts.host ?? "0.0.0.0";
   const secret = typeof opts.secret === "string" ? opts.secret.trim() : "";
   if (!secret) {
     throw new Error(

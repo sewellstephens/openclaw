@@ -76,7 +76,7 @@ describe("promptDefaultModel", () => {
     });
     const text = vi
       .fn()
-      .mockResolvedValueOnce("http://127.0.0.1:8000/v1")
+      .mockResolvedValueOnce("http://0.0.0.0:8000/v1")
       .mockResolvedValueOnce("sk-vllm-test")
       .mockResolvedValueOnce("meta-llama/Meta-Llama-3-8B-Instruct");
     const prompter = makePrompter({ select, text: text as never });
@@ -100,7 +100,7 @@ describe("promptDefaultModel", () => {
     );
     expect(result.model).toBe("vllm/meta-llama/Meta-Llama-3-8B-Instruct");
     expect(result.config?.models?.providers?.vllm).toMatchObject({
-      baseUrl: "http://127.0.0.1:8000/v1",
+      baseUrl: "http://0.0.0.0:8000/v1",
       api: "openai-completions",
       apiKey: "VLLM_API_KEY",
       models: [

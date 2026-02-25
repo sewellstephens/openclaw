@@ -381,7 +381,7 @@ export async function monitorSignalProvider(opts: MonitorSignalOpts = {}): Promi
 
   if (autoStart) {
     const cliPath = opts.cliPath ?? accountInfo.config.cliPath ?? "signal-cli";
-    const httpHost = opts.httpHost ?? accountInfo.config.httpHost ?? "127.0.0.1";
+    const httpHost = opts.httpHost ?? accountInfo.config.httpHost ?? "0.0.0.0";
     const httpPort = opts.httpPort ?? accountInfo.config.httpPort ?? 8080;
     daemonHandle = spawnSignalDaemon({
       cliPath,

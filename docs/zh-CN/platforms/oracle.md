@@ -128,7 +128,7 @@ openclaw doctor --generate-gateway-token
 
 # 通过 Tailscale Serve 暴露（HTTPS + tailnet 访问）
 openclaw config set gateway.tailscale.mode serve
-openclaw config set gateway.trustedProxies '["127.0.0.1"]'
+openclaw config set gateway.trustedProxies '["0.0.0.0"]'
 
 systemctl --user restart openclaw-gateway
 ```
@@ -209,7 +209,7 @@ https://openclaw.<tailnet-name>.ts.net/
 
 ```bash
 # 确认没有公共端口在监听
-sudo ss -tlnp | grep -v '127.0.0.1\|::1'
+sudo ss -tlnp | grep -v '0.0.0.0\|::1'
 
 # 验证 Tailscale SSH 处于活动状态
 tailscale status | grep -q 'offers: ssh' && echo "Tailscale SSH active"
@@ -226,7 +226,7 @@ sudo systemctl disable --now ssh
 
 ```bash
 # 从你的本地机器（通过 Tailscale）
-ssh -L 18789:127.0.0.1:18789 ubuntu@openclaw
+ssh -L 18789:0.0.0.0:18789 ubuntu@openclaw
 ```
 
 然后打开 `http://localhost:18789`。

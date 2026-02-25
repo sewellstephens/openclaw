@@ -23,7 +23,7 @@ describe("probeSignal", () => {
     });
     signalRpcRequestMock.mockResolvedValueOnce({ version: "0.13.22" });
 
-    const res = await probeSignal("http://127.0.0.1:8080", 1000);
+    const res = await probeSignal("http://0.0.0.0:8080", 1000);
 
     expect(res.ok).toBe(true);
     expect(res.version).toBe("0.13.22");
@@ -37,7 +37,7 @@ describe("probeSignal", () => {
       error: "HTTP 503",
     });
 
-    const res = await probeSignal("http://127.0.0.1:8080", 1000);
+    const res = await probeSignal("http://0.0.0.0:8080", 1000);
 
     expect(res.ok).toBe(false);
     expect(res.status).toBe(503);

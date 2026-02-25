@@ -29,7 +29,7 @@ afterAll(async () => {
 
 async function startServerWithDefaultConfig(port: number) {
   return await startGatewayServer(port, {
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     auth: { mode: "token", token: "secret" },
     controlUiEnabled: false,
     openAiChatCompletionsEnabled: false,
@@ -38,7 +38,7 @@ async function startServerWithDefaultConfig(port: number) {
 
 async function startServer(port: number, opts?: { openAiChatCompletionsEnabled?: boolean }) {
   return await startGatewayServer(port, {
-    host: "127.0.0.1",
+    host: "0.0.0.0",
     auth: { mode: "token", token: "secret" },
     controlUiEnabled: false,
     openAiChatCompletionsEnabled: opts?.openAiChatCompletionsEnabled ?? true,
@@ -46,7 +46,7 @@ async function startServer(port: number, opts?: { openAiChatCompletionsEnabled?:
 }
 
 async function postChatCompletions(port: number, body: unknown, headers?: Record<string, string>) {
-  const res = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+  const res = await fetch(`http://0.0.0.0:${port}/v1/chat/completions`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
@@ -139,7 +139,7 @@ describe("OpenAI-compatible HTTP API (e2e)", () => {
 
     try {
       {
-        const res = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+        const res = await fetch(`http://0.0.0.0:${port}/v1/chat/completions`, {
           method: "GET",
           headers: { authorization: "Bearer secret" },
         });
@@ -148,7 +148,7 @@ describe("OpenAI-compatible HTTP API (e2e)", () => {
       }
 
       {
-        const res = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+        const res = await fetch(`http://0.0.0.0:${port}/v1/chat/completions`, {
           method: "POST",
           headers: { "content-type": "application/json" },
           body: JSON.stringify({ messages: [{ role: "user", content: "hi" }] }),
@@ -384,14 +384,14 @@ describe("OpenAI-compatible HTTP API (e2e)", () => {
           messages: [{ role: "user", content: "hi" }],
         };
 
-        const first = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+        const first = await fetch(`http://0.0.0.0:${port}/v1/chat/completions`, {
           method: "POST",
           headers,
           body: JSON.stringify(body),
         });
         expect(first.status).toBe(401);
 
-        const second = await fetch(`http://127.0.0.1:${port}/v1/chat/completions`, {
+        const second = await fetch(`http://0.0.0.0:${port}/v1/chat/completions`, {
           method: "POST",
           headers,
           body: JSON.stringify(body),
@@ -401,7 +401,7 @@ describe("OpenAI-compatible HTTP API (e2e)", () => {
       },
       {
         serverOptions: {
-          host: "127.0.0.1",
+          host: "0.0.0.0",
           controlUiEnabled: false,
           openAiChatCompletionsEnabled: true,
         },

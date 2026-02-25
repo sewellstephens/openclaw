@@ -5,7 +5,7 @@ Purpose: attach OpenClaw to an existing Chrome tab so the Gateway can automate i
 ## Dev / load unpacked
 
 1. Build/run OpenClaw Gateway with browser control enabled.
-2. Ensure the relay server is reachable at `http://127.0.0.1:18792/` (default).
+2. Ensure the relay server is reachable at `http://0.0.0.0:18792/` (default).
 3. Install the extension to a stable path:
 
    ```bash

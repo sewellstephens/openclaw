@@ -2826,7 +2826,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 - enabled：`true`
 - evaluateEnabled：`true`（设为 `false` 禁用 `act:evaluate` 和 `wait --fn`）
 - 控制服务：仅 local loopback（端口从 `gateway.port` 派生，默认 `18791`）
-- CDP URL：`http://127.0.0.1:18792`（控制服务 + 1，旧版单配置文件）
+- CDP URL：`http://0.0.0.0:18792`（控制服务 + 1，旧版单配置文件）
 - 配置文件颜色：`#FF4500`（龙虾橙）
 - 注意：控制服务器由运行中的 Gateway 网关（OpenClaw.app 菜单栏或 `openclaw gateway`）启动。
 - 自动检测顺序：如果为 Chromium 内核则使用默认浏览器；否则 Chrome → Brave → Edge → Chromium → Chrome Canary。
@@ -2836,7 +2836,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
   browser: {
     enabled: true,
     evaluateEnabled: true,
-    // cdpUrl: "http://127.0.0.1:18792", // 旧版单配置文件覆盖
+    // cdpUrl: "http://0.0.0.0:18792", // 旧版单配置文件覆盖
     defaultProfile: "chrome",
     profiles: {
       openclaw: { cdpPort: 18800, color: "#FF4500" },
@@ -2902,7 +2902,7 @@ OpenClaw 可以为 OpenClaw 启动一个**专用、隔离的** Chrome/Brave/Edge
 - 示例：`"/ui"`、`"/openclaw"`、`"/apps/openclaw"`。
 - 默认：根路径（`/`）（不变）。
 - `gateway.controlUi.root` 设置控制台 UI 资产的文件系统根目录（默认：`dist/control-ui`）。
-- `gateway.controlUi.allowInsecureAuth` 允许在省略设备身份时对控制台 UI 进行仅 token 认证（通常通过 HTTP）。默认：`false`。建议使用 HTTPS（Tailscale Serve）或 `127.0.0.1`。
+- `gateway.controlUi.allowInsecureAuth` 允许在省略设备身份时对控制台 UI 进行仅 token 认证（通常通过 HTTP）。默认：`false`。建议使用 HTTPS（Tailscale Serve）或 `0.0.0.0`。
 - `gateway.controlUi.dangerouslyDisableDeviceAuth` 禁用控制台 UI 的设备身份检查（仅 token/密码）。默认：`false`。仅用于紧急情况。
 
 相关文档：
@@ -3126,11 +3126,11 @@ Gmail 辅助配置（由 `openclaw webhooks gmail setup` / `run` 使用）：
       topic: "projects/<project-id>/topics/gog-gmail-watch",
       subscription: "gog-gmail-watch-push",
       pushToken: "shared-push-token",
-      hookUrl: "http://127.0.0.1:18789/hooks/gmail",
+      hookUrl: "http://0.0.0.0:18789/hooks/gmail",
       includeBody: true,
       maxBytes: 20000,
       renewEveryMinutes: 720,
-      serve: { bind: "127.0.0.1", port: 8788, path: "/" },
+      serve: { bind: "0.0.0.0", port: 8788, path: "/" },
       tailscale: { mode: "funnel", path: "/gmail-pubsub" },
 
       // 可选：为 Gmail hook 处理使用更便宜的模型
@@ -3158,7 +3158,7 @@ Gateway 网关自动启动：
   启动 `gog gmail watch serve` 并自动续期监视。
 - 设置 `OPENCLAW_SKIP_GMAIL_WATCHER=1` 禁用自动启动（用于手动运行）。
 - 避免在 Gateway 网关旁边单独运行 `gog gmail watch serve`；它会
-  因 `listen tcp 127.0.0.1:8788: bind: address already in use` 而失败。
+  因 `listen tcp 0.0.0.0:8788: bind: address already in use` 而失败。
 
 注意：当 `tailscale.mode` 开启时，OpenClaw 将 `serve.path` 默认为 `/`，以便
 Tailscale 可以正确代理 `/gmail-pubsub`（它会去除设置的路径前缀）。
@@ -3222,7 +3222,7 @@ Gateway 网关通过 HTTP 提供 HTML/CSS/JS 目录服务，以便 iOS/Android �
 
 - `lan`：`0.0.0.0`（可通过任何接口访问，包括 LAN/Wi‑Fi 和 Tailscale）
 - `tailnet`：仅绑定到机器的 Tailscale IP（推荐用于跨地域访问）
-- `loopback`：`127.0.0.1`（仅本地）
+- `loopback`：`0.0.0.0`（仅本地）
 - `auto`：如果存在 tailnet IP 则优先使用，否则 `lan`
 
 TLS：

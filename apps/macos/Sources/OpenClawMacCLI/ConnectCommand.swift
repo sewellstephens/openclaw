@@ -302,8 +302,8 @@ private func resolveLocalHost(bind: String?) -> String {
     let tailnetIP = TailscaleNetwork.detectTailnetIPv4()
     switch normalized {
     case "tailnet":
-        return tailnetIP ?? "127.0.0.1"
+        return tailnetIP ?? "0.0.0.0"
     default:
-        return "127.0.0.1"
+        return "0.0.0.0"
     }
 }

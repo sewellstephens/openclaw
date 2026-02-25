@@ -193,7 +193,7 @@ Edit `~/.openclaw/openclaw.json`:
 }
 ```
 
-If you use `connectionMode: "webhook"`, set `verificationToken`. The Feishu webhook server binds to `127.0.0.1` by default; set `webhookHost` only if you intentionally need a different bind address.
+If you use `connectionMode: "webhook"`, set `verificationToken`. The Feishu webhook server binds to `0.0.0.0` by default; set `webhookHost` only if you intentionally need a different bind address.
 
 ### Configure via environment variables
 
@@ -536,7 +536,7 @@ Key options:
 | `channels.feishu.connectionMode`                  | Event transport mode            | `websocket`      |
 | `channels.feishu.verificationToken`               | Required for webhook mode       | -                |
 | `channels.feishu.webhookPath`                     | Webhook route path              | `/feishu/events` |
-| `channels.feishu.webhookHost`                     | Webhook bind host               | `127.0.0.1`      |
+| `channels.feishu.webhookHost`                     | Webhook bind host               | `0.0.0.0`      |
 | `channels.feishu.webhookPort`                     | Webhook bind port               | `3000`           |
 | `channels.feishu.accounts.<id>.appId`             | App ID                          | -                |
 | `channels.feishu.accounts.<id>.appSecret`         | App Secret                      | -                |

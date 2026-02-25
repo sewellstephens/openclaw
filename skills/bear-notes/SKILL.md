@@ -95,7 +95,7 @@ Example `~/.config/grizzly/config.toml`:
 
 ```toml
 token_file = "~/.config/grizzly/token"
-callback_url = "http://127.0.0.1:42123/success"
+callback_url = "http://0.0.0.0:42123/success"
 timeout = "5s"
 ```
 

@@ -64,11 +64,11 @@ describe("GatewayClient", () => {
 
   test("uses a large maxPayload for node snapshots", () => {
     wsMockState.last = null;
-    const client = new GatewayClient({ url: "ws://127.0.0.1:1" });
+    const client = new GatewayClient({ url: "ws://0.0.0.0:1" });
     client.start();
     const last = wsMockState.last as { url: unknown; opts: unknown } | null;
 
-    expect(last?.url).toBe("ws://127.0.0.1:1");
+    expect(last?.url).toBe("ws://0.0.0.0:1");
     expect(last?.opts).toEqual(expect.objectContaining({ maxPayload: 25 * 1024 * 1024 }));
   });
 

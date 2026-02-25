@@ -15,7 +15,7 @@ describe("browser navigation guard", () => {
   it("blocks private loopback URLs by default", async () => {
     await expect(
       assertBrowserNavigationAllowed({
-        url: "http://127.0.0.1:8080",
+        url: "http://0.0.0.0:8080",
       }),
     ).rejects.toBeInstanceOf(SsrFBlockedError);
   });
@@ -61,7 +61,7 @@ describe("browser navigation guard", () => {
   });
 
   it("allows blocked hostnames when explicitly allowed", async () => {
-    const lookupFn = createLookupFn("127.0.0.1");
+    const lookupFn = createLookupFn("0.0.0.0");
     await expect(
       assertBrowserNavigationAllowed({
         url: "http://agent.internal:3000",
@@ -75,7 +75,7 @@ describe("browser navigation guard", () => {
   });
 
   it("blocks hostnames that resolve to private addresses by default", async () => {
-    const lookupFn = createLookupFn("127.0.0.1");
+    const lookupFn = createLookupFn("0.0.0.0");
     await expect(
       assertBrowserNavigationAllowed({
         url: "https://example.com",
@@ -104,7 +104,7 @@ describe("browser navigation guard", () => {
   });
 
   it("validates final network URLs after navigation", async () => {
-    const lookupFn = createLookupFn("127.0.0.1");
+    const lookupFn = createLookupFn("0.0.0.0");
     await expect(
       assertBrowserNavigationResultAllowed({
         url: "http://private.test",

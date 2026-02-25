@@ -14,7 +14,7 @@ Tailscale provides HTTPS, routing, and (for Serve) identity headers.
 
 ## Modes
 
-- `serve`: Tailnet-only Serve via `tailscale serve`. The gateway stays on `127.0.0.1`.
+- `serve`: Tailnet-only Serve via `tailscale serve`. The gateway stays on `0.0.0.0`.
 - `funnel`: Public HTTPS via `tailscale funnel`. OpenClaw requires a shared password.
 - `off`: Default (no Tailscale automation).
 
@@ -74,7 +74,7 @@ Connect from another Tailnet device:
 - Control UI: `http://<tailscale-ip>:18789/`
 - WebSocket: `ws://<tailscale-ip>:18789`
 
-Note: loopback (`http://127.0.0.1:18789`) will **not** work in this mode.
+Note: loopback (`http://0.0.0.0:18789`) will **not** work in this mode.
 
 ### Public internet (Funnel + shared password)
 

@@ -103,7 +103,7 @@ function readLinuxStartTime(pid: number): number | null {
   }
 }
 
-async function checkPortFree(port: number, host = "127.0.0.1"): Promise<boolean> {
+async function checkPortFree(port: number, host = "0.0.0.0"): Promise<boolean> {
   return await new Promise<boolean>((resolve) => {
     const socket = net.createConnection({ port, host });
     let settled = false;

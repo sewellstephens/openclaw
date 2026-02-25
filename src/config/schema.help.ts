@@ -1143,7 +1143,7 @@ export const FIELD_HELP: Record<string, string> = {
   "hooks.gmail.tailscale.path":
     "Path published by Tailscale Serve/Funnel for Gmail callback forwarding when enabled. Keep it aligned with Gmail webhook config so requests reach the expected handler.",
   "hooks.gmail.tailscale.target":
-    "Local service target forwarded by Tailscale Serve/Funnel (for example http://127.0.0.1:8787). Use explicit loopback targets to avoid ambiguous routing.",
+    "Local service target forwarded by Tailscale Serve/Funnel (for example http://0.0.0.0:8787). Use explicit loopback targets to avoid ambiguous routing.",
   "hooks.gmail.model":
     "Optional model override for Gmail-triggered runs when mailbox automations should use dedicated model behavior. Keep unset to inherit agent defaults unless mailbox tasks need specialization.",
   "hooks.gmail.thinking":

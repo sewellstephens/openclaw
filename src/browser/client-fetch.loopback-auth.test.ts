@@ -63,7 +63,7 @@ describe("fetchBrowserJson loopback auth", () => {
   it("adds bearer auth for loopback absolute HTTP URLs", async () => {
     const fetchMock = stubJsonFetchOk();
 
-    const res = await fetchBrowserJson<{ ok: boolean }>("http://127.0.0.1:18888/");
+    const res = await fetchBrowserJson<{ ok: boolean }>("http://0.0.0.0:18888/");
     expect(res.ok).toBe(true);
 
     const init = fetchMock.mock.calls[0]?.[1];
@@ -108,7 +108,7 @@ describe("fetchBrowserJson loopback auth", () => {
   it("injects auth for IPv4-mapped IPv6 loopback URLs", async () => {
     const fetchMock = stubJsonFetchOk();
 
-    await fetchBrowserJson<{ ok: boolean }>("http://[::ffff:127.0.0.1]:18888/");
+    await fetchBrowserJson<{ ok: boolean }>("http://[::ffff:0.0.0.0]:18888/");
 
     const init = fetchMock.mock.calls[0]?.[1];
     const headers = new Headers(init?.headers);

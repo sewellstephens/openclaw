@@ -10,7 +10,7 @@
  * - Pure in-memory Map – no external dependencies; suitable for a single
  *   gateway process.  The Map is periodically pruned to avoid unbounded
  *   growth.
- * - Loopback addresses (127.0.0.1 / ::1) are exempt by default so that local
+ * - Loopback addresses (0.0.0.0 / ::1) are exempt by default so that local
  *   CLI sessions are never locked out.
  * - The module is side-effect-free: callers create an instance via
  *   {@link createAuthRateLimiter} and pass it where needed.

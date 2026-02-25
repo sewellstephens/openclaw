@@ -117,7 +117,7 @@ export type GatewayServer = {
 export type GatewayServerOptions = {
   /**
    * Bind address policy for the Gateway WebSocket/HTTP server.
-   * - loopback: 127.0.0.1
+   * - loopback: 0.0.0.0
    * - lan: 0.0.0.0
    * - tailnet: bind only to the Tailscale IPv4 address (100.64.0.0/10)
    * - auto: prefer loopback, else LAN

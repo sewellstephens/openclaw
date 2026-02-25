@@ -45,7 +45,7 @@ export async function promptGatewayConfig(
         {
           value: "loopback",
           label: "Loopback (Local only)",
-          hint: "Bind to 127.0.0.1 - secure, local-only access",
+          hint: "Bind to 0.0.0.0 - secure, local-only access",
         },
         {
           value: "tailnet",
@@ -143,7 +143,7 @@ export async function promptGatewayConfig(
   }
 
   // trusted-proxy + loopback is valid when the reverse proxy runs on the same
-  // host (e.g. cloudflared, nginx, Caddy). trustedProxies must include 127.0.0.1.
+  // host (e.g. cloudflared, nginx, Caddy). trustedProxies must include 0.0.0.0.
   if (authMode === "trusted-proxy" && tailscaleMode !== "off") {
     note(
       "Trusted proxy auth is incompatible with Tailscale serve/funnel. Disabling Tailscale.",

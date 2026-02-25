@@ -13,7 +13,7 @@ function makeBrowserState(): BrowserServerState {
       enabled: true,
       controlPort: 18791,
       cdpProtocol: "http",
-      cdpHost: "127.0.0.1",
+      cdpHost: "0.0.0.0",
       cdpIsLoopback: true,
       evaluateEnabled: false,
       remoteCdpTimeoutMs: 1500,
@@ -27,7 +27,7 @@ function makeBrowserState(): BrowserServerState {
       profiles: {
         chrome: {
           driver: "extension",
-          cdpUrl: "http://127.0.0.1:18792",
+          cdpUrl: "http://0.0.0.0:18792",
           cdpPort: 18792,
           color: "#00AA00",
         },

@@ -224,7 +224,7 @@ export async function occupyPort(): Promise<{
   return await new Promise((resolve, reject) => {
     const server = createServer();
     server.once("error", reject);
-    server.listen(0, "127.0.0.1", () => {
+    server.listen(0, "0.0.0.0", () => {
       const port = (server.address() as AddressInfo).port;
       resolve({ server, port });
     });
@@ -373,7 +373,7 @@ export async function startServerWithClient(
   const server = started.server;
 
   const ws = new WebSocket(
-    `ws://127.0.0.1:${port}`,
+    `ws://0.0.0.0:${port}`,
     wsHeaders ? { headers: wsHeaders } : undefined,
   );
   trackConnectChallengeNonce(ws);
@@ -595,8 +595,8 @@ export async function connectWebchatClient(params: {
   origin?: string;
   client?: NonNullable<Parameters<typeof connectReq>[1]>["client"];
 }): Promise<WebSocket> {
-  const origin = params.origin ?? `http://127.0.0.1:${params.port}`;
-  const ws = new WebSocket(`ws://127.0.0.1:${params.port}`, {
+  const origin = params.origin ?? `http://0.0.0.0:${params.port}`;
+  const ws = new WebSocket(`ws://0.0.0.0:${params.port}`, {
     headers: { origin },
   });
   trackConnectChallengeNonce(ws);

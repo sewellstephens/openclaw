@@ -77,7 +77,7 @@ describe("evaluateViaPlaywright (abort)", () => {
     };
 
     const p = evaluateViaPlaywright({
-      cdpUrl: "http://127.0.0.1:9222",
+      cdpUrl: "http://0.0.0.0:9222",
       fn,
       ref,
       signal: ctrl.signal,

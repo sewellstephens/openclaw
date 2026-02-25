@@ -102,7 +102,7 @@ export async function startMediaServer(
   const app = express();
   attachMediaRoutes(app, ttlMs, runtime);
   return await new Promise((resolve, reject) => {
-    const server = app.listen(port, "127.0.0.1");
+    const server = app.listen(port, "0.0.0.0");
     server.once("listening", () => resolve(server));
     server.once("error", (err) => {
       runtime.error(danger(`Media server failed: ${String(err)}`));

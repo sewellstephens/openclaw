@@ -69,7 +69,7 @@ describe("chutes-oauth", () => {
     const creds = await exchangeChutesCodeForTokens({
       app: {
         clientId: "cid_test",
-        redirectUri: "http://127.0.0.1:1456/oauth-callback",
+        redirectUri: "http://0.0.0.0:1456/oauth-callback",
         scopes: ["openid"],
       },
       code: "code_123",

@@ -72,10 +72,10 @@ async function waitForLocalCallback(params: {
   if (redirectUrl.protocol !== "http:") {
     throw new Error(`Chutes OAuth redirect URI must be http:// (got ${params.redirectUri})`);
   }
-  const hostname = redirectUrl.hostname || "127.0.0.1";
+  const hostname = redirectUrl.hostname || "0.0.0.0";
   if (!isLoopbackHost(hostname)) {
     throw new Error(
-      `Chutes OAuth redirect hostname must be loopback (got ${hostname}). Use http://127.0.0.1:<port>/...`,
+      `Chutes OAuth redirect hostname must be loopback (got ${hostname}). Use http://0.0.0.0:<port>/...`,
     );
   }
   const port = redirectUrl.port ? Number.parseInt(redirectUrl.port, 10) : 80;

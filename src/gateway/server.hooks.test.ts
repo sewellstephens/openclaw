@@ -20,14 +20,14 @@ describe("gateway server hooks", () => {
       list: [{ id: "main", default: true }, { id: "hooks" }],
     };
     await withGatewayServer(async ({ port }) => {
-      const resNoAuth = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resNoAuth = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: "Ping" }),
       });
       expect(resNoAuth.status).toBe(401);
 
-      const resWake = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resWake = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,7 +45,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resAgent = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resAgent = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -63,7 +63,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resAgentModel = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resAgentModel = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -88,7 +88,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resAgentWithId = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resAgentWithId = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -109,7 +109,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resAgentUnknown = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resAgentUnknown = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -125,14 +125,14 @@ describe("gateway server hooks", () => {
       expect(fallbackCall?.job?.agentId).toBe("main");
       drainSystemEvents(resolveMainKey());
 
-      const resQuery = await fetch(`http://127.0.0.1:${port}/hooks/wake?token=hook-secret`, {
+      const resQuery = await fetch(`http://0.0.0.0:${port}/hooks/wake?token=hook-secret`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: "Query auth" }),
       });
       expect(resQuery.status).toBe(400);
 
-      const resBadChannel = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resBadChannel = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,7 +143,7 @@ describe("gateway server hooks", () => {
       expect(resBadChannel.status).toBe(400);
       expect(peekSystemEvents(resolveMainKey()).length).toBe(0);
 
-      const resHeader = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resHeader = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -156,13 +156,13 @@ describe("gateway server hooks", () => {
       expect(headerEvents.some((e) => e.includes("Header auth"))).toBe(true);
       drainSystemEvents(resolveMainKey());
 
-      const resGet = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resGet = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "GET",
         headers: { Authorization: "Bearer hook-secret" },
       });
       expect(resGet.status).toBe(405);
 
-      const resBlankText = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resBlankText = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -172,7 +172,7 @@ describe("gateway server hooks", () => {
       });
       expect(resBlankText.status).toBe(400);
 
-      const resBlankMessage = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resBlankMessage = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -182,7 +182,7 @@ describe("gateway server hooks", () => {
       });
       expect(resBlankMessage.status).toBe(400);
 
-      const resBadJson = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const resBadJson = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -197,7 +197,7 @@ describe("gateway server hooks", () => {
   test("rejects request sessionKey unless hooks.allowRequestSessionKey is enabled", async () => {
     testState.hooksConfig = { enabled: true, token: "hook-secret" };
     await withGatewayServer(async ({ port }) => {
-      const denied = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const denied = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -240,7 +240,7 @@ describe("gateway server hooks", () => {
       cronIsolatedRun.mockClear();
       cronIsolatedRun.mockResolvedValue({ status: "ok", summary: "done" });
 
-      const defaultRoute = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const defaultRoute = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -258,7 +258,7 @@ describe("gateway server hooks", () => {
 
       cronIsolatedRun.mockClear();
       cronIsolatedRun.mockResolvedValue({ status: "ok", summary: "done" });
-      const mappedOk = await fetch(`http://127.0.0.1:${port}/hooks/mapped-ok`, {
+      const mappedOk = await fetch(`http://0.0.0.0:${port}/hooks/mapped-ok`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -274,7 +274,7 @@ describe("gateway server hooks", () => {
       expect(mappedCall?.sessionKey).toBe("hook:mapped:42");
       drainSystemEvents(resolveMainKey());
 
-      const requestBadPrefix = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const requestBadPrefix = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -287,7 +287,7 @@ describe("gateway server hooks", () => {
       });
       expect(requestBadPrefix.status).toBe(400);
 
-      const mappedBadPrefix = await fetch(`http://127.0.0.1:${port}/hooks/mapped-bad`, {
+      const mappedBadPrefix = await fetch(`http://0.0.0.0:${port}/hooks/mapped-bad`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -322,7 +322,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resNoAgent = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resNoAgent = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -343,7 +343,7 @@ describe("gateway server hooks", () => {
         status: "ok",
         summary: "done",
       });
-      const resAllowed = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resAllowed = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -359,7 +359,7 @@ describe("gateway server hooks", () => {
       expect(allowedCall?.job?.agentId).toBe("hooks");
       drainSystemEvents(resolveMainKey());
 
-      const resDenied = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resDenied = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -371,7 +371,7 @@ describe("gateway server hooks", () => {
       const deniedBody = (await resDenied.json()) as { error?: string };
       expect(deniedBody.error).toContain("hooks.allowedAgentIds");
 
-      const resMappedDenied = await fetch(`http://127.0.0.1:${port}/hooks/mapped`, {
+      const resMappedDenied = await fetch(`http://0.0.0.0:${port}/hooks/mapped`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -396,7 +396,7 @@ describe("gateway server hooks", () => {
       list: [{ id: "main", default: true }, { id: "hooks" }],
     };
     await withGatewayServer(async ({ port }) => {
-      const resDenied = await fetch(`http://127.0.0.1:${port}/hooks/agent`, {
+      const resDenied = await fetch(`http://0.0.0.0:${port}/hooks/agent`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -414,7 +414,7 @@ describe("gateway server hooks", () => {
   test("throttles repeated hook auth failures and resets after success", async () => {
     testState.hooksConfig = { enabled: true, token: "hook-secret" };
     await withGatewayServer(async ({ port }) => {
-      const firstFail = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const firstFail = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -426,7 +426,7 @@ describe("gateway server hooks", () => {
 
       let throttled: Response | null = null;
       for (let i = 0; i < 20; i++) {
-        throttled = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+        throttled = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -438,7 +438,7 @@ describe("gateway server hooks", () => {
       expect(throttled?.status).toBe(429);
       expect(throttled?.headers.get("retry-after")).toBeTruthy();
 
-      const allowed = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const allowed = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -450,7 +450,7 @@ describe("gateway server hooks", () => {
       await waitForSystemEvent();
       drainSystemEvents(resolveMainKey());
 
-      const failAfterSuccess = await fetch(`http://127.0.0.1:${port}/hooks/wake`, {
+      const failAfterSuccess = await fetch(`http://0.0.0.0:${port}/hooks/wake`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

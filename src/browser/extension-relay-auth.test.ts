@@ -15,7 +15,7 @@ async function withRelayServer(
   const port = await getFreePort();
   const server = createServer(handler);
   await new Promise<void>((resolve, reject) => {
-    server.listen(port, "127.0.0.1", () => resolve());
+    server.listen(port, "0.0.0.0", () => resolve());
     server.once("error", reject);
   });
   try {
@@ -76,7 +76,7 @@ describe("extension-relay-auth", () => {
       async ({ port }) => {
         const token = resolveRelayAuthTokenForPort(port);
         const ok = await probeAuthenticatedOpenClawRelay({
-          baseUrl: `http://127.0.0.1:${port}`,
+          baseUrl: `http://0.0.0.0:${port}`,
           relayAuthHeader: "x-openclaw-relay-token",
           relayAuthToken: token,
         });
@@ -99,7 +99,7 @@ describe("extension-relay-auth", () => {
       },
       async ({ port }) => {
         const ok = await probeAuthenticatedOpenClawRelay({
-          baseUrl: `http://127.0.0.1:${port}`,
+          baseUrl: `http://0.0.0.0:${port}`,
           relayAuthHeader: "x-openclaw-relay-token",
           relayAuthToken: "irrelevant",
         });
@@ -121,7 +121,7 @@ describe("extension-relay-auth", () => {
       },
       async ({ port }) => {
         const ok = await probeAuthenticatedOpenClawRelay({
-          baseUrl: `http://127.0.0.1:${port}`,
+          baseUrl: `http://0.0.0.0:${port}`,
           relayAuthHeader: "x-openclaw-relay-token",
           relayAuthToken: "irrelevant",
         });

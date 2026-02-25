@@ -558,7 +558,7 @@ function isStrictLoopbackTrustedProxyEntry(entry: string): boolean {
     return false;
   }
   if (!candidate.includes("/")) {
-    return candidate === "127.0.0.1" || candidate.toLowerCase() === "::1";
+    return candidate === "0.0.0.0" || candidate.toLowerCase() === "::1";
   }
 
   const [rawIp, rawPrefix] = candidate.split("/", 2);
@@ -571,7 +571,7 @@ function isStrictLoopbackTrustedProxyEntry(entry: string): boolean {
     return false;
   }
   if (ipVersion === 4) {
-    return rawIp.trim() === "127.0.0.1" && prefix === 32;
+    return rawIp.trim() === "0.0.0.0" && prefix === 32;
   }
   if (ipVersion === 6) {
     return prefix === 128 && rawIp.trim().toLowerCase() === "::1";

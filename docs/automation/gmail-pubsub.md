@@ -111,7 +111,7 @@ Path note: when `tailscale.mode` is enabled, OpenClaw automatically sets
 strips the set-path prefix before proxying.
 If you need the backend to receive the prefixed path, set
 `hooks.gmail.tailscale.target` (or `--tailscale-target`) to a full URL like
-`http://127.0.0.1:8788/gmail-pubsub` and match `hooks.gmail.serve.path`.
+`http://0.0.0.0:8788/gmail-pubsub` and match `hooks.gmail.serve.path`.
 
 Want a custom endpoint? Use `--push-endpoint <url>` or `--tailscale off`.
 
@@ -124,7 +124,7 @@ Gateway auto-start (recommended):
   `gog gmail watch serve` on boot and auto-renews the watch.
 - Set `OPENCLAW_SKIP_GMAIL_WATCHER=1` to opt out (useful if you run the daemon yourself).
 - Do not run the manual daemon at the same time, or you will hit
-  `listen tcp 127.0.0.1:8788: bind: address already in use`.
+  `listen tcp 0.0.0.0:8788: bind: address already in use`.
 
 Manual daemon (starts `gog gmail watch serve` + auto-renew):
 
@@ -181,11 +181,11 @@ Local example (shared token auth):
 ```bash
 gog gmail watch serve \
   --account openclaw@gmail.com \
-  --bind 127.0.0.1 \
+  --bind 0.0.0.0 \
   --port 8788 \
   --path /gmail-pubsub \
   --token <shared> \
-  --hook-url http://127.0.0.1:18789/hooks/gmail \
+  --hook-url http://0.0.0.0:18789/hooks/gmail \
   --hook-token OPENCLAW_HOOK_TOKEN \
   --include-body \
   --max-bytes 20000
@@ -205,7 +205,7 @@ If you need a non-Tailscale tunnel, wire it manually and use the public URL in t
 subscription (unsupported, no guardrails):
 
 ```bash
-cloudflared tunnel --url http://127.0.0.1:8788 --no-autoupdate
+cloudflared tunnel --url http://0.0.0.0:8788 --no-autoupdate
 ```
 
 Use the generated URL as the push endpoint:

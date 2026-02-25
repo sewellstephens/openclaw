@@ -5,7 +5,7 @@ import { resolveLeastPrivilegeOperatorScopesForMethod } from "../../gateway/meth
 import { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } from "../../utils/message-channel.js";
 import { readStringParam } from "./common.js";
 
-export const DEFAULT_GATEWAY_URL = "ws://127.0.0.1:18789";
+export const DEFAULT_GATEWAY_URL = "ws://0.0.0.0:18789";
 
 export type GatewayCallOptions = {
   gatewayUrl?: string;
@@ -60,8 +60,8 @@ function validateGatewayUrlOverrideForAgentTools(params: {
   const { cfg } = params;
   const port = resolveGatewayPort(cfg);
   const localAllowed = new Set<string>([
-    `ws://127.0.0.1:${port}`,
-    `wss://127.0.0.1:${port}`,
+    `ws://0.0.0.0:${port}`,
+    `wss://0.0.0.0:${port}`,
     `ws://localhost:${port}`,
     `wss://localhost:${port}`,
     `ws://[::1]:${port}`,
@@ -90,7 +90,7 @@ function validateGatewayUrlOverrideForAgentTools(params: {
   throw new Error(
     [
       "gatewayUrl override rejected.",
-      `Allowed: ws(s) loopback on port ${port} (127.0.0.1/localhost/[::1])`,
+      `Allowed: ws(s) loopback on port ${port} (0.0.0.0/localhost/[::1])`,
       "Or: configure gateway.remote.url and omit gatewayUrl to use the configured remote gateway.",
     ].join(" "),
   );

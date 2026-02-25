@@ -14,7 +14,7 @@ const WS_CONNECT_TIMEOUT_MS = 2_000;
 
 async function listen(
   server: ReturnType<typeof createGatewayHttpServer>,
-  host = "127.0.0.1",
+  host = "0.0.0.0",
 ): Promise<{
   host: string;
   port: number;
@@ -185,7 +185,7 @@ describe("gateway canvas host auth", () => {
     await withTempConfig({
       cfg: {
         gateway: {
-          trustedProxies: ["127.0.0.1"],
+          trustedProxies: ["0.0.0.0"],
         },
       },
       ...(prefix ? { prefix } : {}),
@@ -199,7 +199,7 @@ describe("gateway canvas host auth", () => {
         resolvedAuth: tokenResolvedAuth,
         handleHttpRequest: allowCanvasHostHttp,
         run: async ({ listener, clients }) => {
-          const host = "127.0.0.1";
+          const host = "0.0.0.0";
           const operatorOnlyCapability = "operator-only";
           const expiredNodeCapability = "expired-node";
           const activeNodeCapability = "active-node";
@@ -288,7 +288,7 @@ describe("gateway canvas host auth", () => {
           clients.add(
             makeWsClient({
               connId: "c-loopback-node",
-              clientIp: "127.0.0.1",
+              clientIp: "0.0.0.0",
               role: "node",
               mode: "node",
               canvasCapability: "unused",
@@ -296,10 +296,10 @@ describe("gateway canvas host auth", () => {
             }),
           );
 
-          const res = await fetch(`http://127.0.0.1:${listener.port}${CANVAS_HOST_PATH}/`);
+          const res = await fetch(`http://0.0.0.0:${listener.port}${CANVAS_HOST_PATH}/`);
           expect(res.status).toBe(401);
 
-          await expectWsRejected(`ws://127.0.0.1:${listener.port}${CANVAS_WS_PATH}`, {});
+          await expectWsRejected(`ws://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, {});
         },
       });
     });
@@ -367,18 +367,18 @@ describe("gateway canvas host auth", () => {
             authorization: "Bearer wrong",
             "x-forwarded-for": "203.0.113.99",
           };
-          const first = await fetch(`http://127.0.0.1:${listener.port}${CANVAS_HOST_PATH}/`, {
+          const first = await fetch(`http://0.0.0.0:${listener.port}${CANVAS_HOST_PATH}/`, {
             headers,
           });
           expect(first.status).toBe(401);
 
-          const second = await fetch(`http://127.0.0.1:${listener.port}${CANVAS_HOST_PATH}/`, {
+          const second = await fetch(`http://0.0.0.0:${listener.port}${CANVAS_HOST_PATH}/`, {
             headers,
           });
           expect(second.status).toBe(429);
           expect(second.headers.get("retry-after")).toBeTruthy();
 
-          await expectWsRejected(`ws://127.0.0.1:${listener.port}${CANVAS_WS_PATH}`, headers, 429);
+          await expectWsRejected(`ws://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, headers, 429);
         },
       });
     });

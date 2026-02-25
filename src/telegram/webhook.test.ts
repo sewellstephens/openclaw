@@ -55,7 +55,7 @@ describe("startTelegramWebhook", () => {
     if (!address || typeof address === "string") {
       throw new Error("no address");
     }
-    const url = `http://127.0.0.1:${address.port}`;
+    const url = `http://0.0.0.0:${address.port}`;
 
     const health = await fetch(`${url}/healthz`);
     expect(health.status).toBe(200);
@@ -101,7 +101,7 @@ describe("startTelegramWebhook", () => {
     if (!addr || typeof addr === "string") {
       throw new Error("no addr");
     }
-    await fetch(`http://127.0.0.1:${addr.port}/hook`, { method: "POST" });
+    await fetch(`http://0.0.0.0:${addr.port}/hook`, { method: "POST" });
     expect(handlerSpy).toHaveBeenCalled();
     abort.abort();
   });

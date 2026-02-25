@@ -79,7 +79,7 @@ final class RemotePortTunnel {
             "-o", "ServerAliveCountMax=3",
             "-o", "TCPKeepAlive=yes",
             "-N",
-            "-L", "\(localPort):127.0.0.1:\(resolvedRemotePort)",
+            "-L", "\(localPort):0.0.0.0:\(resolvedRemotePort)",
         ]
         let identity = settings.identity.trimmingCharacters(in: .whitespacesAndNewlines)
         let args = CommandResolver.sshArguments(
@@ -216,7 +216,7 @@ final class RemotePortTunnel {
     private static func portIsFree(_ port: UInt16) -> Bool {
         #if canImport(Darwin)
         // NWListener can succeed even when only one address family is held. Mirror what ssh needs by checking
-        // both 127.0.0.1 and ::1 for availability.
+        // both 0.0.0.0 and ::1 for availability.
         return self.canBindIPv4(port) && self.canBindIPv6(port)
         #else
         do {
@@ -242,7 +242,7 @@ final class RemotePortTunnel {
         addr.sin_len = UInt8(MemoryLayout<sockaddr_in>.size)
         addr.sin_family = sa_family_t(AF_INET)
         addr.sin_port = port.bigEndian
-        addr.sin_addr = in_addr(s_addr: inet_addr("127.0.0.1"))
+        addr.sin_addr = in_addr(s_addr: inet_addr("0.0.0.0"))
 
         let result = withUnsafePointer(to: &addr) { ptr in
             ptr.withMemoryRebound(to: sockaddr.self, capacity: 1) { sa in

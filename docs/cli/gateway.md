@@ -84,7 +84,7 @@ Pass `--token` or `--password` explicitly. Missing explicit credentials is an er
 ### `gateway health`
 
 ```bash
-openclaw gateway health --url ws://127.0.0.1:18789
+openclaw gateway health --url ws://0.0.0.0:18789
 ```
 
 ### `gateway status`
@@ -121,7 +121,7 @@ openclaw gateway probe --json
 
 #### Remote over SSH (Mac app parity)
 
-The macOS app “Remote over SSH” mode uses a local port-forward so the remote gateway (which may be bound to loopback only) becomes reachable at `ws://127.0.0.1:<port>`.
+The macOS app “Remote over SSH” mode uses a local port-forward so the remote gateway (which may be bound to loopback only) becomes reachable at `ws://0.0.0.0:<port>`.
 
 CLI equivalent:
 

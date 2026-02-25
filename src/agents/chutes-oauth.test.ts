@@ -11,7 +11,7 @@ describe("parseOAuthCallbackInput", () => {
 
   it("accepts full redirect URL when state matches", () => {
     const parsed = parseOAuthCallbackInput(
-      "http://127.0.0.1:1456/oauth-callback?code=abc123&state=expected-state",
+      "http://0.0.0.0:1456/oauth-callback?code=abc123&state=expected-state",
       "expected-state",
     );
     expect(parsed).toEqual({ code: "abc123", state: "expected-state" });
@@ -24,7 +24,7 @@ describe("parseOAuthCallbackInput", () => {
 
   it("rejects missing state", () => {
     const parsed = parseOAuthCallbackInput(
-      "http://127.0.0.1:1456/oauth-callback?code=abc123",
+      "http://0.0.0.0:1456/oauth-callback?code=abc123",
       "expected-state",
     );
     expect(parsed).toEqual({
@@ -34,7 +34,7 @@ describe("parseOAuthCallbackInput", () => {
 
   it("rejects state mismatch", () => {
     const parsed = parseOAuthCallbackInput(
-      "http://127.0.0.1:1456/oauth-callback?code=abc123&state=evil",
+      "http://0.0.0.0:1456/oauth-callback?code=abc123&state=evil",
       "expected-state",
     );
     expect(parsed).toEqual({

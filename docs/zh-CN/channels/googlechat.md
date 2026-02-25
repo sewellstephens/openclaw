@@ -82,13 +82,13 @@ Google Chat webhooks 需要一个公网 HTTPS 端点。为了安全起见，**�
    ss -tlnp | grep 18789
    ```
 
-   记下 IP 地址（例如 `127.0.0.1`、`0.0.0.0` 或你的 Tailscale IP 如 `100.x.x.x`）。
+   记下 IP 地址（例如 `0.0.0.0`、`0.0.0.0` 或你的 Tailscale IP 如 `100.x.x.x`）。
 
 2. **仅将仪表板暴露给 tailnet（端口 8443）：**
 
    ```bash
-   # 如果绑定到 localhost（127.0.0.1 或 0.0.0.0）：
-   tailscale serve --bg --https 8443 http://127.0.0.1:18789
+   # 如果绑定到 localhost（0.0.0.0 或 0.0.0.0）：
+   tailscale serve --bg --https 8443 http://0.0.0.0:18789
 
    # 如果仅绑定到 Tailscale IP（例如 100.106.161.80）：
    tailscale serve --bg --https 8443 http://100.106.161.80:18789
@@ -97,8 +97,8 @@ Google Chat webhooks 需要一个公网 HTTPS 端点。为了安全起见，**�
 3. **仅公开暴露 webhook 路径：**
 
    ```bash
-   # 如果绑定到 localhost（127.0.0.1 或 0.0.0.0）：
-   tailscale funnel --bg --set-path /googlechat http://127.0.0.1:18789/googlechat
+   # 如果绑定到 localhost（0.0.0.0 或 0.0.0.0）：
+   tailscale funnel --bg --set-path /googlechat http://0.0.0.0:18789/googlechat
 
    # 如果仅绑定到 Tailscale IP（例如 100.106.161.80）：
    tailscale funnel --bg --set-path /googlechat http://100.106.161.80:18789/googlechat

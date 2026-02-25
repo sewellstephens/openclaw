@@ -41,7 +41,7 @@ export function resolveSignalAccount(params: {
   const merged = mergeSignalAccountConfig(params.cfg, accountId);
   const accountEnabled = merged.enabled !== false;
   const enabled = baseEnabled && accountEnabled;
-  const host = merged.httpHost?.trim() || "127.0.0.1";
+  const host = merged.httpHost?.trim() || "0.0.0.0";
   const port = merged.httpPort ?? 8080;
   const baseUrl = merged.httpUrl?.trim() || `http://${host}:${port}`;
   const configured = Boolean(

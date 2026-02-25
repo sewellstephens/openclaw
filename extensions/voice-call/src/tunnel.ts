@@ -223,7 +223,7 @@ export async function startTailscaleTunnel(config: {
   }
 
   const path = config.path.startsWith("/") ? config.path : `/${config.path}`;
-  const localUrl = `http://127.0.0.1:${config.port}${path}`;
+  const localUrl = `http://0.0.0.0:${config.port}${path}`;
 
   return new Promise((resolve, reject) => {
     const proc = spawn("tailscale", [config.mode, "--bg", "--yes", "--set-path", path, localUrl], {

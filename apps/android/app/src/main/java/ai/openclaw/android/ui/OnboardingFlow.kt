@@ -764,7 +764,7 @@ private fun GatewayStep(
               onManualTlsChange(false)
             })
             QuickFillChip(label = "Localhost", onClick = {
-              onManualHostChange("127.0.0.1")
+              onManualHostChange("0.0.0.0")
               onManualPortChange("18789")
               onManualTlsChange(false)
             })

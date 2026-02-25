@@ -2,7 +2,7 @@ import { upsertAuthProfileWithLock } from "../agents/auth-profiles.js";
 import type { OpenClawConfig } from "../config/config.js";
 import type { WizardPrompter } from "../wizard/prompts.js";
 
-export const VLLM_DEFAULT_BASE_URL = "http://127.0.0.1:8000/v1";
+export const VLLM_DEFAULT_BASE_URL = "http://0.0.0.0:8000/v1";
 export const VLLM_DEFAULT_CONTEXT_WINDOW = 128000;
 export const VLLM_DEFAULT_MAX_TOKENS = 8192;
 export const VLLM_DEFAULT_COST = {

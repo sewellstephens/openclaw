@@ -22,7 +22,7 @@ const browserClientMocks = vi.hoisted(() => ({
     running: true,
     pid: 1,
     cdpPort: 18792,
-    cdpUrl: "http://127.0.0.1:18792",
+    cdpUrl: "http://0.0.0.0:18792",
   })),
   browserStop: vi.fn(async (..._args: unknown[]) => ({})),
   browserTabs: vi.fn(async (..._args: unknown[]): Promise<Array<Record<string, unknown>>> => []),
@@ -210,7 +210,7 @@ describe("browser tool snapshot maxChars", () => {
   });
 
   it("defaults to host when using profile=chrome (even in sandboxed sessions)", async () => {
-    const tool = createBrowserTool({ sandboxBridgeUrl: "http://127.0.0.1:9999" });
+    const tool = createBrowserTool({ sandboxBridgeUrl: "http://0.0.0.0:9999" });
     await tool.execute?.("call-1", { action: "snapshot", profile: "chrome", snapshotFormat: "ai" });
 
     expect(browserClientMocks.browserSnapshot).toHaveBeenCalledWith(
@@ -239,11 +239,11 @@ describe("browser tool snapshot maxChars", () => {
 
   it("keeps sandbox bridge url when node proxy is available", async () => {
     mockSingleBrowserProxyNode();
-    const tool = createBrowserTool({ sandboxBridgeUrl: "http://127.0.0.1:9999" });
+    const tool = createBrowserTool({ sandboxBridgeUrl: "http://0.0.0.0:9999" });
     await tool.execute?.("call-1", { action: "status" });
 
     expect(browserClientMocks.browserStatus).toHaveBeenCalledWith(
-      "http://127.0.0.1:9999",
+      "http://0.0.0.0:9999",
       expect.objectContaining({ profile: undefined }),
     );
     expect(gatewayMocks.callGatewayTool).not.toHaveBeenCalled();

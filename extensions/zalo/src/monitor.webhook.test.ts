@@ -8,14 +8,14 @@ import type { ResolvedZaloAccount } from "./types.js";
 async function withServer(handler: RequestListener, fn: (baseUrl: string) => Promise<void>) {
   const server = createServer(handler);
   await new Promise<void>((resolve) => {
-    server.listen(0, "127.0.0.1", () => resolve());
+    server.listen(0, "0.0.0.0", () => resolve());
   });
   const address = server.address() as AddressInfo | null;
   if (!address) {
     throw new Error("missing server address");
   }
   try {
-    await fn(`http://127.0.0.1:${address.port}`);
+    await fn(`http://0.0.0.0:${address.port}`);
   } finally {
     await new Promise<void>((resolve) => server.close(() => resolve()));
   }

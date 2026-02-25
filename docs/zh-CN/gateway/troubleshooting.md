@@ -92,7 +92,7 @@ openclaw models status
 **修复：**
 
 - 优先通过 [Tailscale Serve](/gateway/tailscale) 使用 HTTPS。
-- 或在 Gateway 网关主机上本地打开：`http://127.0.0.1:18789/`。
+- 或在 Gateway 网关主机上本地打开：`http://0.0.0.0:18789/`。
 - 如果必须使用 HTTP，启用 `gateway.controlUi.allowInsecureAuth: true` 并
   使用 Gateway 网关令牌（仅令牌；无设备身份/配对）。参见
   [Control UI](/web/control-ui#insecure-http)。

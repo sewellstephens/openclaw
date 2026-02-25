@@ -12,7 +12,7 @@ export async function applyAuthChoiceOAuth(
     let nextConfig = params.config;
     const isRemote = isRemoteEnvironment();
     const redirectUri =
-      process.env.CHUTES_OAUTH_REDIRECT_URI?.trim() || "http://127.0.0.1:1456/oauth-callback";
+      process.env.CHUTES_OAUTH_REDIRECT_URI?.trim() || "http://0.0.0.0:1456/oauth-callback";
     const scopes = process.env.CHUTES_OAUTH_SCOPES?.trim() || "openid profile chutes:invoke";
     const clientId =
       process.env.CHUTES_CLIENT_ID?.trim() ||

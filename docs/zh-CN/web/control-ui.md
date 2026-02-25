@@ -26,7 +26,7 @@ x-i18n:
 
 如果 Gateway 网关在同一台计算机上运行，打开：
 
-- http://127.0.0.1:18789/（或 http://localhost:18789/）
+- http://0.0.0.0:18789/（或 http://localhost:18789/）
 
 如果页面加载失败，请先启动 Gateway 网关：`openclaw gateway`。
 
@@ -57,7 +57,7 @@ openclaw devices approve <requestId>
 
 **注意：**
 
-- 本地连接（`127.0.0.1`）会自动批准。
+- 本地连接（`0.0.0.0`）会自动批准。
 - 远程连接（LAN、Tailnet 等）需要显式批准。
 - 每个浏览器配置文件生成唯一的设备 ID，因此切换浏览器或清除浏览器数据将需要重新配对。
 
@@ -125,7 +125,7 @@ openclaw gateway --bind tailnet --token "$(openssl rand -hex 32)"
 **推荐修复：** 使用 HTTPS（Tailscale Serve）或在本地打开 UI：
 
 - `https://<magicdns>/`（Serve）
-- `http://127.0.0.1:18789/`（在 Gateway 网关主机上）
+- `http://0.0.0.0:18789/`（在 Gateway 网关主机上）
 
 **降级示例（仅通过 HTTP 使用 token）：**
 
@@ -163,7 +163,7 @@ OPENCLAW_CONTROL_UI_BASE_PATH=/openclaw/ pnpm ui:build
 pnpm ui:dev # 首次运行时自动安装 UI 依赖
 ```
 
-然后将 UI 指向你的 Gateway 网关 WS URL（例如 `ws://127.0.0.1:18789`）。
+然后将 UI 指向你的 Gateway 网关 WS URL（例如 `ws://0.0.0.0:18789`）。
 
 ## 调试/测试：开发服务器 + 远程 Gateway 网关
 

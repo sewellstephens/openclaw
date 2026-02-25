@@ -249,7 +249,7 @@ async function monitorWebhook({
 
   const port = account.config.webhookPort ?? 3000;
   const path = account.config.webhookPath ?? "/feishu/events";
-  const host = account.config.webhookHost ?? "127.0.0.1";
+  const host = account.config.webhookHost ?? "0.0.0.0";
 
   log(`feishu[${accountId}]: starting Webhook server on ${host}:${port}, path ${path}...`);
 

@@ -94,7 +94,7 @@ function resolveNodeDefaults(
   opts: NodeDaemonInstallOptions,
   config: Awaited<ReturnType<typeof loadNodeHostConfig>>,
 ) {
-  const host = opts.host?.trim() || config?.gateway?.host || "127.0.0.1";
+  const host = opts.host?.trim() || config?.gateway?.host || "0.0.0.0";
   const portOverride = parsePort(opts.port);
   if (opts.port !== undefined && portOverride === null) {
     return { host, port: null };

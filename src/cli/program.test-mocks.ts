@@ -60,9 +60,9 @@ export function installBaseProgramMocks() {
     callGateway,
     randomIdempotencyKey: () => "idem-test",
     buildGatewayConnectionDetails: () => ({
-      url: "ws://127.0.0.1:1234",
+      url: "ws://0.0.0.0:1234",
       urlSource: "test",
-      message: "Gateway target: ws://127.0.0.1:1234",
+      message: "Gateway target: ws://0.0.0.0:1234",
     }),
   }));
   vi.mock("./deps.js", () => ({ createDefaultDeps: () => ({}) }));

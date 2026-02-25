@@ -12,7 +12,7 @@ function buildResolvedConfig(): ResolvedBrowserConfig {
     evaluateEnabled: false,
     controlPort: 0,
     cdpProtocol: "http",
-    cdpHost: "127.0.0.1",
+    cdpHost: "0.0.0.0",
     cdpIsLoopback: true,
     remoteCdpTimeoutMs: 1500,
     remoteCdpHandshakeTimeoutMs: 3000,

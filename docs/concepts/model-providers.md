@@ -354,7 +354,7 @@ ollama pull llama3.3
 }
 ```
 
-Ollama is automatically detected when running locally at `http://127.0.0.1:11434/v1`. See [/providers/ollama](/providers/ollama) for model recommendations and custom configuration.
+Ollama is automatically detected when running locally at `http://0.0.0.0:11434/v1`. See [/providers/ollama](/providers/ollama) for model recommendations and custom configuration.
 
 ### vLLM
 
@@ -362,7 +362,7 @@ vLLM is a local (or self-hosted) OpenAI-compatible server:
 
 - Provider: `vllm`
 - Auth: Optional (depends on your server)
-- Default base URL: `http://127.0.0.1:8000/v1`
+- Default base URL: `http://0.0.0.0:8000/v1`
 
 To opt in to auto-discovery locally (any value works if your server doesn’t enforce auth):
 

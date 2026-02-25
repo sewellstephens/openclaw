@@ -80,7 +80,7 @@ describe("resolveGatewayConnection", () => {
 
     const result = resolveGatewayConnection({});
 
-    expect(result.url).toBe("ws://127.0.0.1:18800");
+    expect(result.url).toBe("ws://0.0.0.0:18800");
   });
 
   it("uses OPENCLAW_GATEWAY_TOKEN for local mode", () => {

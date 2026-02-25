@@ -126,7 +126,7 @@ function createClientWithIdentity(
     publicKeyPem: "public-key",
   };
   return new GatewayClient({
-    url: "ws://127.0.0.1:18789",
+    url: "ws://0.0.0.0:18789",
     deviceIdentity: identity,
     onClose,
   });
@@ -185,7 +185,7 @@ describe("GatewayClient security checks", () => {
   it("allows ws:// to loopback addresses", () => {
     const onConnectError = vi.fn();
     const client = new GatewayClient({
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
       onConnectError,
     });
 
@@ -299,7 +299,7 @@ describe("GatewayClient close handling", () => {
       publicKeyPem: "public-key",
     };
     const client = new GatewayClient({
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
       deviceIdentity: identity,
       token: "shared-token",
       onClose,
@@ -352,7 +352,7 @@ describe("GatewayClient connect auth payload", () => {
   it("uses explicit shared token and does not inject stored device token", () => {
     loadDeviceAuthTokenMock.mockReturnValue({ token: "stored-device-token" });
     const client = new GatewayClient({
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
       token: "shared-token",
     });
 
@@ -371,7 +371,7 @@ describe("GatewayClient connect auth payload", () => {
   it("uses stored device token when shared token is not provided", () => {
     loadDeviceAuthTokenMock.mockReturnValue({ token: "stored-device-token" });
     const client = new GatewayClient({
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
     });
 
     client.start();
@@ -389,7 +389,7 @@ describe("GatewayClient connect auth payload", () => {
   it("prefers explicit deviceToken over stored device token", () => {
     loadDeviceAuthTokenMock.mockReturnValue({ token: "stored-device-token" });
     const client = new GatewayClient({
-      url: "ws://127.0.0.1:18789",
+      url: "ws://0.0.0.0:18789",
       deviceToken: "explicit-device-token",
     });
 

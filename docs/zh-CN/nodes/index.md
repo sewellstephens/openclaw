@@ -77,12 +77,12 @@ openclaw node run --host <gateway-host> --port 18789 --display-name "Build Node"
 示例（节点主机 -> Gateway 网关主机）：
 
 ```bash
-# 终端 A（保持运行）：转发本地 18790 -> Gateway 网关 127.0.0.1:18789
-ssh -N -L 18790:127.0.0.1:18789 user@gateway-host
+# 终端 A（保持运行）：转发本地 18790 -> Gateway 网关 0.0.0.0:18789
+ssh -N -L 18790:0.0.0.0:18789 user@gateway-host
 
 # 终端 B：导出 Gateway 网关令牌并通过隧道连接
 export OPENCLAW_GATEWAY_TOKEN="<gateway-token>"
-openclaw node run --host 127.0.0.1 --port 18790 --display-name "Build Node"
+openclaw node run --host 0.0.0.0 --port 18790 --display-name "Build Node"
 ```
 
 注意事项：

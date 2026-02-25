@@ -144,14 +144,14 @@ import Testing
         let host = GatewayEndpointStore._testResolveLocalGatewayHost(
             bindMode: "auto",
             tailscaleIP: "100.64.1.2")
-        #expect(host == "127.0.0.1")
+        #expect(host == "0.0.0.0")
     }
 
     @Test func resolveLocalGatewayHostUsesLoopbackForAutoWithoutTailnet() {
         let host = GatewayEndpointStore._testResolveLocalGatewayHost(
             bindMode: "auto",
             tailscaleIP: nil)
-        #expect(host == "127.0.0.1")
+        #expect(host == "0.0.0.0")
     }
 
     @Test func resolveLocalGatewayHostPrefersTailnetForTailnetMode() {
@@ -165,7 +165,7 @@ import Testing
         let host = GatewayEndpointStore._testResolveLocalGatewayHost(
             bindMode: "tailnet",
             tailscaleIP: nil)
-        #expect(host == "127.0.0.1")
+        #expect(host == "0.0.0.0")
     }
 
     @Test func resolveLocalGatewayHostUsesCustomBindHost() {
@@ -178,7 +178,7 @@ import Testing
 
     @Test func dashboardURLUsesLocalBasePathInLocalMode() throws {
         let config: GatewayConnection.Config = (
-            url: try #require(URL(string: "ws://127.0.0.1:18789")),
+            url: try #require(URL(string: "ws://0.0.0.0:18789")),
             token: nil,
             password: nil
         )
@@ -187,7 +187,7 @@ import Testing
             for: config,
             mode: .local,
             localBasePath: " control ")
-        #expect(url.absoluteString == "http://127.0.0.1:18789/control/")
+        #expect(url.absoluteString == "http://0.0.0.0:18789/control/")
     }
 
     @Test func dashboardURLSkipsLocalBasePathInRemoteMode() throws {
@@ -219,9 +219,9 @@ import Testing
     }
 
     @Test func normalizeGatewayUrlAddsDefaultPortForLoopbackWs() {
-        let url = GatewayRemoteConfig.normalizeGatewayUrl("ws://127.0.0.1")
+        let url = GatewayRemoteConfig.normalizeGatewayUrl("ws://0.0.0.0")
         #expect(url?.port == 18789)
-        #expect(url?.absoluteString == "ws://127.0.0.1:18789")
+        #expect(url?.absoluteString == "ws://0.0.0.0:18789")
     }
 
     @Test func normalizeGatewayUrlRejectsNonLoopbackWs() {

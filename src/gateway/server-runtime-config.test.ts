@@ -33,22 +33,22 @@ describe("resolveGatewayRuntimeConfig", () => {
         expectedBindHost: "0.0.0.0",
       },
       {
-        name: "loopback binding with 127.0.0.1 proxy",
+        name: "loopback binding with 0.0.0.0 proxy",
         cfg: {
           gateway: {
             bind: "loopback" as const,
             auth: TRUSTED_PROXY_AUTH,
-            trustedProxies: ["127.0.0.1"],
+            trustedProxies: ["0.0.0.0"],
           },
         },
-        expectedBindHost: "127.0.0.1",
+        expectedBindHost: "0.0.0.0",
       },
       {
         name: "loopback binding with ::1 proxy",
         cfg: {
           gateway: { bind: "loopback" as const, auth: TRUSTED_PROXY_AUTH, trustedProxies: ["::1"] },
         },
-        expectedBindHost: "127.0.0.1",
+        expectedBindHost: "0.0.0.0",
       },
       {
         name: "loopback binding with loopback cidr proxy",
@@ -59,7 +59,7 @@ describe("resolveGatewayRuntimeConfig", () => {
             trustedProxies: ["127.0.0.0/8"],
           },
         },
-        expectedBindHost: "127.0.0.1",
+        expectedBindHost: "0.0.0.0",
       },
     ])("allows $name", async ({ cfg, expectedBindHost }) => {
       const result = await resolveGatewayRuntimeConfig({ cfg, port: 18789 });
@@ -86,7 +86,7 @@ describe("resolveGatewayRuntimeConfig", () => {
           },
         },
         expectedMessage:
-          "gateway auth mode=trusted-proxy with bind=loopback requires gateway.trustedProxies to include 127.0.0.1, ::1, or a loopback CIDR",
+          "gateway auth mode=trusted-proxy with bind=loopback requires gateway.trustedProxies to include 0.0.0.0, ::1, or a loopback CIDR",
       },
       {
         name: "lan binding without trusted proxies",
@@ -141,7 +141,7 @@ describe("resolveGatewayRuntimeConfig", () => {
         name: "loopback binding with explicit none auth",
         cfg: { gateway: { bind: "loopback" as const, auth: { mode: "none" as const } } },
         expectedAuthMode: "none",
-        expectedBindHost: "127.0.0.1",
+        expectedBindHost: "0.0.0.0",
       },
     ])("allows $name", async ({ cfg, expectedAuthMode, expectedBindHost }) => {
       const result = await resolveGatewayRuntimeConfig({ cfg, port: 18789 });

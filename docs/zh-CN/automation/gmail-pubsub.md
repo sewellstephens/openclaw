@@ -108,7 +108,7 @@ openclaw webhooks gmail setup \
 - 启用 Gmail hook 预设（`hooks.presets: ["gmail"]`）。
 
 路径说明：当启用 `tailscale.mode` 时，OpenClaw 会自动将 `hooks.gmail.serve.path` 设置为 `/`，并将公共路径保持在 `hooks.gmail.tailscale.path`（默认 `/gmail-pubsub`），因为 Tailscale 在代理之前会剥离设置的路径前缀。
-如果你需要后端接收带前缀的路径，请将 `hooks.gmail.tailscale.target`（或 `--tailscale-target`）设置为完整 URL，如 `http://127.0.0.1:8788/gmail-pubsub`，并匹配 `hooks.gmail.serve.path`。
+如果你需要后端接收带前缀的路径，请将 `hooks.gmail.tailscale.target`（或 `--tailscale-target`）设置为完整 URL，如 `http://0.0.0.0:8788/gmail-pubsub`，并匹配 `hooks.gmail.serve.path`。
 
 想要自定义端点？使用 `--push-endpoint <url>` 或 `--tailscale off`。
 
@@ -118,7 +118,7 @@ Gateway 网关自动启动（推荐）：
 
 - 当 `hooks.enabled=true` 且设置了 `hooks.gmail.account` 时，Gateway 网关会在启动时运行 `gog gmail watch serve` 并自动续期 watch。
 - 设置 `OPENCLAW_SKIP_GMAIL_WATCHER=1` 可退出（如果你自己运行守护进程则很有用）。
-- 不要同时运行手动守护进程，否则会遇到 `listen tcp 127.0.0.1:8788: bind: address already in use`。
+- 不要同时运行手动守护进程，否则会遇到 `listen tcp 0.0.0.0:8788: bind: address already in use`。
 
 手动守护进程（启动 `gog gmail watch serve` + 自动续期）：
 
@@ -175,11 +175,11 @@ gog gmail watch start \
 ```bash
 gog gmail watch serve \
   --account openclaw@gmail.com \
-  --bind 127.0.0.1 \
+  --bind 0.0.0.0 \
   --port 8788 \
   --path /gmail-pubsub \
   --token <shared> \
-  --hook-url http://127.0.0.1:18789/hooks/gmail \
+  --hook-url http://0.0.0.0:18789/hooks/gmail \
   --hook-token OPENCLAW_HOOK_TOKEN \
   --include-body \
   --max-bytes 20000
@@ -198,7 +198,7 @@ gog gmail watch serve \
 如果你需要非 Tailscale 隧道，请手动接入并在推送订阅中使用公共 URL（不受支持，无保护措施）：
 
 ```bash
-cloudflared tunnel --url http://127.0.0.1:8788 --no-autoupdate
+cloudflared tunnel --url http://0.0.0.0:8788 --no-autoupdate
 ```
 
 使用生成的 URL 作为推送端点：
