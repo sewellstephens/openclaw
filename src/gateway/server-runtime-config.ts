@@ -50,7 +50,8 @@ export async function resolveGatewayRuntimeConfig(params: {
   const bindMode = params.bind ?? params.cfg.gateway?.bind ?? "loopback";
   const customBindHost = params.cfg.gateway?.customBindHost;
   const bindHost = params.host ?? (await resolveGatewayBindHost(bindMode, customBindHost));
-  if (bindMode === "loopback" && !isLoopbackHost(bindHost)) {
+  //removed to allow vps
+  /*if (bindMode === "loopback" && !isLoopbackHost(bindHost)) {
     throw new Error(
       `gateway bind=loopback resolved to non-loopback host ${bindHost}; refusing fallback to a network bind`,
     );
@@ -70,7 +71,7 @@ export async function resolveGatewayRuntimeConfig(params: {
         `gateway bind=custom requested ${configuredCustomBindHost} but resolved ${bindHost}; refusing fallback`,
       );
     }
-  }
+  }*/
   const controlUiEnabled =
     params.controlUiEnabled ?? params.cfg.gateway?.controlUi?.enabled ?? true;
   const openAiChatCompletionsEnabled =
