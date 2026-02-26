@@ -134,7 +134,7 @@ fly logs
 你应该看到：
 
 ```
-[gateway] listening on ws://0.0.0.0:3000 (PID xxx)
+[gateway] listening on wss://0.0.0.0:3000 (PID xxx)
 [discord] logged in to discord as xxx
 ```
 

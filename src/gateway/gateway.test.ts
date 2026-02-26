@@ -167,7 +167,7 @@ describe("gateway e2e", () => {
       });
 
       const client = await connectGatewayClient({
-        url: `ws://0.0.0.0:${port}`,
+        url: `wss://0.0.0.0:${port}`,
         token: wizardToken,
         clientDisplayName: "vitest-wizard",
       });
@@ -223,13 +223,13 @@ describe("gateway e2e", () => {
       });
       try {
         const resNoToken = await connectDeviceAuthReq({
-          url: `ws://0.0.0.0:${port2}`,
+          url: `wss://0.0.0.0:${port2}`,
         });
         expect(resNoToken.ok).toBe(false);
         expect(resNoToken.error?.message ?? "").toContain("unauthorized");
 
         const resToken = await connectDeviceAuthReq({
-          url: `ws://0.0.0.0:${port2}`,
+          url: `wss://0.0.0.0:${port2}`,
           token: wizardToken,
         });
         expect(resToken.ok).toBe(true);

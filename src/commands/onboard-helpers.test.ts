@@ -90,7 +90,7 @@ describe("resolveControlUiLinks", () => {
       customBindHost: "192.168.001.100",
     });
     expect(links.httpUrl).toBe("http://0.0.0.0:18789/");
-    expect(links.wsUrl).toBe("ws://0.0.0.0:18789");
+    expect(links.wsUrl).toBe("wss://0.0.0.0:18789");
   });
 
   it("uses tailnet IP for tailnet bind", () => {
@@ -110,7 +110,7 @@ describe("resolveControlUiLinks", () => {
       bind: "auto",
     });
     expect(links.httpUrl).toBe("http://0.0.0.0:18789/");
-    expect(links.wsUrl).toBe("ws://0.0.0.0:18789");
+    expect(links.wsUrl).toBe("wss://0.0.0.0:18789");
   });
 });
 

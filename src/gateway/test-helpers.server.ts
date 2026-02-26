@@ -373,7 +373,7 @@ export async function startServerWithClient(
   const server = started.server;
 
   const ws = new WebSocket(
-    `ws://0.0.0.0:${port}`,
+    `wss://0.0.0.0:${port}`,
     wsHeaders ? { headers: wsHeaders } : undefined,
   );
   trackConnectChallengeNonce(ws);
@@ -596,7 +596,7 @@ export async function connectWebchatClient(params: {
   client?: NonNullable<Parameters<typeof connectReq>[1]>["client"];
 }): Promise<WebSocket> {
   const origin = params.origin ?? `http://0.0.0.0:${params.port}`;
-  const ws = new WebSocket(`ws://0.0.0.0:${params.port}`, {
+  const ws = new WebSocket(`wss://0.0.0.0:${params.port}`, {
     headers: { origin },
   });
   trackConnectChallengeNonce(ws);

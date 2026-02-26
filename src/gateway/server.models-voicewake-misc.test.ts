@@ -233,7 +233,7 @@ describe("gateway server models + voicewake", () => {
 
   test("pushes voicewake.changed to nodes on connect and on updates", async () => {
     await withTempHome(async () => {
-      const nodeWs = new WebSocket(`ws://0.0.0.0:${port}`);
+      const nodeWs = new WebSocket(`wss://0.0.0.0:${port}`);
       trackConnectChallengeNonce(nodeWs);
       await new Promise<void>((resolve) => nodeWs.once("open", resolve));
       const firstEventP = onceMessage(

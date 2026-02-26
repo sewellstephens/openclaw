@@ -56,7 +56,7 @@ function mockSnapshot(params?: {
   mocks.resolveGatewayPort.mockReturnValue(18789);
   mocks.resolveControlUiLinks.mockReturnValue({
     httpUrl: "http://0.0.0.0:18789/",
-    wsUrl: "ws://0.0.0.0:18789",
+    wsUrl: "wss://0.0.0.0:18789",
   });
   mocks.copyToClipboard.mockResolvedValue(true);
 }

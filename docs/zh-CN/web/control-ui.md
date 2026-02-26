@@ -163,7 +163,7 @@ OPENCLAW_CONTROL_UI_BASE_PATH=/openclaw/ pnpm ui:build
 pnpm ui:dev # 首次运行时自动安装 UI 依赖
 ```
 
-然后将 UI 指向你的 Gateway 网关 WS URL（例如 `ws://0.0.0.0:18789`）。
+然后将 UI 指向你的 Gateway 网关 WS URL（例如 `wss://0.0.0.0:18789`）。
 
 ## 调试/测试：开发服务器 + 远程 Gateway 网关
 

@@ -77,7 +77,7 @@ describe("gateway server chat", () => {
     let webchatWs: WebSocket | undefined;
 
     try {
-      webchatWs = new WebSocket(`ws://0.0.0.0:${port}`, {
+      webchatWs = new WebSocket(`wss://0.0.0.0:${port}`, {
         headers: { origin: `http://0.0.0.0:${port}` },
       });
       trackConnectChallengeNonce(webchatWs);
@@ -369,7 +369,7 @@ describe("gateway server chat", () => {
       },
     });
 
-    const webchatWs = new WebSocket(`ws://0.0.0.0:${port}`, {
+    const webchatWs = new WebSocket(`wss://0.0.0.0:${port}`, {
       headers: { origin: `http://0.0.0.0:${port}` },
     });
     trackConnectChallengeNonce(webchatWs);

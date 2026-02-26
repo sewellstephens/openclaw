@@ -71,5 +71,5 @@ openclaw gateway --port 18999 --bind loopback
 然后：
 
 ```bash
-openclaw gateway call health --url ws://0.0.0.0:18999 --timeout 3000
+openclaw gateway call health --url wss://0.0.0.0:18999 --timeout 3000
 ```

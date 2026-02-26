@@ -110,7 +110,7 @@ describe("callGateway url resolution", () => {
 
     await callGateway({ method: "health" });
 
-    expect(lastClientOptions?.url).toBe("ws://0.0.0.0:18800");
+    expect(lastClientOptions?.url).toBe("wss://0.0.0.0:18800");
   });
 
   it.each([
@@ -126,7 +126,7 @@ describe("callGateway url resolution", () => {
       gateway: { mode: "local", bind: "tailnet" },
       tailnetIp: "100.64.0.1",
       lanIp: undefined,
-      expectedUrl: "ws://0.0.0.0:18800",
+      expectedUrl: "wss://0.0.0.0:18800",
     },
     {
       label: "lan with TLS",
@@ -140,14 +140,14 @@ describe("callGateway url resolution", () => {
       gateway: { mode: "local", bind: "lan" },
       tailnetIp: undefined,
       lanIp: "192.168.1.42",
-      expectedUrl: "ws://0.0.0.0:18800",
+      expectedUrl: "wss://0.0.0.0:18800",
     },
     {
       label: "lan without discovered LAN IP",
       gateway: { mode: "local", bind: "lan" },
       tailnetIp: undefined,
       lanIp: undefined,
-      expectedUrl: "ws://0.0.0.0:18800",
+      expectedUrl: "wss://0.0.0.0:18800",
     },
   ])("uses loopback for $label", async ({ gateway, tailnetIp, lanIp, expectedUrl }) => {
     loadConfig.mockReturnValue({ gateway });
@@ -241,13 +241,13 @@ describe("buildGatewayConnectionDetails", () => {
 
     const details = buildGatewayConnectionDetails();
 
-    expect(details.url).toBe("ws://0.0.0.0:18789");
+    expect(details.url).toBe("wss://0.0.0.0:18789");
     expect(details.urlSource).toBe("missing gateway.remote.url (fallback local)");
     expect(details.bindDetail).toBe("Bind: loopback");
     expect(details.remoteFallbackNote).toContain(
       "gateway.mode=remote but gateway.remote.url is missing",
     );
-    expect(details.message).toContain("Gateway target: ws://0.0.0.0:18789");
+    expect(details.message).toContain("Gateway target: wss://0.0.0.0:18789");
   });
 
   it.each([
@@ -259,7 +259,7 @@ describe("buildGatewayConnectionDetails", () => {
     {
       label: "without TLS",
       gateway: { mode: "local", bind: "lan" },
-      expectedUrl: "ws://0.0.0.0:18800",
+      expectedUrl: "wss://0.0.0.0:18800",
     },
   ])("uses loopback URL for bind=lan $label", ({ gateway, expectedUrl }) => {
     loadConfig.mockReturnValue({ gateway });
@@ -323,7 +323,7 @@ describe("buildGatewayConnectionDetails", () => {
 
     const details = buildGatewayConnectionDetails();
 
-    expect(details.url).toBe("ws://0.0.0.0:18789");
+    expect(details.url).toBe("wss://0.0.0.0:18789");
   });
 });
 
@@ -350,7 +350,7 @@ describe("callGateway error details", () => {
     }
 
     expect(err?.message).toContain("gateway closed (1006");
-    expect(err?.message).toContain("Gateway target: ws://0.0.0.0:18789");
+    expect(err?.message).toContain("Gateway target: wss://0.0.0.0:18789");
     expect(err?.message).toContain("Source: local loopback");
     expect(err?.message).toContain("Bind: loopback");
   });
@@ -369,7 +369,7 @@ describe("callGateway error details", () => {
     await promise;
 
     expect(errMessage).toContain("gateway timeout after 5ms");
-    expect(errMessage).toContain("Gateway target: ws://0.0.0.0:18789");
+    expect(errMessage).toContain("Gateway target: wss://0.0.0.0:18789");
     expect(errMessage).toContain("Source: local loopback");
     expect(errMessage).toContain("Bind: loopback");
   });

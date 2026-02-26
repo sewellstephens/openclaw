@@ -82,7 +82,7 @@ struct GatewayDiscoveryHelpersTests {
         let localGateway = self.makeGateway(
             serviceHost: "0.0.0.0",
             servicePort: 18789)
-        #expect(GatewayDiscoveryHelpers.directUrl(for: localGateway) == "ws://0.0.0.0:18789")
+        #expect(GatewayDiscoveryHelpers.directUrl(for: localGateway) == "wss://0.0.0.0:18789")
     }
 
     @Test func directUrlRejectsTxtOnlyFallback() {

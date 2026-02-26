@@ -150,7 +150,7 @@ Smallest useful flow: connect + health.
 ```ts
 import { WebSocket } from "ws";
 
-const ws = new WebSocket("ws://0.0.0.0:18789");
+const ws = new WebSocket("wss://0.0.0.0:18789");
 
 ws.on("open", () => {
   ws.send(

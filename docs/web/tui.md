@@ -134,7 +134,7 @@ Other Gateway slash commands (for example, `/context`) are forwarded to the Gate
 
 ## Options
 
-- `--url <url>`: Gateway WebSocket URL (defaults to config or `ws://0.0.0.0:<port>`)
+- `--url <url>`: Gateway WebSocket URL (defaults to config or `wss://0.0.0.0:<port>`)
 - `--token <token>`: Gateway token (if required)
 - `--password <password>`: Gateway password (if required)
 - `--session <key>`: Session key (default: `main`, or `global` when scope is global)

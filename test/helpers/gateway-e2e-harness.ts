@@ -267,7 +267,7 @@ export async function connectNode(
   const deviceIdentity = loadOrCreateDeviceIdentity(identityPath);
   const nodeId = deviceIdentity.deviceId;
   const client = await connectGatewayClient({
-    url: `ws://0.0.0.0:${inst.port}`,
+    url: `wss://0.0.0.0:${inst.port}`,
     token: inst.gatewayToken,
     clientName: GATEWAY_CLIENT_NAMES.NODE_HOST,
     clientDisplayName: label,
@@ -308,7 +308,7 @@ async function connectStatusClient(
     };
 
     const client = new GatewayClient({
-      url: `ws://0.0.0.0:${inst.port}`,
+      url: `wss://0.0.0.0:${inst.port}`,
       connectDelayMs: 0,
       token: inst.gatewayToken,
       clientName: GATEWAY_CLIENT_NAMES.CLI,

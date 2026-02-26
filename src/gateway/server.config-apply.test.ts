@@ -24,7 +24,7 @@ afterAll(async () => {
 });
 
 const openClient = async () => {
-  const ws = new WebSocket(`ws://0.0.0.0:${port}`);
+  const ws = new WebSocket(`wss://0.0.0.0:${port}`);
   trackConnectChallengeNonce(ws);
   await new Promise<void>((resolve) => ws.once("open", resolve));
   await connectOk(ws);

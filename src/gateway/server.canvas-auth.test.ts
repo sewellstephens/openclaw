@@ -299,7 +299,7 @@ describe("gateway canvas host auth", () => {
           const res = await fetch(`http://0.0.0.0:${listener.port}${CANVAS_HOST_PATH}/`);
           expect(res.status).toBe(401);
 
-          await expectWsRejected(`ws://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, {});
+          await expectWsRejected(`wss://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, {});
         },
       });
     });
@@ -378,7 +378,7 @@ describe("gateway canvas host auth", () => {
           expect(second.status).toBe(429);
           expect(second.headers.get("retry-after")).toBeTruthy();
 
-          await expectWsRejected(`ws://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, headers, 429);
+          await expectWsRejected(`wss://0.0.0.0:${listener.port}${CANVAS_WS_PATH}`, headers, 429);
         },
       });
     });

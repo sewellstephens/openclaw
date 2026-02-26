@@ -2173,7 +2173,7 @@ openclaw gateway install --force
 
 ### "another gateway instance is already listening"是什么意思
 
-OpenClaw 通过在启动时立即绑定 WebSocket 监听器来强制运行时锁（默认 `ws://0.0.0.0:18789`）。如果绑定因 `EADDRINUSE` 失败，它会抛出 `GatewayLockError` 表示另一个实例已在监听。
+OpenClaw 通过在启动时立即绑定 WebSocket 监听器来强制运行时锁（默认 `wss://0.0.0.0:18789`）。如果绑定因 `EADDRINUSE` 失败，它会抛出 `GatewayLockError` 表示另一个实例已在监听。
 
 修复：停止另一个实例，释放端口，或使用 `openclaw gateway --port <port>` 运行。
 

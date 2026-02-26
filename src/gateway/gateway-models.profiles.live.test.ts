@@ -644,7 +644,7 @@ async function runGatewayModelSuite(params: GatewayModelSuiteParams) {
   });
 
   const client = await connectClient({
-    url: `ws://0.0.0.0:${port}`,
+    url: `wss://0.0.0.0:${port}`,
     token,
   });
 
@@ -1283,7 +1283,7 @@ describeLive("gateway live (dev agent, profile keys)", () => {
     });
 
     const client = await connectClient({
-      url: `ws://0.0.0.0:${port}`,
+      url: `wss://0.0.0.0:${port}`,
       token,
     });
 

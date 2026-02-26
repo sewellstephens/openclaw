@@ -5,7 +5,7 @@ import { resolveLeastPrivilegeOperatorScopesForMethod } from "../../gateway/meth
 import { GATEWAY_CLIENT_MODES, GATEWAY_CLIENT_NAMES } from "../../utils/message-channel.js";
 import { readStringParam } from "./common.js";
 
-export const DEFAULT_GATEWAY_URL = "ws://0.0.0.0:18789";
+export const DEFAULT_GATEWAY_URL = "wss://0.0.0.0:18789";
 
 export type GatewayCallOptions = {
   gatewayUrl?: string;
@@ -60,7 +60,7 @@ function validateGatewayUrlOverrideForAgentTools(params: {
   const { cfg } = params;
   const port = resolveGatewayPort(cfg);
   const localAllowed = new Set<string>([
-    `ws://0.0.0.0:${port}`,
+    `wss://0.0.0.0:${port}`,
     `wss://0.0.0.0:${port}`,
     `ws://localhost:${port}`,
     `wss://localhost:${port}`,

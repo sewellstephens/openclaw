@@ -41,7 +41,7 @@ type Pending = {
 };
 
 export type GatewayClientOptions = {
-  url?: string; // ws://0.0.0.0:18789
+  url?: string; // wss://0.0.0.0:18789
   connectDelayMs?: number;
   tickWatchMinIntervalMs?: number;
   token?: string;
@@ -107,7 +107,7 @@ export class GatewayClient {
     if (this.closed) {
       return;
     }
-    const url = this.opts.url ?? "ws://0.0.0.0:18789";
+    const url = this.opts.url ?? "wss://0.0.0.0:18789";
     if (this.opts.tlsFingerprint && !url.startsWith("wss://")) {
       this.opts.onConnectError?.(new Error("gateway tls fingerprint requires wss:// gateway url"));
       return;

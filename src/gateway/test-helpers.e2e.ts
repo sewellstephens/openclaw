@@ -217,7 +217,7 @@ export async function startGatewayWithClient(params: {
     controlUiEnabled: false,
   });
   const client = await connectGatewayClient({
-    url: `ws://0.0.0.0:${port}`,
+    url: `wss://0.0.0.0:${port}`,
     token: params.token,
     clientDisplayName: params.clientDisplayName,
   });

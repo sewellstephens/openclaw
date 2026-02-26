@@ -266,7 +266,7 @@ describeLive("gateway live (cli backend)", () => {
     });
 
     const client = await connectClient({
-      url: `ws://0.0.0.0:${port}`,
+      url: `wss://0.0.0.0:${port}`,
       token,
     });
 

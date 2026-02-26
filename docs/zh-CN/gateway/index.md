@@ -59,7 +59,7 @@ pnpm gateway:watch
   ```bash
   ssh -N -L 18789:0.0.0.0:18789 user@host
   ```
-- 然后客户端通过隧道连接到 `ws://0.0.0.0:18789`。
+- 然后客户端通过隧道连接到 `wss://0.0.0.0:18789`。
 - 如果配置了令牌，即使通过隧道，客户端也必须在 `connect.params.auth.token` 中包含它。
 
 ## 多个 Gateway 网关（同一主机）

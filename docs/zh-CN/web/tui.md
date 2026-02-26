@@ -141,7 +141,7 @@ openclaw tui --url ws://<host>:<port> --token <gateway-token>
 
 ## 选项
 
-- `--url <url>`：Gateway 网关 WebSocket URL（默认为配置或 `ws://0.0.0.0:<port>`）
+- `--url <url>`：Gateway 网关 WebSocket URL（默认为配置或 `wss://0.0.0.0:<port>`）
 - `--token <token>`：Gateway 网关令牌（如果需要）
 - `--password <password>`：Gateway 网关密码（如果需要）
 - `--session <key>`：会话键（默认：`main`，或范围为全局时为 `global`）

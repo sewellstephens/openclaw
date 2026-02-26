@@ -73,7 +73,7 @@ const startWsServer = async (
   }
 
   return {
-    url: `ws://0.0.0.0:${address.port}/voice/stream`,
+    url: `wss://0.0.0.0:${address.port}/voice/stream`,
     close: async () => {
       await new Promise<void>((resolve, reject) => {
         server.close((err) => (err ? reject(err) : resolve()));

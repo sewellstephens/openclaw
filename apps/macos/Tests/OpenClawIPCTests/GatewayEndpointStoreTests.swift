@@ -178,7 +178,7 @@ import Testing
 
     @Test func dashboardURLUsesLocalBasePathInLocalMode() throws {
         let config: GatewayConnection.Config = (
-            url: try #require(URL(string: "ws://0.0.0.0:18789")),
+            url: try #require(URL(string: "wss://0.0.0.0:18789")),
             token: nil,
             password: nil
         )
@@ -219,9 +219,9 @@ import Testing
     }
 
     @Test func normalizeGatewayUrlAddsDefaultPortForLoopbackWs() {
-        let url = GatewayRemoteConfig.normalizeGatewayUrl("ws://0.0.0.0")
+        let url = GatewayRemoteConfig.normalizeGatewayUrl("wss://0.0.0.0")
         #expect(url?.port == 18789)
-        #expect(url?.absoluteString == "ws://0.0.0.0:18789")
+        #expect(url?.absoluteString == "wss://0.0.0.0:18789")
     }
 
     @Test func normalizeGatewayUrlRejectsNonLoopbackWs() {

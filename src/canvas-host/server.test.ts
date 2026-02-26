@@ -224,7 +224,7 @@ describe("canvas host", () => {
         expect(html).toContain("v1");
         expect(html).toContain(CANVAS_WS_PATH);
 
-        const ws = new WebSocket(`ws://0.0.0.0:${server.port}${CANVAS_WS_PATH}`);
+        const ws = new WebSocket(`wss://0.0.0.0:${server.port}${CANVAS_WS_PATH}`);
         await new Promise<void>((resolve, reject) => {
           const timer = setTimeout(
             () => reject(new Error("ws open timeout")),

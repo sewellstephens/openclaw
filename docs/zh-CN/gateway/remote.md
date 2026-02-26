@@ -83,7 +83,7 @@ ssh -N -L 18789:0.0.0.0:18789 user@host
 
 隧道建立后：
 
-- `openclaw health` 和 `openclaw status --deep` 现在通过 `ws://0.0.0.0:18789` 访问远程 Gateway 网关。
+- `openclaw health` 和 `openclaw status --deep` 现在通过 `wss://0.0.0.0:18789` 访问远程 Gateway 网关。
 - `openclaw gateway {status,health,send,agent,call}` 在需要时也可以通过 `--url` 指定转发的 URL。
 
 注意：将 `18789` 替换为你配置的 `gateway.port`（或 `--port`/`OPENCLAW_GATEWAY_PORT`）。
@@ -97,20 +97,20 @@ ssh -N -L 18789:0.0.0.0:18789 user@host
   gateway: {
     mode: "remote",
     remote: {
-      url: "ws://0.0.0.0:18789",
+      url: "wss://0.0.0.0:18789",
       token: "your-token",
     },
   },
 }
 ```
 
-当 Gateway 网关仅限 loopback 时，保持 URL 为 `ws://0.0.0.0:18789` 并先打开 SSH 隧道。
+当 Gateway 网关仅限 loopback 时，保持 URL 为 `wss://0.0.0.0:18789` 并先打开 SSH 隧道。
 
 ## 通过 SSH 的聊天 UI
 
 WebChat 不再使用单独的 HTTP 端口。SwiftUI 聊天 UI 直接连接到 Gateway WebSocket。
 
-- 通过 SSH 转发 `18789`（见上文），然后让客户端连接到 `ws://0.0.0.0:18789`。
+- 通过 SSH 转发 `18789`（见上文），然后让客户端连接到 `wss://0.0.0.0:18789`。
 - 在 macOS 上，优先使用应用的"Remote over SSH"模式，它会自动管理隧道。
 
 ## macOS 应用"Remote over SSH"

@@ -119,7 +119,7 @@ describe("usage controller date interpretation params", () => {
 
     const state = createState(request, {
       usageTimeZone: "local",
-      settings: { gatewayUrl: "ws://0.0.0.0:18789" },
+      settings: { gatewayUrl: "wss://0.0.0.0:18789" },
     });
 
     await loadUsage(state);

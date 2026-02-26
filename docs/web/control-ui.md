@@ -204,7 +204,7 @@ For local development (separate dev server):
 pnpm ui:dev # auto-installs UI deps on first run
 ```
 
-Then point the UI at your Gateway WS URL (e.g. `ws://0.0.0.0:18789`).
+Then point the UI at your Gateway WS URL (e.g. `wss://0.0.0.0:18789`).
 
 ## Debugging/testing: dev server + remote Gateway
 

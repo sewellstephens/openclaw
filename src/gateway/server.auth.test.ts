@@ -37,7 +37,7 @@ async function waitForWsClose(ws: WebSocket, timeoutMs: number): Promise<boolean
 }
 
 const openWs = async (port: number, headers?: Record<string, string>) => {
-  const ws = new WebSocket(`ws://0.0.0.0:${port}`, headers ? { headers } : undefined);
+  const ws = new WebSocket(`wss://0.0.0.0:${port}`, headers ? { headers } : undefined);
   trackConnectChallengeNonce(ws);
   await new Promise<void>((resolve) => ws.once("open", resolve));
   return ws;
@@ -59,7 +59,7 @@ const readConnectChallengeNonce = async (ws: WebSocket) => {
 };
 
 const openTailscaleWs = async (port: number) => {
-  const ws = new WebSocket(`ws://0.0.0.0:${port}`, {
+  const ws = new WebSocket(`wss://0.0.0.0:${port}`, {
     headers: {
       origin: "https://gateway.tailnet.ts.net",
       "x-forwarded-for": "100.64.0.1",
@@ -506,7 +506,7 @@ describe("gateway server auth/connect", () => {
     });
 
     test("sends connect challenge on open", async () => {
-      const ws = new WebSocket(`ws://0.0.0.0:${port}`);
+      const ws = new WebSocket(`wss://0.0.0.0:${port}`);
       const evtPromise = onceMessage<{
         type?: string;
         event?: string;
@@ -545,7 +545,7 @@ describe("gateway server auth/connect", () => {
     });
 
     test("requires nonce for device auth", async () => {
-      const ws = new WebSocket(`ws://0.0.0.0:${port}`, {
+      const ws = new WebSocket(`wss://0.0.0.0:${port}`, {
         headers: { host: "example.com" },
       });
       await new Promise<void>((resolve) => ws.once("open", resolve));
@@ -838,7 +838,7 @@ describe("gateway server auth/connect", () => {
     process.env.OPENCLAW_GATEWAY_TOKEN = "secret";
     try {
       await withGatewayServer(async ({ port }) => {
-        const ws = new WebSocket(`ws://0.0.0.0:${port}`, {
+        const ws = new WebSocket(`wss://0.0.0.0:${port}`, {
           headers: {
             origin: "https://localhost",
             "x-forwarded-for": "203.0.113.10",
@@ -1238,7 +1238,7 @@ describe("gateway server auth/connect", () => {
       };
     };
     const connectWithNonce = async (role: "operator" | "node", scopes: string[]) => {
-      const socket = new WebSocket(`ws://0.0.0.0:${port}`, {
+      const socket = new WebSocket(`wss://0.0.0.0:${port}`, {
         headers: { host: "gateway.example" },
       });
       const challengePromise = onceMessage<{

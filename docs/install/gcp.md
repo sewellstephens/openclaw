@@ -377,7 +377,7 @@ docker compose logs -f openclaw-gateway
 Success:
 
 ```
-[gateway] listening on ws://0.0.0.0:18789
+[gateway] listening on wss://0.0.0.0:18789
 ```
 
 ---

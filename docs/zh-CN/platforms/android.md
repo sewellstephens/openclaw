@@ -51,7 +51,7 @@ openclaw gateway --port 18789 --verbose
 
 在日志中确认你看到类似内容：
 
-- `listening on ws://0.0.0.0:18789`
+- `listening on wss://0.0.0.0:18789`
 
 对于仅 tailnet 设置（推荐用于维也纳 ⇄ 伦敦），将 Gateway 网关绑定到 tailnet IP：
 

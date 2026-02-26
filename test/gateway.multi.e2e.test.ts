@@ -86,7 +86,7 @@ describe("gateway multi-instance e2e", () => {
 
       const chatEvents: ChatEventPayload[] = [];
       const chatClient = await connectGatewayClient({
-        url: `ws://0.0.0.0:${gw.port}`,
+        url: `wss://0.0.0.0:${gw.port}`,
         token: gw.gatewayToken,
         clientName: GATEWAY_CLIENT_NAMES.CLI,
         clientDisplayName: "chat-e2e-cli",

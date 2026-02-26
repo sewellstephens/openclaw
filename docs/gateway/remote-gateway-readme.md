@@ -15,7 +15,7 @@ flowchart TB
     subgraph Client["Client Machine"]
         direction TB
         A["OpenClaw.app"]
-        B["ws://0.0.0.0:18789\n(local port)"]
+        B["wss://0.0.0.0:18789\n(local port)"]
         T["SSH Tunnel"]
 
         A --> B
@@ -24,7 +24,7 @@ flowchart TB
     subgraph Remote["Remote Machine"]
         direction TB
         C["Gateway WebSocket"]
-        D["ws://0.0.0.0:18789"]
+        D["wss://0.0.0.0:18789"]
 
         C --> D
     end
@@ -155,4 +155,4 @@ launchctl bootout gui/$UID/ai.openclaw.ssh-tunnel
 | `KeepAlive`                          | Automatically restarts tunnel if it crashes                  |
 | `RunAtLoad`                          | Starts tunnel when the agent loads                           |
 
-OpenClaw.app connects to `ws://0.0.0.0:18789` on your client machine. The SSH tunnel forwards that connection to port 18789 on the remote machine where the Gateway is running.
+OpenClaw.app connects to `wss://0.0.0.0:18789` on your client machine. The SSH tunnel forwards that connection to port 18789 on the remote machine where the Gateway is running.

@@ -46,7 +46,7 @@ openclaw acp client
 openclaw acp client --server-args --url wss://gateway-host:18789 --token-file ~/.openclaw/gateway.token
 
 # Override the server command (default: openclaw)
-openclaw acp client --server "node" --server-args openclaw.mjs acp --url ws://0.0.0.0:19001
+openclaw acp client --server "node" --server-args openclaw.mjs acp --url wss://0.0.0.0:19001
 ```
 
 Permission model (client debug mode):

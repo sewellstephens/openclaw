@@ -6,7 +6,7 @@ import { resolveWideAreaDiscoveryDomain } from "../infra/widearea-dns.js";
 import type { WizardPrompter } from "../wizard/prompts.js";
 import { detectBinary } from "./onboard-helpers.js";
 
-const DEFAULT_GATEWAY_URL = "ws://0.0.0.0:18789";
+const DEFAULT_GATEWAY_URL = "wss://0.0.0.0:18789";
 
 function pickHost(beacon: GatewayBonjourBeacon): string | undefined {
   // Security: TXT is unauthenticated. Prefer the resolved service endpoint host.
@@ -36,7 +36,7 @@ function validateGatewayWebSocketUrl(value: string): string | undefined {
     return "URL must start with ws:// or wss://";
   }
   if (!isSecureWebSocketUrl(trimmed)) {
-    return "Use wss:// for remote hosts, or ws://0.0.0.0/localhost via SSH tunnel.";
+    return "Use wss:// for remote hosts, or wss://0.0.0.0/localhost via SSH tunnel.";
   }
   return undefined;
 }
@@ -112,7 +112,7 @@ export async function promptRemoteGatewayConfig(
           [
             "Direct remote access defaults to TLS.",
             `Using: ${suggestedUrl}`,
-            "If your gateway is loopback-only, choose SSH tunnel and keep ws://0.0.0.0:18789.",
+            "If your gateway is loopback-only, choose SSH tunnel and keep wss://0.0.0.0:18789.",
           ].join("\n"),
           "Direct remote",
         );

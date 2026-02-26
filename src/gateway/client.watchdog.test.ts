@@ -68,7 +68,7 @@ describe("GatewayClient", () => {
 
     const closed = new Promise<{ code: number; reason: string }>((resolve) => {
       const client = new GatewayClient({
-        url: `ws://0.0.0.0:${port}`,
+        url: `wss://0.0.0.0:${port}`,
         connectDelayMs: 0,
         tickWatchMinIntervalMs: 5,
         onClose: (code, reason) => resolve({ code, reason }),

@@ -148,8 +148,8 @@ describe("chrome extension relay server", () => {
     const port = await getFreePort();
     cdpUrl = `http://0.0.0.0:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
-    const ext = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     await waitForOpen(ext);
     return { port, ext };
@@ -167,8 +167,8 @@ describe("chrome extension relay server", () => {
     };
     expect(v1.webSocketDebuggerUrl).toBeUndefined();
 
-    const ext = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     await waitForOpen(ext);
 
@@ -203,7 +203,7 @@ describe("chrome extension relay server", () => {
     const res = await fetch(`${cdpUrl}/json/version`);
     expect(res.status).toBe(401);
 
-    const cdp = new WebSocket(`ws://0.0.0.0:${port}/cdp`);
+    const cdp = new WebSocket(`wss://0.0.0.0:${port}/cdp`);
     const err = await waitForError(cdp);
     expect(err.message).toContain("401");
   });
@@ -213,7 +213,7 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://0.0.0.0:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const ext = new WebSocket(`ws://0.0.0.0:${port}/extension`);
+    const ext = new WebSocket(`wss://0.0.0.0:${port}/extension`);
     const err = await waitForError(ext);
     expect(err.message).toContain("401");
   });
@@ -223,13 +223,13 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://0.0.0.0:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const ext1 = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext1 = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     await waitForOpen(ext1);
 
-    const ext2 = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext2 = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     const err = await waitForError(ext2);
     expect(err.message).toContain("409");
@@ -242,15 +242,15 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://0.0.0.0:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const ext1 = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext1 = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     await waitForOpen(ext1);
     const ext1Closed = new Promise<void>((resolve) => ext1.once("close", () => resolve()));
 
     ext1.close();
-    const ext2 = new WebSocket(`ws://0.0.0.0:${port}/extension`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/extension`),
+    const ext2 = new WebSocket(`wss://0.0.0.0:${port}/extension`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/extension`),
     });
     await waitForOpen(ext2);
     await ext1Closed;
@@ -268,10 +268,10 @@ describe("chrome extension relay server", () => {
     cdpUrl = `http://0.0.0.0:${port}`;
     await ensureChromeExtensionRelayServer({ cdpUrl });
 
-    const token = relayAuthHeaders(`ws://0.0.0.0:${port}/extension`)["x-openclaw-relay-token"];
+    const token = relayAuthHeaders(`wss://0.0.0.0:${port}/extension`)["x-openclaw-relay-token"];
     expect(token).toBeTruthy();
     const ext = new WebSocket(
-      `ws://0.0.0.0:${port}/extension?token=${encodeURIComponent(String(token))}`,
+      `wss://0.0.0.0:${port}/extension?token=${encodeURIComponent(String(token))}`,
     );
     await waitForOpen(ext);
     ext.close();
@@ -288,7 +288,7 @@ describe("chrome extension relay server", () => {
     expect(versionRes.status).toBe(200);
 
     const ext = new WebSocket(
-      `ws://0.0.0.0:${port}/extension?token=${encodeURIComponent(TEST_GATEWAY_TOKEN)}`,
+      `wss://0.0.0.0:${port}/extension?token=${encodeURIComponent(TEST_GATEWAY_TOKEN)}`,
     );
     await waitForOpen(ext);
     ext.close();
@@ -370,8 +370,8 @@ describe("chrome extension relay server", () => {
         ),
       ).toBe(true);
 
-      const cdp = new WebSocket(`ws://0.0.0.0:${port}/cdp`, {
-        headers: relayAuthHeaders(`ws://0.0.0.0:${port}/cdp`),
+      const cdp = new WebSocket(`wss://0.0.0.0:${port}/cdp`, {
+        headers: relayAuthHeaders(`wss://0.0.0.0:${port}/cdp`),
       });
       await waitForOpen(cdp);
       const q = createMessageQueue(cdp);
@@ -414,8 +414,8 @@ describe("chrome extension relay server", () => {
   it("rebroadcasts attach when a session id is reused for a new target", async () => {
     const { port, ext } = await startRelayWithExtension();
 
-    const cdp = new WebSocket(`ws://0.0.0.0:${port}/cdp`, {
-      headers: relayAuthHeaders(`ws://0.0.0.0:${port}/cdp`),
+    const cdp = new WebSocket(`wss://0.0.0.0:${port}/cdp`, {
+      headers: relayAuthHeaders(`wss://0.0.0.0:${port}/cdp`),
     });
     await waitForOpen(cdp);
     const q = createMessageQueue(cdp);

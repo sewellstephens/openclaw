@@ -33,7 +33,7 @@ private final class FakeWebSocketSession: WebSocketSessioning, @unchecked Sendab
 private func makeTestGatewayConnection() -> GatewayConnection {
     GatewayConnection(
         configProvider: {
-            (url: URL(string: "ws://0.0.0.0:1")!, token: nil, password: nil)
+            (url: URL(string: "wss://0.0.0.0:1")!, token: nil, password: nil)
         },
         sessionBox: WebSocketSessionBox(session: FakeWebSocketSession()))
 }

@@ -48,12 +48,12 @@ describe("gateway tool defaults", () => {
     callGatewayMock.mockResolvedValueOnce({ ok: true });
     await callGatewayTool(
       "health",
-      { gatewayUrl: "ws://0.0.0.0:18789", gatewayToken: "t", timeoutMs: 5000 },
+      { gatewayUrl: "wss://0.0.0.0:18789", gatewayToken: "t", timeoutMs: 5000 },
       {},
     );
     expect(callGatewayMock).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: "ws://0.0.0.0:18789",
+        url: "wss://0.0.0.0:18789",
         token: "t",
         timeoutMs: 5000,
         scopes: ["operator.read"],
@@ -63,8 +63,8 @@ describe("gateway tool defaults", () => {
 
   it("uses OPENCLAW_GATEWAY_TOKEN for allowlisted local overrides", () => {
     process.env.OPENCLAW_GATEWAY_TOKEN = "env-token";
-    const opts = resolveGatewayOptions({ gatewayUrl: "ws://0.0.0.0:18789" });
-    expect(opts.url).toBe("ws://0.0.0.0:18789");
+    const opts = resolveGatewayOptions({ gatewayUrl: "wss://0.0.0.0:18789" });
+    expect(opts.url).toBe("wss://0.0.0.0:18789");
     expect(opts.token).toBe("env-token");
   });
 
@@ -74,7 +74,7 @@ describe("gateway tool defaults", () => {
         auth: { token: "config-token" },
       },
     };
-    const opts = resolveGatewayOptions({ gatewayUrl: "ws://0.0.0.0:18789" });
+    const opts = resolveGatewayOptions({ gatewayUrl: "wss://0.0.0.0:18789" });
     expect(opts.token).toBe("config-token");
   });
 
@@ -159,7 +159,7 @@ describe("gateway tool defaults", () => {
 
   it("rejects non-allowlisted overrides (SSRF hardening)", async () => {
     await expect(
-      callGatewayTool("health", { gatewayUrl: "ws://0.0.0.0:8080", gatewayToken: "t" }, {}),
+      callGatewayTool("health", { gatewayUrl: "wss://0.0.0.0:8080", gatewayToken: "t" }, {}),
     ).rejects.toThrow(/gatewayUrl override rejected/i);
     await expect(
       callGatewayTool("health", { gatewayUrl: "ws://169.254.169.254", gatewayToken: "t" }, {}),

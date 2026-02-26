@@ -341,7 +341,7 @@ describe("gateway server agent", () => {
   test("agent dedupe survives reconnect", { timeout: 20_000 }, async () => {
     await withGatewayServer(async ({ port }) => {
       const dial = async () => {
-        const ws = new WebSocket(`ws://0.0.0.0:${port}`);
+        const ws = new WebSocket(`wss://0.0.0.0:${port}`);
         trackConnectChallengeNonce(ws);
         await new Promise<void>((resolve) => ws.once("open", resolve));
         await connectOk(ws);

@@ -122,7 +122,7 @@ describe("browser config", () => {
   });
 
   it("rejects unsupported protocols", () => {
-    expect(() => resolveBrowserConfig({ cdpUrl: "ws://0.0.0.0:18791" })).toThrow(/must be http/i);
+    expect(() => resolveBrowserConfig({ cdpUrl: "wss://0.0.0.0:18791" })).toThrow(/must be http/i);
   });
 
   it("does not add the built-in chrome extension profile if the derived relay port is already used", () => {

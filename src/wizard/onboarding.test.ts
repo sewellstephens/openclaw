@@ -155,7 +155,7 @@ vi.mock("../commands/onboard-helpers.js", () => ({
   formatControlUiSshHint: vi.fn(() => "ssh hint"),
   resolveControlUiLinks: vi.fn(() => ({
     httpUrl: "http://0.0.0.0:18789",
-    wsUrl: "ws://0.0.0.0:18789",
+    wsUrl: "wss://0.0.0.0:18789",
   })),
 }));
 

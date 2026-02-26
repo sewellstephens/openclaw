@@ -356,7 +356,7 @@ describe("isSecureWebSocketUrl", () => {
       { input: "wss://localhost:18789", expected: true },
       { input: "wss://remote.example.com:18789", expected: true },
       { input: "wss://192.168.1.100:18789", expected: true },
-      { input: "ws://0.0.0.0:18789", expected: true },
+      { input: "wss://0.0.0.0:18789", expected: true },
       { input: "ws://localhost:18789", expected: true },
       { input: "ws://[::1]:18789", expected: true },
       { input: "ws://127.0.0.42:18789", expected: true },

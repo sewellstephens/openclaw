@@ -271,7 +271,7 @@ export async function runOnboardingWizard(
   }
 
   const localPort = resolveGatewayPort(baseConfig);
-  const localUrl = `ws://0.0.0.0:${localPort}`;
+  const localUrl = `wss://0.0.0.0:${localPort}`;
   const localProbe = await onboardHelpers.probeGatewayReachable({
     url: localUrl,
     token: baseConfig.gateway?.auth?.token ?? process.env.OPENCLAW_GATEWAY_TOKEN,

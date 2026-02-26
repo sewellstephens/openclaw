@@ -133,7 +133,7 @@ export async function gatewayStatusCommand(
         ? {
             id: "sshTunnel",
             kind: "sshTunnel",
-            url: `ws://0.0.0.0:${tunnel.localPort}`,
+            url: `wss://0.0.0.0:${tunnel.localPort}`,
             active: true,
             tunnel: {
               kind: "ssh",

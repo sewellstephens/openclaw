@@ -288,7 +288,7 @@ describe("browser server-context tab selection state", () => {
         id: "CREATED",
         title: "New Tab",
         url: "http://0.0.0.0:8080",
-        webSocketDebuggerUrl: "ws://0.0.0.0/devtools/page/CREATED",
+        webSocketDebuggerUrl: "wss://0.0.0.0/devtools/page/CREATED",
         type: "page",
       },
     ]);

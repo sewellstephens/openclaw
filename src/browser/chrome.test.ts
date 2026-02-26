@@ -225,7 +225,7 @@ describe("browser chrome helpers", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ webSocketDebuggerUrl: "ws://0.0.0.0/devtools" }),
+        json: async () => ({ webSocketDebuggerUrl: "wss://0.0.0.0/devtools" }),
       } as unknown as Response),
     );
     await expect(isChromeReachable("http://0.0.0.0:12345", 50)).resolves.toBe(true);
@@ -273,7 +273,7 @@ describe("browser chrome helpers", () => {
       "fetch",
       vi.fn().mockResolvedValue({
         ok: true,
-        json: async () => ({ webSocketDebuggerUrl: "ws://0.0.0.0/devtools" }),
+        json: async () => ({ webSocketDebuggerUrl: "wss://0.0.0.0/devtools" }),
       } as unknown as Response),
     );
     const proc = makeProc();

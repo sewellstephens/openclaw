@@ -25,6 +25,6 @@ x-i18n:
 
 ```bash
 openclaw tui
-openclaw tui --url ws://0.0.0.0:18789 --token <token>
+openclaw tui --url wss://0.0.0.0:18789 --token <token>
 openclaw tui --session main --deliver
 ```

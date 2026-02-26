@@ -92,7 +92,7 @@ describe("promptRemoteGatewayConfig", () => {
     const text: WizardPrompter["text"] = vi.fn(async (params) => {
       if (params.message === "Gateway WebSocket URL") {
         expect(params.validate?.("ws://10.0.0.8:18789")).toContain("Use wss://");
-        expect(params.validate?.("ws://0.0.0.0:18789")).toBeUndefined();
+        expect(params.validate?.("wss://0.0.0.0:18789")).toBeUndefined();
         expect(params.validate?.("wss://remote.example.com:18789")).toBeUndefined();
         return "wss://remote.example.com:18789";
       }

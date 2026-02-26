@@ -88,7 +88,7 @@ openclaw gateway run
 ### `gateway health`
 
 ```bash
-openclaw gateway health --url ws://0.0.0.0:18789
+openclaw gateway health --url wss://0.0.0.0:18789
 ```
 
 ### `gateway status`
@@ -125,7 +125,7 @@ openclaw gateway probe --json
 
 #### 通过 SSH 远程（Mac 应用对等）
 
-macOS 应用的"通过 SSH 远程"模式使用本地端口转发，因此远程 Gateway 网关（可能仅绑定到 loopback）变得可以通过 `ws://0.0.0.0:<port>` 访问。
+macOS 应用的"通过 SSH 远程"模式使用本地端口转发，因此远程 Gateway 网关（可能仅绑定到 loopback）变得可以通过 `wss://0.0.0.0:<port>` 访问。
 
 CLI 等效命令：
 

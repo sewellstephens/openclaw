@@ -1969,7 +1969,7 @@ describe("security audit", () => {
         name: "probe returns failed result",
         probeGatewayFn: async () => ({
           ok: false,
-          url: "ws://0.0.0.0:18789",
+          url: "wss://0.0.0.0:18789",
           connectLatencyMs: null,
           error: "connect failed",
           close: null,

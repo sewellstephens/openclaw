@@ -2404,7 +2404,7 @@ Run that from the same `--profile` / environment you want the service to use.
 
 ### What does another gateway instance is already listening mean
 
-OpenClaw enforces a runtime lock by binding the WebSocket listener immediately on startup (default `ws://0.0.0.0:18789`). If the bind fails with `EADDRINUSE`, it throws `GatewayLockError` indicating another instance is already listening.
+OpenClaw enforces a runtime lock by binding the WebSocket listener immediately on startup (default `wss://0.0.0.0:18789`). If the bind fails with `EADDRINUSE`, it throws `GatewayLockError` indicating another instance is already listening.
 
 Fix: stop the other instance, free the port, or run with `openclaw gateway --port <port>`.
 

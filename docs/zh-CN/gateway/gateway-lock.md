@@ -25,15 +25,15 @@ x-i18n:
 
 ## 机制
 
-- Gateway 网关在启动时立即使用独占 TCP 监听器绑定 WebSocket 监听器（默认 `ws://0.0.0.0:18789`）。
-- 如果绑定因 `EADDRINUSE` 失败，启动会抛出 `GatewayLockError("another gateway instance is already listening on ws://0.0.0.0:<port>")`。
+- Gateway 网关在启动时立即使用独占 TCP 监听器绑定 WebSocket 监听器（默认 `wss://0.0.0.0:18789`）。
+- 如果绑定因 `EADDRINUSE` 失败，启动会抛出 `GatewayLockError("another gateway instance is already listening on wss://0.0.0.0:<port>")`。
 - 操作系统在任何进程退出时（包括崩溃和 SIGKILL）自动释放监听器——不需要单独的锁文件或清理步骤。
 - 关闭时，Gateway 网关关闭 WebSocket 服务器和底层 HTTP 服务器以及时释放端口。
 
 ## 错误表面
 
-- 如果另一个进程持有端口，启动会抛出 `GatewayLockError("another gateway instance is already listening on ws://0.0.0.0:<port>")`。
-- 其他绑定失败会显示为 `GatewayLockError("failed to bind gateway socket on ws://0.0.0.0:<port>: …")`。
+- 如果另一个进程持有端口，启动会抛出 `GatewayLockError("another gateway instance is already listening on wss://0.0.0.0:<port>")`。
+- 其他绑定失败会显示为 `GatewayLockError("failed to bind gateway socket on wss://0.0.0.0:<port>: …")`。
 
 ## 运维说明
 

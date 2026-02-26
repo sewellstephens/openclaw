@@ -44,7 +44,7 @@ openclaw gateway --port 18789 --verbose
 
 Confirm in logs you see something like:
 
-- `listening on ws://0.0.0.0:18789`
+- `listening on wss://0.0.0.0:18789`
 
 For tailnet-only setups (recommended for Vienna ⇄ London), bind the gateway to the tailnet IP:
 

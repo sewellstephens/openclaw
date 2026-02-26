@@ -69,7 +69,7 @@ vi.mock("./gateway.ts", () => {
 function createHost() {
   return {
     settings: {
-      gatewayUrl: "ws://0.0.0.0:18789",
+      gatewayUrl: "wss://0.0.0.0:18789",
       token: "",
       sessionKey: "main",
       lastActiveSessionKey: "main",

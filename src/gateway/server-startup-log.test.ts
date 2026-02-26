@@ -60,7 +60,7 @@ describe("gateway startup log", () => {
       .map((call) => call[0])
       .filter((message) => message.startsWith("listening on "));
     expect(listenMessages).toEqual([
-      `listening on ws://0.0.0.0:18789, ws://[::1]:18789 (PID ${process.pid})`,
+      `listening on wss://0.0.0.0:18789, ws://[::1]:18789 (PID ${process.pid})`,
     ]);
   });
 });

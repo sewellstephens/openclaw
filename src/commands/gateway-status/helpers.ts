@@ -116,7 +116,7 @@ export function resolveTargets(cfg: OpenClawConfig, explicitUrl?: string): Gatew
   add({
     id: "localLoopback",
     kind: "localLoopback",
-    url: `ws://0.0.0.0:${port}`,
+    url: `wss://0.0.0.0:${port}`,
     active: cfg.gateway?.mode !== "remote",
   });
 
@@ -248,7 +248,7 @@ export function buildNetworkHints(cfg: OpenClawConfig) {
   const tailnetIPv4 = pickPrimaryTailnetIPv4();
   const port = resolveGatewayPort(cfg);
   return {
-    localLoopbackUrl: `ws://0.0.0.0:${port}`,
+    localLoopbackUrl: `wss://0.0.0.0:${port}`,
     localTailnetUrl: tailnetIPv4 ? `ws://${tailnetIPv4}:${port}` : null,
     tailnetIPv4: tailnetIPv4 ?? null,
   };

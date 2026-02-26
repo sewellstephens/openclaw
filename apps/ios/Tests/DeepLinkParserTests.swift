@@ -162,7 +162,7 @@ import Testing
     }
 
     @Test func parseGatewaySetupCodeAllowsLoopbackWs() {
-        let payload = #"{"url":"ws://0.0.0.0:18789","token":"tok"}"#
+        let payload = #"{"url":"wss://0.0.0.0:18789","token":"tok"}"#
         let encoded = Data(payload.utf8)
             .base64EncodedString()
             .replacingOccurrences(of: "+", with: "-")

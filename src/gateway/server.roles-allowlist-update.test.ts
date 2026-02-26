@@ -45,7 +45,7 @@ const connectNodeClient = async (params: {
     throw new Error("OPENCLAW_GATEWAY_TOKEN is required for node test clients");
   }
   return await connectGatewayClient({
-    url: `ws://0.0.0.0:${params.port}`,
+    url: `wss://0.0.0.0:${params.port}`,
     token,
     role: "node",
     clientName: GATEWAY_CLIENT_NAMES.NODE_HOST,

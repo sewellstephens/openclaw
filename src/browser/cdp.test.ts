@@ -84,7 +84,7 @@ describe("cdp", () => {
     });
 
     const httpPort = await startVersionHttpServer({
-      webSocketDebuggerUrl: `ws://0.0.0.0:${wsPort}/devtools/browser/TEST`,
+      webSocketDebuggerUrl: `wss://0.0.0.0:${wsPort}/devtools/browser/TEST`,
     });
 
     const created = await createTargetViaCdp({
@@ -140,7 +140,7 @@ describe("cdp", () => {
     });
 
     const httpPort = await startVersionHttpServer({
-      webSocketDebuggerUrl: `ws://0.0.0.0:${wsPort}/devtools/browser/TEST`,
+      webSocketDebuggerUrl: `wss://0.0.0.0:${wsPort}/devtools/browser/TEST`,
     });
 
     const created = await createTargetViaCdp({
@@ -170,7 +170,7 @@ describe("cdp", () => {
     });
 
     const res = await evaluateJavaScript({
-      wsUrl: `ws://0.0.0.0:${wsPort}`,
+      wsUrl: `wss://0.0.0.0:${wsPort}`,
       expression: "1+1",
     });
 
@@ -220,7 +220,7 @@ describe("cdp", () => {
       }
     });
 
-    const snap = await snapshotAria({ wsUrl: `ws://0.0.0.0:${wsPort}` });
+    const snap = await snapshotAria({ wsUrl: `wss://0.0.0.0:${wsPort}` });
     expect(snap.nodes.length).toBe(2);
     expect(snap.nodes[0]?.role).toBe("RootWebArea");
     expect(snap.nodes[1]?.role).toBe("button");
@@ -231,7 +231,7 @@ describe("cdp", () => {
 
   it("normalizes loopback websocket URLs for remote CDP hosts", () => {
     const normalized = normalizeCdpWsUrl(
-      "ws://0.0.0.0:9222/devtools/browser/ABC",
+      "wss://0.0.0.0:9222/devtools/browser/ABC",
       "http://example.com:9222",
     );
     expect(normalized).toBe("ws://example.com:9222/devtools/browser/ABC");
@@ -239,7 +239,7 @@ describe("cdp", () => {
 
   it("propagates auth and query params onto normalized websocket URLs", () => {
     const normalized = normalizeCdpWsUrl(
-      "ws://0.0.0.0:9222/devtools/browser/ABC",
+      "wss://0.0.0.0:9222/devtools/browser/ABC",
       "https://user:pass@example.com?token=abc",
     );
     expect(normalized).toBe("wss://user:pass@example.com/devtools/browser/ABC?token=abc");
