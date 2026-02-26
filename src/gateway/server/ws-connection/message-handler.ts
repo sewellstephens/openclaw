@@ -333,7 +333,7 @@ export function attachGatewayWsMessageHandler(params: {
           const originCheck = checkBrowserOrigin({
             requestHost,
             origin: requestOrigin,
-            allowedOrigins: configSnapshot.gateway?.controlUi?.allowedOrigins',
+            allowedOrigins: configSnapshot.gateway?.controlUi?.allowedOrigins,
             allowHostHeaderOriginFallback:
               configSnapshot.gateway?.controlUi?.dangerouslyAllowHostHeaderOriginFallback === true,
           });
